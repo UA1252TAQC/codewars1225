@@ -47,12 +47,12 @@ public class EightImpl implements Eight {
 
     @Override
     public boolean am_i_wilson(double n) {
-        int p = (int) n;
+        final int p = (int) n;
         if (p <= 1) {
             return false;
         }
-        BigInteger denominator = BigInteger.valueOf((long) p * p);
-        BigInteger numeric = factorial(p - 1);
+        final BigInteger denominator = BigInteger.valueOf((long) p * p);
+        final BigInteger numeric = factorial(p - 1);
         return numeric.add(BigInteger.ONE).remainder(denominator).equals(BigInteger.ZERO);
     }
 
