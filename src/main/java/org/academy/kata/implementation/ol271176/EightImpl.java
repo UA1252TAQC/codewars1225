@@ -15,7 +15,7 @@ public class EightImpl implements Eight {
 
     @Override
     public float mpgToKPM(float mpg) {
-        return 0;
+        return (float)((mpg/4.54609188)*1.609344);
     }
 
     @Override
