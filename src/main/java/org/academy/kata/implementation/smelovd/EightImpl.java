@@ -2,6 +2,8 @@ package org.academy.kata.implementation.smelovd;
 
 import org.academy.kata.Eight;
 
+import java.math.BigInteger;
+
 public class EightImpl implements Eight {
     @Override
     public int liters(double time) {
@@ -45,6 +47,20 @@ public class EightImpl implements Eight {
 
     @Override
     public boolean am_i_wilson(double n) {
-        return false;
+        int p = (int) n;
+        if (p <= 1) {
+            return false;
+        }
+        BigInteger denominator = BigInteger.valueOf((long) p * p);
+        BigInteger numeric = factorial(p - 1);
+        return numeric.add(BigInteger.ONE).remainder(denominator).equals(BigInteger.ZERO);
+    }
+
+    private BigInteger factorial(int n) {
+        BigInteger factorial = new BigInteger(String.valueOf(1));
+        for (int i = 1; i <= n; i++) {
+            factorial = factorial.multiply(BigInteger.valueOf(i));
+        }
+        return factorial;
     }
 }
