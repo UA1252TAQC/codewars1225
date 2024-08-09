@@ -2,6 +2,7 @@ package org.academy.kata.implementation.Shr1mpa;
 
 import org.academy.kata.Eight;
 
+import java.math.BigInteger;
 import java.util.Arrays;
 
 public class EightImpl implements Eight {
@@ -75,6 +76,20 @@ public class EightImpl implements Eight {
 
     @Override
     public boolean am_i_wilson(double n) {
-        return false;
+        if (n < 2) return false;
+
+        long nLong = (long) n;
+        BigInteger factorial = factorial(BigInteger.valueOf(nLong - 1));
+        BigInteger add = factorial.add(BigInteger.ONE);
+        BigInteger divide= BigInteger.valueOf(nLong * nLong);
+
+        return add.mod(divide).equals(BigInteger.ZERO);
+    }
+
+    private static BigInteger factorial(BigInteger n) {
+        if (n.compareTo(BigInteger.ONE) <= 0) {
+            return BigInteger.ONE;
+        }
+        return n.multiply(factorial(n.subtract(BigInteger.ONE)));
     }
 }
