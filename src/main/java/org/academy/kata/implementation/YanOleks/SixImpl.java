@@ -15,7 +15,21 @@ public class SixImpl implements Six {
 
     @Override
     public double f(double x) {
-        return 0;
+        int precision = 10;
+        int shift = 2;
+        double result = x / 2;
+        double powerOfX = x;
+        double coeficient = 1;
+        long divider = 2L;
+        short sign = -1;
+        for (int i = 0; i < precision - shift; i++){
+            powerOfX *= x;
+            divider *= (2 * (i + shift));
+            result += sign * coeficient * powerOfX / divider;
+            coeficient *= 3;
+            sign *= -1;
+        }
+        return result;
     }
 
     @Override
