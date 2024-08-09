@@ -10,6 +10,10 @@ public class SevenImpl implements Seven {
 
     @Override
     public String seriesSum(int n) {
-        return "";
+        double term = 0;
+        for (int i = 1, j = 1; i <= n; i++, j += 3){
+            term += (1. / j);
+        }
+        return String.format("%.2f", term);
     }
 }
