@@ -2,6 +2,8 @@ package org.academy.kata.implementation.Shr1mpa;
 
 import org.academy.kata.Eight;
 
+import java.util.Arrays;
+
 public class EightImpl implements Eight {
     @Override
     public int liters(double time) {
@@ -20,7 +22,16 @@ public class EightImpl implements Eight {
 
     @Override
     public int[] squareOrSquareRoot(int[] array) {
-        return new int[0];
+        return Arrays.stream(array)
+                .map(x -> {
+                    double sqrt = Math.sqrt(x);
+                    if (sqrt == (int) sqrt) {
+                        return (int) sqrt;
+                    } else {
+                        return x * x;
+                    }
+                })
+                .toArray();
     }
 
     @Override
