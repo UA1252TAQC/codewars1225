@@ -57,7 +57,7 @@ public class EightImpl implements Eight {
         return add.mod(divide).equals(BigInteger.ZERO);
     }
 
-    public static BigInteger factorial(BigInteger n) {
+    private static BigInteger factorial(BigInteger n) {
         if (n.compareTo(BigInteger.ONE) <= 0) {
             return BigInteger.ONE;
         }
