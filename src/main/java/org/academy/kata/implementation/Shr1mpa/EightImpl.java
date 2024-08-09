@@ -2,6 +2,8 @@ package org.academy.kata.implementation.Shr1mpa;
 
 import org.academy.kata.Eight;
 
+import java.util.Arrays;
+
 public class EightImpl implements Eight {
     @Override
     public int liters(double time) {
@@ -40,7 +42,9 @@ public class EightImpl implements Eight {
 
     @Override
     public int[] divisibleBy(int[] numbers, int divider) {
-        return new int[0];
+        return Arrays.stream(numbers)
+                .filter(i -> i % divider == 0)
+                .toArray();
     }
 
     @Override
