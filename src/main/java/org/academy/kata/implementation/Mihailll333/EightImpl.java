@@ -52,7 +52,7 @@ public class EightImpl implements Eight {
     @Override
     public int stringToNumber(String str) {
         return Integer.parseInt(str);
-    }тото
+    }
 
     @Override
     public double TwoDecimalPlaces(double number) {
