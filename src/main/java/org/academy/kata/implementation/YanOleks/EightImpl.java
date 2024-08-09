@@ -45,6 +45,11 @@ public class EightImpl implements Eight {
 
     @Override
     public boolean am_i_wilson(double n) {
-        return false;
+        if (n <= 1) return false;
+        double factorial_mod = 1;
+        for (int i = 2; i < n; i++){
+            factorial_mod = (factorial_mod * i) % (n * n);
+        }
+        return (((factorial_mod + 1) % (n * n)) == 0);
     }
 }
