@@ -2,6 +2,9 @@ package org.academy.kata.implementation.oleksandrtkv;
 
 import org.academy.kata.Eight;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class EightImpl implements Eight {
     @Override
     public int liters(double time) {
@@ -40,7 +43,17 @@ public class EightImpl implements Eight {
 
     @Override
     public int[] divisibleBy(int[] numbers, int divider) {
-        return new int[0];
+        List<Integer> list = new ArrayList<>();
+        for (int number : numbers) {
+            if (number % divider == 0) {
+                list.add(number);
+            }
+        }
+        int[] res = new int[list.size()];
+        for (int i = 0; i < res.length; i++) {
+            res[i] = list.get(i);
+        }
+        return res;
     }
 
     @Override
