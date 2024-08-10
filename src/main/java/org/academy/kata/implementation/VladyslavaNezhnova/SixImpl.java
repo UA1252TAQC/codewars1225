@@ -2,6 +2,9 @@ package org.academy.kata.implementation.VladyslavaNezhnova;
 
 import org.academy.kata.Six;
 
+import java.util.Arrays;
+
+
 public class SixImpl implements Six {
     @Override
     public long findNb(long m) {
@@ -20,12 +23,27 @@ public class SixImpl implements Six {
 
     @Override
     public double mean(String town, String strng) {
-        return 0;
+        return Arrays.stream(strng.split("\n"))
+                .filter(line -> line.startsWith(town + ":"))
+                .flatMapToDouble(line -> Arrays.stream(line.split(":")[1].split(","))
+                        .mapToDouble(entry -> Double.parseDouble(entry.trim().split(" ")[1])))
+                .average()
+                .orElse(-1);
     }
-
     @Override
     public double variance(String town, String strng) {
-        return 0;
+        double mean = mean(town, strng);
+        if (mean == -1) return -1;
+
+        return Arrays.stream(strng.split("\n"))
+                .filter(line -> line.startsWith(town + ":"))
+                .flatMapToDouble(line -> Arrays.stream(line.split(":")[1].split(","))
+                        .mapToDouble(entry -> {
+                            double value = Double.parseDouble(entry.trim().split(" ")[1]);
+                            return Math.pow(value - mean, 2);
+                        }))
+                .average()
+                .orElse(-1);
     }
 
     @Override
