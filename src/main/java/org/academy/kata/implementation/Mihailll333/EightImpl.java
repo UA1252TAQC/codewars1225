@@ -15,7 +15,12 @@ public class EightImpl implements Eight {
 
     @Override
     public float mpgToKPM(float mpg) {
-        return 0;
+        float milesToKilometers = 1.609344f;
+        float gallonToLiters = 4.54609188f;
+
+        float kpl = mpg * (milesToKilometers / gallonToLiters);
+
+        return Math.round(kpl * 100.0f) / 100.0f;
     }
 
     @Override
@@ -61,7 +66,22 @@ public class EightImpl implements Eight {
 
     @Override
     public int[] divisibleBy(int[] numbers, int divider) {
-        return new int[0];
+        int count = 0;
+        for (int number : numbers)
+        {
+            if (number % divider == 0) {
+                count++;
+            }
+        }
+        int[] result = new int[count];
+        int index = 0;
+        for (int number : numbers)
+        {
+            if (number % divider == 0) {
+                result[index++] = number;
+            }
+        }
+        return result;
     }
 
     @Override
