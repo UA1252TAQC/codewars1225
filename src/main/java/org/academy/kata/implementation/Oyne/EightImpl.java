@@ -2,6 +2,8 @@ package org.academy.kata.implementation.Oyne;
 
 import org.academy.kata.Eight;
 
+import java.math.BigInteger;
+
 public class EightImpl implements Eight {
     @Override
     public int liters(double time) {
@@ -45,6 +47,19 @@ public class EightImpl implements Eight {
 
     @Override
     public boolean am_i_wilson(double n) {
-        return false;
+        if (n <= 1) {
+            return false;
+        }
+
+        BigInteger factorial = BigInteger.ONE;
+        for (int i = 1; i <= n - 1; i++) {
+            factorial = factorial.multiply(BigInteger.valueOf(i));
+        }
+
+        BigInteger numerator = factorial.add(BigInteger.ONE);
+        BigInteger denominator = BigInteger.valueOf((long)n).multiply(BigInteger.valueOf((long)n));
+        BigInteger[] divisionResult = numerator.divideAndRemainder(denominator);
+
+        return divisionResult[1].equals(BigInteger.ZERO);
     }
 }
