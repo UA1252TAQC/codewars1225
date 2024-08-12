@@ -3,6 +3,7 @@ package org.academy.kata.implementation.smelovd;
 import org.academy.kata.Five;
 
 import java.math.BigInteger;
+import java.util.Arrays;
 
 public class FiveImpl implements Five {
     @Override
@@ -28,22 +29,39 @@ public class FiveImpl implements Five {
     @Override
     public long[] smallest(long n) {
         final String s = Long.toString(n);
-        long minNumber = n;
-        int fromIndex = -1, toIndex = -1;
+        final char[] digits = s.toCharArray(), sortedDigits = digits.clone();
+        Arrays.sort(sortedDigits);
 
         for (int i = 0; i < s.length(); i++) {
-            for (int j = 0; j < s.length(); j++) {
-                final char digit = s.charAt(i);
-                final long newNumber = Long.parseLong(new StringBuilder(s).deleteCharAt(i).insert(j, digit).toString());
+            if (sortedDigits[i] == digits[i]) continue;
 
-                if (i != j && newNumber < minNumber) {
-                    minNumber = newNumber;
-                    fromIndex = i;
-                    toIndex = j;
-                }
+            int firstFromIndex = s.lastIndexOf(sortedDigits[i]), firstToIndex = i;
+            final long firstNum = createNumber(s, firstFromIndex, firstToIndex, sortedDigits[i]);
+            int secondFromIndex = i, secondToIndex = calculateSecondToIndex(secondFromIndex, s, digits);
+            final long secondNum = createNumber(s, secondFromIndex, secondToIndex, digits[i]);
+
+            if (firstNum < secondNum) {
+                while (firstFromIndex > 0 && digits[firstFromIndex] == digits[firstFromIndex - 1]) firstFromIndex--;
+                while (firstToIndex > 0 && sortedDigits[i] == digits[firstToIndex - 1]) firstToIndex--;
+                return new long[] { firstNum, firstFromIndex, firstToIndex };
+            }
+            while (secondFromIndex > 0 && digits[secondFromIndex] == digits[secondFromIndex - 1]) secondFromIndex--;
+            while (secondToIndex < s.length() - 1 && digits[i] == digits[secondToIndex + 1]) secondToIndex++;
+            return new long[] { secondNum, secondFromIndex, secondToIndex };
+        }
+        return new long[] { n, -1, -1 };
+    }
+
+    private static int calculateSecondToIndex(int fromIndex, String s, char[] digits) {
+        for (int j = fromIndex; j < s.length() - 2; j++) {
+            if (digits[fromIndex] < digits[j + 1]) {
+                return j;
             }
         }
+        return s.length() - 1;
+    }
 
-        return new long[] { minNumber, fromIndex, toIndex };
+    private static long createNumber(String number, int fromIndex, int toIndex, char digit) {
+        return Long.parseLong(new StringBuilder(number).deleteCharAt(fromIndex).insert(toIndex, digit).toString());
     }
 }
