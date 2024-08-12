@@ -10,37 +10,19 @@ public class SixImpl implements Six {
 
     @Override
     public String balance(String book) {
-        if (book == null || book.trim().isEmpty()) {
-            throw new IllegalArgumentException();
+        if (book == null || book.isEmpty()) throw new IllegalArgumentException();
+        final String[] clearLines = book.replaceAll("([^\\n. \\da-zA-Z])", "").split("\n");
+        final double startBalance = Double.parseDouble(clearLines[0]);
+        double currentBalance = startBalance;
+        int count = 0;
+        StringBuilder result = new StringBuilder().append("Original Balance: ").append(clearLines[0]);
+        for (int i = 1; i < clearLines.length; i++, count++) {
+            String[] lineVariables = clearLines[i].split("[ ]+");
+            currentBalance -= Double.parseDouble(lineVariables[2]);
+            result.append(String.format("\\r\\n%s %s %s Balance %.2f", lineVariables[0], lineVariables[1], lineVariables[2], currentBalance));
         }
-
-        final StringBuilder builder = new StringBuilder();
-        final String[] clearLines = book.replaceAll("[^\r\n a-zA-Z0-9.]", "").trim().split("\n");
-
-        final double finalOriginalBalance = Double.parseDouble(clearLines[0]);
-        double originalBalance = finalOriginalBalance;
-        builder.append("Original Balance: ").append(clearLines[0]);
-        for (int i = 1; i < clearLines.length; i++) {
-            while (clearLines[i].contains("  ")) {
-                clearLines[i] = clearLines[i].replaceAll("  ", " ");
-            }
-            String[] lineVariables = clearLines[i].split(" ");
-            builder.append("\\r\\n").append(clearLines[i].trim());
-
-            originalBalance = Math.round((originalBalance - Double.parseDouble(lineVariables[2])) * 100.0) / 100.0;
-            builder.append(" Balance ").append(String.format("%.2f", originalBalance));
-        }
-
-        this.setExpenses(builder, finalOriginalBalance, originalBalance, clearLines.length - 1);
-        return builder.toString();
-    }
-
-    private void setExpenses(StringBuilder builder, double finalOriginalBalance, double originalBalance, int count) {
-        double totalExpense = Math.round((finalOriginalBalance - originalBalance) * 100.0) / 100.0;
-        builder.append("\\r\\nTotal expense  ").append(String.format("%.2f", totalExpense));
-
-        double averageExpense = Math.round(totalExpense / count * 100.0) / 100.0;
-        builder.append("\\r\\nAverage expense  ").append(String.format("%.2f", averageExpense));
+        result.append(String.format("\\r\\nTotal expense  %.2f\\r\\nAverage expense  %.2f", startBalance - currentBalance, (startBalance - currentBalance) / count));
+        return result.toString();
     }
 
     @Override
