@@ -32,12 +32,11 @@ public class FiveImpl implements Five {
         int fromIndex = -1, toIndex = -1;
 
         for (int i = 0; i < s.length(); i++) {
-            final String numWithoutFromIndex = s.substring(0, i) + s.substring(i + 1);
+            for (int j = 0; j < s.length(); j++) {
+                final char digit = s.charAt(i);
+                final long newNumber = Long.parseLong(new StringBuilder(s).deleteCharAt(i).insert(j, digit).toString());
 
-            for (int j = 0; j <= numWithoutFromIndex.length(); j++) {
-                final long newNumber = Long.parseLong(numWithoutFromIndex.substring(0, j) + s.charAt(i) + numWithoutFromIndex.substring(j));
-
-                if (newNumber < minNumber || (newNumber == minNumber && isIndexSmaller(fromIndex, toIndex, i, j))) {
+                if (i != j && newNumber < minNumber) {
                     minNumber = newNumber;
                     fromIndex = i;
                     toIndex = j;
@@ -46,9 +45,5 @@ public class FiveImpl implements Five {
         }
 
         return new long[] { minNumber, fromIndex, toIndex };
-    }
-
-    private boolean isIndexSmaller(int fromIndex, int toIndex, int i, int j) {
-        return i < fromIndex || (i == fromIndex && j < toIndex);
     }
 }
