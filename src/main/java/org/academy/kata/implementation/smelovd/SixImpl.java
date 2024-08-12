@@ -41,17 +41,12 @@ public class SixImpl implements Six {
     public String stockSummary(String[] lstOfArt, String[] lstOf1stLetter) {
         final Map<Character, Integer> categoryCounts = Arrays.stream(lstOfArt)
                 .collect(Collectors.groupingBy(s -> s.charAt(0), Collectors.summingInt(s -> Integer.parseInt(s.split(" ")[1]))));
-        if (isAllZeros(lstOf1stLetter, categoryCounts)) {
-            return "";
-        }
-        return Arrays.stream(lstOf1stLetter)
-                .map(letter -> {
-                    int count = categoryCounts.getOrDefault(letter.charAt(0), 0);
-                    return "(" + letter + " : " + count + ")";
-                }).collect(Collectors.joining(" - "));
+        if (isAllZeros(lstOf1stLetter, categoryCounts)) return "";
+        return Arrays.stream(lstOf1stLetter).map(letters -> String.format("(%s : %d)", letters, categoryCounts.getOrDefault(letters.charAt(0), 0)))
+                .collect(Collectors.joining(" - "));
     }
 
     private boolean isAllZeros(String[] lstOf1stLetter, Map<Character, Integer> categoryCounts) {
-        return Arrays.stream(lstOf1stLetter).allMatch(letter -> categoryCounts.getOrDefault(letter.charAt(0), 0) == 0);
+        return Arrays.stream(lstOf1stLetter).allMatch(letters -> categoryCounts.getOrDefault(letters.charAt(0), 0) == 0);
     }
 }
