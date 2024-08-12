@@ -27,6 +27,27 @@ public class FiveImpl implements Five {
 
     @Override
     public long[] smallest(long n) {
-        return new long[0];
+        String str = Long.toString(n);
+        int len = str.length();
+        long minNumber = n;
+        int fromIndex = 0, toIndex = 0;
+
+        for (int i = 0; i < len; i++) {
+            for (int j = 0; j < len; j++) {
+                if (i != j) {
+                    StringBuilder sb = new StringBuilder(str);
+                    char digitToMove = sb.charAt(i);
+                    sb.deleteCharAt(i);
+                    sb.insert(j, digitToMove);
+                    long newNumber = Long.parseLong(sb.toString());
+                    if (newNumber < minNumber) {
+                        minNumber = newNumber;
+                        fromIndex = i;
+                        toIndex = j;
+                    }
+                }
+            }
+        }
+        return new long[]{minNumber, fromIndex, toIndex};
     }
 }
