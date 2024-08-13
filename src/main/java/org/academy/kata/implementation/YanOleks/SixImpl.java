@@ -13,7 +13,27 @@ public class SixImpl implements Six {
 
     @Override
     public String balance(String book) {
-        return "";
+        String raw = book.replaceAll("[^\\w \\n\\r.]", "");
+        String[] lines = raw.split("\\n");
+
+        StringBuilder sb = new StringBuilder();
+        double balance = Double.parseDouble(lines[0].trim());
+        sb.append(String.format("Original Balance: %.2f\\r\\n", balance));
+
+        double totalExpense = 0;
+        int numberOfExpenses = 0;
+        for (int i = 1; i < lines.length; i++){
+            if (lines[i].isEmpty()) continue;
+            String line = lines[i].replaceAll("(?<=\\s)\\s", "").trim();
+            double expense = Double.parseDouble(line.substring(line.lastIndexOf(" ") + 1));
+            balance -= expense;
+            totalExpense += expense;
+            sb.append(String.format("%s Balance %.2f\\r\\n", line.trim(), balance));
+            numberOfExpenses++;
+        }
+        sb.append(String.format("Total expense  %.2f\\r\\n", totalExpense));
+        sb.append(String.format("Average expense  %.2f", totalExpense / numberOfExpenses));
+        return sb.toString();
     }
 
     @Override
