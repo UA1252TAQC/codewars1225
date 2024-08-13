@@ -37,7 +37,7 @@ public class FiveImpl implements Five {
 
             int firstFromIndex = s.lastIndexOf(sortedDigits[i]), firstToIndex = i;
             final long firstNum = createNumber(s, firstFromIndex, firstToIndex, sortedDigits[i]);
-            int secondFromIndex = i, secondToIndex = calculateSecondToIndex(secondFromIndex, s, digits);
+            int secondFromIndex = i, secondToIndex = findSecondToIndex(secondFromIndex, s, digits);
             final long secondNum = createNumber(s, secondFromIndex, secondToIndex, digits[i]);
 
             if (firstNum < secondNum) {
@@ -52,7 +52,7 @@ public class FiveImpl implements Five {
         return new long[] { n, -1, -1 };
     }
 
-    private static int calculateSecondToIndex(int fromIndex, String s, char[] digits) {
+    private static int findSecondToIndex(int fromIndex, String s, char[] digits) {
         for (int j = fromIndex; j < s.length() - 2; j++) {
             if (digits[fromIndex] < digits[j + 1]) {
                 return j;
