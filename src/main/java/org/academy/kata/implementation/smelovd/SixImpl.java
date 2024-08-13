@@ -32,7 +32,7 @@ public class SixImpl implements Six {
         return getStream(town, strng).map(i -> Math.pow(avg - i, 2)).average().orElse(-1);
     }
 
-    private DoubleStream getStream(String town, String strng) {
+    private static DoubleStream getStream(String town, String strng) {
         return Arrays.stream(strng.split("\n"))
                 .filter(townData -> townData.startsWith(town + ":"))
                 .map(townData -> townData.substring(town.length() + 1))
