@@ -1,6 +1,9 @@
 package org.academy.kata.implementation.marchenko2005;
 
 import org.academy.kata.Eight;
+import java.math.RoundingMode;
+import java.math.BigDecimal;
+import java.util.ArrayList;
 
 public class EightImpl implements Eight {
     @Override
@@ -41,7 +44,7 @@ public class EightImpl implements Eight {
 
     @Override
     public int stringToNumber(String str) {
-        return 0;
+        return Integer.parseInt(str);
     }
 
     @Override
