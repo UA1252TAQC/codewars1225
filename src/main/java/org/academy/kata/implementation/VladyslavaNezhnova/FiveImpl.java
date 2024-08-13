@@ -22,8 +22,30 @@ public class FiveImpl implements Five {
 
     @Override
     public double solve(double m) {
-        return 0;
+        double left = 0;
+        double right = 1;
+        double epsilon = 1e-12;
+
+        while (right - left > epsilon) {
+            double mid = (left + right) / 2;
+            double sum = 0;
+            double term = mid;
+            double n = 1;
+
+            while (term > 1e-15) {
+                sum += n * term;
+                n++;
+                term *= mid;
+            }
+            if (sum < m) {
+                left = mid;
+            } else {
+                right = mid;
+            }
+        }
+        return (left + right) / 2;
     }
+
 
     @Override
     public long[] smallest(long n) {
