@@ -17,7 +17,22 @@ public class FiveImpl implements Five {
 
     @Override
     public BigInteger perimeter(BigInteger n) {
-        return null;
+        return sumFibonacci(n.longValueExact()).multiply(BigInteger.valueOf(4L));
+    }
+
+    private static BigInteger sumFibonacci(long n) {
+        BigInteger a = BigInteger.ZERO;
+        BigInteger b = BigInteger.ONE;
+        BigInteger sum = a.add(b);
+
+        for (int i = 2; i <= n + 1; i++) {
+            BigInteger next = a.add(b);
+            sum = sum.add(next);
+            a = b;
+            b = next;
+        }
+
+        return sum;
     }
 
     @Override
