@@ -32,7 +32,15 @@ public class FiveImpl implements Five {
 
     @Override
     public int zeros(int n) {
-        return 0;
+        int zeros = 0;
+        int dividend = 5;
+        double quotient = n * 1. / dividend;
+        while (quotient >= 1) {
+            zeros += (int)quotient;
+            dividend *= 5;
+            quotient = n * 1. / dividend;
+        }
+        return zeros;
     }
 
     @Override
