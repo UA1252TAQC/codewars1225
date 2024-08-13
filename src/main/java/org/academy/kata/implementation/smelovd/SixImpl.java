@@ -57,12 +57,12 @@ public class SixImpl implements Six {
                 toFind, wins, draws, losses, totalScored, totalConceded, (wins * 3) + draws);
     }
 
-    private boolean isMatchMember(String[] teams, String team) {
+    private static boolean isMatchMember(String[] teams, String team) {
         return teams[0].substring(0, teams[0].trim().lastIndexOf(" ")).trim().equals(team) ||
                 teams[1].substring(0, teams[1].trim().lastIndexOf(" ")).trim().equals(team);
     }
 
-    private int[] extractScores(String[] teams, String team) {
+    private static int[] extractScores(String[] teams, String team) {
         final String team1 = teams[0].trim();
         final String team2 = teams[1].trim();
 
@@ -70,11 +70,11 @@ public class SixImpl implements Six {
         return new int[] {extractScore(team2), extractScore(team1)};
     }
 
-    private boolean isRequiredTeam(String team, String team1) {
+    private static boolean isRequiredTeam(String team, String team1) {
         return team1.substring(0, team1.lastIndexOf(" ")).equals(team);
     }
 
-    private int extractScore(String team) {
+    private static int extractScore(String team) {
         return Integer.parseInt(team.substring(team.lastIndexOf(" ")).trim());
     }
 
