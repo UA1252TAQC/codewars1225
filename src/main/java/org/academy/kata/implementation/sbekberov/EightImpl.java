@@ -2,6 +2,8 @@ package org.academy.kata.implementation.sbekberov;
 
 import org.academy.kata.Eight;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.math.BigInteger;
 
@@ -71,7 +73,9 @@ public class EightImpl implements Eight {
 
     @Override
     public double TwoDecimalPlaces(double number) {
-        return 0;
+        BigDecimal bd = new BigDecimal(number);
+        bd = bd.setScale(2, RoundingMode.HALF_UP);
+        return bd.doubleValue();
     }
 
     @Override
