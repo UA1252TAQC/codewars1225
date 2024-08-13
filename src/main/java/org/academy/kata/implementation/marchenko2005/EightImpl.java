@@ -63,7 +63,9 @@ public class EightImpl implements Eight {
 
     @Override
     public double TwoDecimalPlaces(double number) {
-        return 0;
+        BigDecimal bd = new BigDecimal(Double.toString(number));
+        bd = bd.setScale(2, RoundingMode.HALF_UP);
+        return bd.doubleValue();
     }
 
     @Override
