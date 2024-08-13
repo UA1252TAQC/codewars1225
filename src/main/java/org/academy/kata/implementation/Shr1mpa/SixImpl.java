@@ -5,7 +5,15 @@ import org.academy.kata.Six;
 public class SixImpl implements Six {
     @Override
     public long findNb(long m) {
-        return 0;
+        long sum = 0;
+        int n = 0;
+
+        while (sum < m) {
+            n++;
+            sum += (long) Math.pow(n, 3);
+        }
+
+        return (sum == m) ? n : -1;
     }
 
     @Override
