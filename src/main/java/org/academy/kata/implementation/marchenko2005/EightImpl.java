@@ -55,7 +55,12 @@ public class EightImpl implements Eight {
 
     @Override
     public int[] divisibleBy(int[] numbers, int divider) {
-        return new int[0];
+        ArrayList<Integer> a = new ArrayList<>();
+        for (int i = 0; i < numbers.length; i++) {
+            if (numbers[i] % divider == 0)
+                a.add(numbers[i]);
+        }
+        return a.stream().mapToInt(i -> i).toArray();
     }
     public static long factorial(double n){
         long res = 1;
