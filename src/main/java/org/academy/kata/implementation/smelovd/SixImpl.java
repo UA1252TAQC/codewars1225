@@ -2,6 +2,10 @@ package org.academy.kata.implementation.smelovd;
 
 import org.academy.kata.Six;
 
+import java.util.Arrays;
+import java.util.Map;
+import java.util.stream.Collectors;
+
 public class SixImpl implements Six {
     @Override
     public long findNb(long m) {
@@ -35,6 +39,14 @@ public class SixImpl implements Six {
 
     @Override
     public String stockSummary(String[] lstOfArt, String[] lstOf1stLetter) {
-        return "";
+        final Map<Character, Integer> categoryCounts = Arrays.stream(lstOfArt)
+                .collect(Collectors.groupingBy(s -> s.charAt(0), Collectors.summingInt(s -> Integer.parseInt(s.split(" ")[1]))));
+        if (isAllZeros(lstOf1stLetter, categoryCounts)) return "";
+        return Arrays.stream(lstOf1stLetter).map(letters -> String.format("(%s : %d)", letters, categoryCounts.getOrDefault(letters.charAt(0), 0)))
+                .collect(Collectors.joining(" - "));
+    }
+
+    private static boolean isAllZeros(String[] lstOf1stLetter, Map<Character, Integer> categoryCounts) {
+        return Arrays.stream(lstOf1stLetter).allMatch(letters -> categoryCounts.getOrDefault(letters.charAt(0), 0) == 0);
     }
 }
