@@ -2,6 +2,7 @@ package org.academy.kata.implementation.smelovd;
 
 import org.academy.kata.Six;
 
+import java.math.BigInteger;
 import java.util.Arrays;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -9,7 +10,18 @@ import java.util.stream.Collectors;
 public class SixImpl implements Six {
     @Override
     public long findNb(long m) {
-        return 0;
+        final BigInteger expectedVolume = BigInteger.valueOf(m);
+        BigInteger volume = BigInteger.ZERO;
+        long cubesCount = 0;
+        for (; volume.compareTo(expectedVolume) < 0; cubesCount++) {
+            volume = volume.add(BigInteger.valueOf(cubesCount + 1).pow(3));
+        }
+
+        if (volume.compareTo(expectedVolume) != 0) {
+            return -1;
+        }
+
+        return cubesCount;
     }
 
     @Override
