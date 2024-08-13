@@ -12,7 +12,12 @@ public class FiveImpl implements Five {
 
     @Override
     public int zeros(int n) {
-        return 0;
+        long kMax = (long) (Math.log(n) / Math.log(5));
+        int count = 0;
+        for (int i = 1; i <= kMax; i++) {
+            count += (int) (n / Math.pow(5, i));
+        }
+        return count;
     }
 
     @Override
