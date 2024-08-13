@@ -2,6 +2,7 @@ package org.academy.kata.implementation.sbekberov;
 
 import org.academy.kata.Eight;
 
+import java.util.ArrayList;
 import java.math.BigInteger;
 
 public class EightImpl implements Eight {
@@ -75,7 +76,24 @@ public class EightImpl implements Eight {
 
     @Override
     public int[] divisibleBy(int[] numbers, int divider) {
-        return new int[0];
+        if (divider == 0) {
+            throw new IllegalArgumentException("Divider cannot be zero.");
+        }
+
+        ArrayList<Integer> resultList = new ArrayList<>();
+
+        for (int number : numbers) {
+            if (number % divider == 0) {
+                resultList.add(number);
+            }
+        }
+
+        int[] resultArray = new int[resultList.size()];
+        for (int i = 0; i < resultList.size(); i++) {
+            resultArray[i] = resultList.get(i);
+        }
+
+        return resultArray;
     }
 
     @Override
