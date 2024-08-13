@@ -4,6 +4,8 @@ import org.academy.kata.Six;
 
 import java.text.DecimalFormat;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 public class SixImpl implements Six {
     @Override
@@ -117,6 +119,36 @@ public class SixImpl implements Six {
 
     @Override
     public String stockSummary(String[] lstOfArt, String[] lstOf1stLetter) {
-        return "";
+        if (lstOfArt.length == 0 || lstOf1stLetter.length == 0) {
+            return "";
+        }
+
+        Map<Character, Integer> categoryMap = new HashMap<>();
+
+        for (String category : lstOf1stLetter) {
+            categoryMap.put(category.charAt(0), 0);
+        }
+
+        for (String book : lstOfArt) {
+            char category = book.charAt(0);
+            int quantity = Integer.parseInt(book.split(" ")[1]);
+
+            if (categoryMap.containsKey(category)) {
+                categoryMap.put(category, categoryMap.get(category) + quantity);
+            }
+        }
+
+        StringBuilder result = new StringBuilder();
+        for (String category : lstOf1stLetter) {
+            if (result.length() > 0) {
+                result.append(" - ");
+            }
+            result.append("(")
+                    .append(category)
+                    .append(" : ")
+                    .append(categoryMap.get(category.charAt(0)))
+                    .append(")");
+        }
+        return result.toString();
     }
 }
