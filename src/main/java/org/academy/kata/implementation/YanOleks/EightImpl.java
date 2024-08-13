@@ -1,6 +1,7 @@
 package org.academy.kata.implementation.YanOleks;
 
 import org.academy.kata.Eight;
+import java.util.ArrayList;
 
 public class EightImpl implements Eight {
     @Override
@@ -54,7 +55,11 @@ public class EightImpl implements Eight {
 
     @Override
     public int[] divisibleBy(int[] numbers, int divider) {
-        return new int[0];
+        ArrayList<Integer> divided = new ArrayList<Integer>();
+        for (int val: numbers){
+            if (val % divider == 0) divided.add(val);
+        }
+        return divided.stream().mapToInt(i -> i).toArray();
     }
 
     @Override
