@@ -12,7 +12,12 @@ public class FiveImpl implements Five {
 
     @Override
     public int zeros(int n) {
-        return 0;
+        int cnt = 0;
+        while(n >= 5){
+            n /= 5;
+            cnt += n;
+        }
+        return cnt;
     }
 
     @Override
