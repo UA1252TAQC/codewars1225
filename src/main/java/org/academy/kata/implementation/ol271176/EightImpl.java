@@ -30,12 +30,12 @@ public class EightImpl implements Eight {
 
     @Override
     public int stringToNumber(String str) {
-        return 0;
+        return Integer.parseInt(str);
     }
 
     @Override
     public double TwoDecimalPlaces(double number) {
-        return 0;
+        return Double.parseDouble(String.format("%.2f", number));
     }
 
     @Override
@@ -45,6 +45,12 @@ public class EightImpl implements Eight {
 
     @Override
     public boolean am_i_wilson(double n) {
-        return false;
+        if(n<2) return false;
+        long factorial = 1;
+        for(int i=2; i<=n-1; i++){
+            factorial *= i;
+        }
+        double result = (factorial +1)/(n*n);
+        return (long) result == result;
     }
 }

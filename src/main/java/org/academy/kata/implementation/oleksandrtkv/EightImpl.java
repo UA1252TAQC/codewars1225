@@ -2,6 +2,9 @@ package org.academy.kata.implementation.oleksandrtkv;
 
 import org.academy.kata.Eight;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
 public class EightImpl implements Eight {
     @Override
     public int liters(double time) {
@@ -15,7 +18,7 @@ public class EightImpl implements Eight {
 
     @Override
     public float mpgToKPM(float mpg) {
-        return 0;
+        return new BigDecimal(mpg * 1.609344 / 4.54609188).setScale(2, RoundingMode.HALF_UP).floatValue();
     }
 
     @Override
