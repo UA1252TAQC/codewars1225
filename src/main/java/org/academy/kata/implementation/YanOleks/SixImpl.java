@@ -8,7 +8,14 @@ import java.util.ArrayList;
 public class SixImpl implements Six {
     @Override
     public long findNb(long m) {
-        return 0;
+        long numberOfCubes = 0;
+        long volume = 0;
+        while (volume < m){
+            numberOfCubes++;
+            volume += numberOfCubes * numberOfCubes * numberOfCubes;
+        }
+        if (volume == m) return numberOfCubes;
+        else return -1L;
     }
 
     @Override
