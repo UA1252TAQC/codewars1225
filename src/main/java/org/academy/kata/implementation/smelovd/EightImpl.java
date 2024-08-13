@@ -56,7 +56,7 @@ public class EightImpl implements Eight {
         return numeric.add(BigInteger.ONE).remainder(denominator).equals(BigInteger.ZERO);
     }
 
-    private BigInteger factorial(int n) {
+    private static BigInteger factorial(int n) {
         BigInteger factorial = new BigInteger(String.valueOf(1));
         for (int i = 1; i <= n; i++) {
             factorial = factorial.multiply(BigInteger.valueOf(i));
