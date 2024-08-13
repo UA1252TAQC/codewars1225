@@ -7,7 +7,15 @@ import java.util.regex.Pattern;
 public class SixImpl implements Six {
     @Override
     public long findNb(long m) {
-        return 0;
+        long n = 0;
+        long totalVolume = 0;
+
+        while (totalVolume < m) {
+            n++;
+            totalVolume += n * n * n;
+        }
+
+        return totalVolume == m ? n : -1;
     }
 
     @Override
