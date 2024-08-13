@@ -20,7 +20,7 @@ public class FiveImpl implements Five {
         return sumFibonacci(n.longValueExact()).multiply(BigInteger.valueOf(4L));
     }
 
-    public static BigInteger sumFibonacci(long n) {
+    private static BigInteger sumFibonacci(long n) {
         BigInteger a = BigInteger.ZERO;
         BigInteger b = BigInteger.ONE;
         BigInteger sum = a.add(b);
