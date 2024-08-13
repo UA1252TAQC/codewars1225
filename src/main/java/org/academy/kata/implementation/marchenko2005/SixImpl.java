@@ -1,6 +1,8 @@
 package org.academy.kata.implementation.marchenko2005;
 
 import org.academy.kata.Six;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -182,6 +184,34 @@ public class SixImpl implements Six {
     }
     @Override
     public String stockSummary(String[] lstOfArt, String[] lstOf1stLetter) {
-        return "";
+        if (lstOfArt.length == 0 || lstOf1stLetter.length == 0) {
+            return "";
+        }
+
+        Map<String, Integer> categorySums = new HashMap<>();
+
+        for (String category : lstOf1stLetter) {
+            categorySums.put(category, 0);
+        }
+
+        for (String item : lstOfArt) {
+            String[] parts = item.split(" ");
+            String category = parts[0].substring(0, 1);
+            int quantity = Integer.parseInt(parts[1]);
+
+            if (categorySums.containsKey(category)) {
+                categorySums.put(category, categorySums.get(category) + quantity);
+            }
+        }
+
+        StringBuilder result = new StringBuilder();
+        for (String category : lstOf1stLetter) {
+            if (result.length() > 0) {
+                result.append(" - ");
+            }
+            result.append("(").append(category).append(" : ").append(categorySums.get(category)).append(")");
+        }
+
+        return result.toString();
     }
 }
