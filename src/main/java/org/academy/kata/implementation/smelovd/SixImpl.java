@@ -46,7 +46,7 @@ public class SixImpl implements Six {
                 .collect(Collectors.joining(" - "));
     }
 
-    private boolean isAllZeros(String[] lstOf1stLetter, Map<Character, Integer> categoryCounts) {
+    private static boolean isAllZeros(String[] lstOf1stLetter, Map<Character, Integer> categoryCounts) {
         return Arrays.stream(lstOf1stLetter).allMatch(letters -> categoryCounts.getOrDefault(letters.charAt(0), 0) == 0);
     }
 }
