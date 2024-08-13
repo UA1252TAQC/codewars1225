@@ -22,7 +22,15 @@ public class EightImpl implements Eight {
 
     @Override
     public int[] squareOrSquareRoot(int[] array) {
-        return new int[0];
+        for (int i = 0; i < array.length; i++) {
+            double sqrtValue = Math.sqrt(array[i]);
+            if (sqrtValue == Math.floor(sqrtValue)) {
+                array[i] = (int) sqrtValue;
+            } else {
+                array[i] = (int) Math.pow(array[i], 2);
+            }
+        }
+        return array;
     }
 
     @Override
