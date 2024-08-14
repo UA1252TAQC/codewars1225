@@ -20,12 +20,63 @@ public class SixImpl implements Six {
 
     @Override
     public double mean(String town, String strng) {
-        return 0;
+        String[] records = strng.split("\n");
+        String townRecord = null;
+
+        for (String record : records) {
+            if (record.startsWith(town + ":")) {
+                townRecord = record;
+                break;
+            }
+        }
+
+        if (townRecord == null) {
+            return -1;
+        }
+
+        String[] monthlyData = townRecord.split(":")[1].split(",");
+        double sum = 0;
+        int count = 0;
+
+        for (String data : monthlyData) {
+            String[] parts = data.split(" ");
+            double rainfall = Double.parseDouble(parts[1]);
+            sum += rainfall;
+            count++;
+        }
+
+        return sum / count;
     }
 
     @Override
     public double variance(String town, String strng) {
-        return 0;
+        double meanValue = mean(town, strng);
+        if (meanValue == -1) {
+            return -1;
+        }
+
+        String[] records = strng.split("\n");
+        String townRecord = null;
+
+        for (String record : records) {
+            if (record.startsWith(town + ":")) {
+                townRecord = record;
+                break;
+            }
+        }
+
+        String[] monthlyData = townRecord.split(":")[1].split(",");
+        double sumOfSquares = 0;
+        int count = 0;
+
+        for (String data : monthlyData) {
+            String[] parts = data.split(" ");
+            double rainfall = Double.parseDouble(parts[1]);
+            sumOfSquares += Math.pow(rainfall - meanValue, 2);
+            count++;
+        }
+
+        return sumOfSquares / count;
     }
 
     @Override
