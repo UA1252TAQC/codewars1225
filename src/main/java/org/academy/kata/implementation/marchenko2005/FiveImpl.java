@@ -59,7 +59,23 @@ public class FiveImpl implements Five {
 
     @Override
     public double solve(double m) {
-        return 0;
+        double low = 0.0;
+        double high = 1.0;
+        double mid = 0.5;
+        double tolerance = 1e-12;
+
+        while (high - low > tolerance) {
+            mid = (low + high) / 2.0;
+            double fMid = mid / Math.pow(1 - mid, 2);
+
+            if (fMid < m) {
+                low = mid;
+            } else {
+                high = mid;
+            }
+        }
+
+        return mid;
     }
 
     @Override
