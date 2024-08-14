@@ -5,7 +5,7 @@ import org.academy.kata.Five;
 import org.academy.kata.Six;
 import org.academy.kata.Seven;
 
-public enum Authors {
+public enum Author {
 
     MARCHENKO2005( "Marchenko Maria",
             new org.academy.kata.implementation.marchenko2005.FiveImpl(),
@@ -85,7 +85,7 @@ public enum Authors {
     private final Seven seven;
     private final Eight eight;
 
-    Authors( String name, Five five, Six six, Seven seven, Eight eight) {
+    Author( String name, Five five, Six six, Seven seven, Eight eight) {
         this.name = name;
         this.five = five;
         this.six = six;
