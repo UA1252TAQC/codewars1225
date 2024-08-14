@@ -21,6 +21,10 @@ public enum Task {
         this.requiredParams = requiredParams;
     }
 
+    public int getId() {
+        return this.ordinal();
+    }
+
     public String getTitle() {
         return title;
     }
