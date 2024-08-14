@@ -6,14 +6,18 @@ import org.academy.codewars.services.TaskService;
 import java.util.List;
 
 public class TaskController {
-    private TaskService taskService;
-    public TaskController(TaskService service){
-        taskService = service;
+    private final TaskService taskService;
+
+    public TaskController(TaskService service) {
+        this.taskService = service;
     }
+
     public List<Task> getAll() {
         return taskService.getAll();
     }
-    public Task getById(int id){
+
+    public Task getById(int id) {
+        if (id < 0) throw new IllegalArgumentException("id can't be negative");
         return taskService.getById(id);
     }
 }
