@@ -11,18 +11,6 @@ public class ConsoleScanner {
         this.scanner = scanner;
     }
 
-    public int readInt() {
-        while (true) {
-            try {
-                System.out.print("Enter an int number: ");
-                return scanner.nextInt();
-            } catch (InputMismatchException e) {
-                System.out.println("Invalid data format. An integer is expected.");
-                scanner.next();
-            }
-        }
-    }
-
     public int readInt(String param) {
         while (true) {
             try {
@@ -35,10 +23,10 @@ public class ConsoleScanner {
         }
     }
 
-    public float readFloat() {
+    public float readFloat(String param) {
         while (true) {
             try {
-                System.out.print("Enter a float number: ");
+                System.out.print("Enter a " + param + " (float): ");
                 return scanner.nextFloat();
             } catch (InputMismatchException e) {
                 System.out.println("Invalid data format. A floating point number is expected.");
@@ -47,25 +35,13 @@ public class ConsoleScanner {
         }
     }
 
-    public long readLong() {
+    public long readLong(String param) {
         while (true) {
             try {
-                System.out.print("Enter a long number: ");
+                System.out.print("Enter a " + param + " (long): ");
                 return scanner.nextLong();
             } catch (InputMismatchException e) {
                 System.out.println("Invalid data format. An integer (long) is expected.");
-                scanner.next();
-            }
-        }
-    }
-
-    public double readDouble() {
-        while (true) {
-            try {
-                System.out.print("Enter a double number: ");
-                return scanner.nextDouble();
-            } catch (InputMismatchException e) {
-                System.out.println("Invalid data format. A floating point number is expected.");
                 scanner.next();
             }
         }
@@ -83,10 +59,10 @@ public class ConsoleScanner {
         }
     }
 
-    public BigInteger readBigInteger() {
+    public BigInteger readBigInteger(String param) {
         while (true) {
             try {
-                System.out.print("Enter a BigInteger number: ");
+                System.out.print("Enter a " + param + " number: ");
                 return scanner.nextBigInteger();
             } catch (InputMismatchException e) {
                 System.out.println("Invalid data format. An integer (BigInteger) is expected.");
@@ -95,49 +71,45 @@ public class ConsoleScanner {
         }
     }
 
-    public int[] readIntArray() {
-        System.out.print("Enter the number of elements int[] => ");
-        int size = readInt();
+    public int[] readIntArray(String param) {
+        System.out.print("Enter the " + param + " (int array): ) ");
+        int size = readInt("size for array");
         int[] array = new int[size];
         System.out.println("Enter elements int[]:");
         for (int i = 0; i < size; i++) {
             System.out.print("Element_" + (i + 1) + " => ");
-            array[i] = readInt();
+            array[i] = readInt("new int");
         }
         return array;
     }
 
-    public double[] readDoubleArray() {
-        System.out.print("Enter the number of elements double[] => ");
-        int size = readInt();
+    public double[] readDoubleArray(String param) {
+        System.out.print("Enter the " + param + " (int array): ) ");
+        int size = readInt("size for array");
         double[] array = new double[size];
         System.out.println("Enter elements double[]:");
         for (int i = 0; i < size; i++) {
             System.out.print("Element_" + (i + 1) + " => ");
-            array[i] = readDouble();
+            array[i] = readDouble("new double");
         }
         return array;
     }
 
-    public String readString() {
-        System.out.print("Enter a String: ");
+    public String readString(String param) {
+        System.out.print("Enter a " + param + " : ");
         return scanner.nextLine();
     }
 
-    public String[] readStringArray() {
-        System.out.print("Enter the number of elements String[] => ");
-        int size = readInt();
+    public String[] readStringArray(String param) {
+        System.out.print("Enter the " + param + " (int array): ) ");
+        int size = readInt("size for array");
         String[] array = new String[size];
         scanner.nextLine();
         System.out.println("Enter elements String[]:");
         for (int i = 0; i < size; i++) {
             System.out.print("Element_" + (i + 1) + " => ");
-            array[i] = readString();
+            array[i] = readString("new string");
         }
         return array;
-    }
-
-    public void close() {
-        scanner.close();
     }
 }
