@@ -23,6 +23,18 @@ public class ConsoleScanner {
         }
     }
 
+    public int readInt(String param) {
+        while (true) {
+            try {
+                System.out.print("Enter a " + param + " (int): ");
+                return scanner.nextInt();
+            } catch (InputMismatchException e) {
+                System.out.println("Invalid data format. An integer is expected.");
+                scanner.next();
+            }
+        }
+    }
+
     public float readFloat() {
         while (true) {
             try {
@@ -51,6 +63,18 @@ public class ConsoleScanner {
         while (true) {
             try {
                 System.out.print("Enter a double number: ");
+                return scanner.nextDouble();
+            } catch (InputMismatchException e) {
+                System.out.println("Invalid data format. A floating point number is expected.");
+                scanner.next();
+            }
+        }
+    }
+
+    public double readDouble(String param) {
+        while (true) {
+            try {
+                System.out.print("Enter a " + param + " (double): ");
                 return scanner.nextDouble();
             } catch (InputMismatchException e) {
                 System.out.println("Invalid data format. A floating point number is expected.");
