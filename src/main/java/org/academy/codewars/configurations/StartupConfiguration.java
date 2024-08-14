@@ -9,6 +9,7 @@ import org.academy.codewars.services.AuthorService;
 import org.academy.codewars.services.TaskService;
 
 public class StartupConfiguration {
+
     public static UIController initUIController() {
         AuthorRepository authorRepository = new AuthorRepository();
         TaskRepository taskRepository = new TaskRepository();

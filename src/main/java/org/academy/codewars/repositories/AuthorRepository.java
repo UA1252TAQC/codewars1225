@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Optional;
 
 public class AuthorRepository {
-
     private final List<Author> authors = Arrays.asList(Author.values());
 
     public List<Author> findAll() {
@@ -19,5 +18,4 @@ public class AuthorRepository {
                 .filter(author -> author.getId() == id)
                 .findFirst();
     }
-
 }
