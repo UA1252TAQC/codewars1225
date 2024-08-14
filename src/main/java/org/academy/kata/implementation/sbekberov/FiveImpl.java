@@ -22,7 +22,22 @@ public class FiveImpl implements Five {
 
     @Override
     public double solve(double m) {
-        return 0;
+        double left = 0;
+        double right = 1;
+        double epsilon = 1e-12;
+        double mid = 0;
+
+        while (right - left > epsilon) {
+            mid = (left + right) / 2;
+            double value = mid / Math.pow(1 - mid, 2);
+
+            if (value > m) {
+                right = mid;
+            } else {
+                left = mid;
+            }
+        }
+        return (left + right) / 2;
     }
 
     @Override
