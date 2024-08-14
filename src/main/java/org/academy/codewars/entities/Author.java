@@ -93,7 +93,6 @@ public enum Author {
         this.eight = eight;
     }
 
-    // Гетери для полів
     public int getId() {
         return this.ordinal();
     }
