@@ -22,7 +22,8 @@ public class TaskService {
         return taskRepository.findAll();
     }
 
-    public Optional<Task> getById(int id) {
-        return taskRepository.findById(id);
+    public Task getById(int id) {
+        return taskRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Task with ID " + id + " not found"));
     }
 }
