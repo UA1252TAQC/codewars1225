@@ -46,17 +46,15 @@ public class UIController {
 
     private void getAllAuthors() {
         System.out.println("All authors:");
-        int i = 1;
         for (Author author : authorController.getAll()) {
-            System.out.printf("\t%d) %s%n", i, author.getName());
+            System.out.printf("\t%d) %s%n", author.getId(), author.getName());
         }
     }
 
     private void getAllTasks() {
         System.out.println("All tasks:");
-        int i = 1;
         for (Task task : taskController.getAll()) {
-            System.out.printf("\t%d) %s%n", i, task.getTitle());
+            System.out.printf("\t%d) %s%n", task.getId(), task.getTitle());
         }
     }
 
