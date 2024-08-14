@@ -59,11 +59,48 @@ public class FiveImpl implements Five {
 
     @Override
     public double solve(double m) {
-        return 0;
+        double low = 0.0;
+        double high = 1.0;
+        double mid = 0.5;
+        double tolerance = 1e-12;
+
+        while (high - low > tolerance) {
+            mid = (low + high) / 2.0;
+            double fMid = mid / Math.pow(1 - mid, 2);
+
+            if (fMid < m) {
+                low = mid;
+            } else {
+                high = mid;
+            }
+        }
+
+        return mid;
     }
 
     @Override
     public long[] smallest(long n) {
-        return new long[0];
+        String numStr = Long.toString(n);
+        int length = numStr.length();
+        long smallestNumber = n;
+        int fromIndex = 0;
+        int toIndex = 0;
+
+        for (int i = 0; i < length; i++) {
+            char digit = numStr.charAt(i);
+            StringBuilder sb = new StringBuilder(numStr);
+            sb.deleteCharAt(i);
+            for (int j = 0; j <= sb.length(); j++) {
+                sb.insert(j, digit);
+                long newNumber = Long.parseLong(sb.toString());
+                if (newNumber < smallestNumber) {
+                    smallestNumber = newNumber;
+                    fromIndex = i;
+                    toIndex = j;
+                }
+                sb.deleteCharAt(j);
+            }
+        }
+        return new long[]{smallestNumber, fromIndex, toIndex};
     }
 }
