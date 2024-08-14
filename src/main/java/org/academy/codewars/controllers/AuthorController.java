@@ -17,10 +17,7 @@ public class AuthorController {
     }
 
     public Author getById(int id) {
-        if (id < 0) {
-            throw new IllegalArgumentException("ID must be a positive number.");
-        }
+        if (id < 0) throw new IllegalArgumentException("ID must be a positive number.");
         return authorService.getById(id);
     }
-
 }
