@@ -1,33 +1,28 @@
 package org.academy.codewars.services;
 
-import org.academy.codewars.entities.Author;
 import org.academy.codewars.entities.Task;
+import org.academy.codewars.repositories.TaskRepository;
 
-import java.util.ArrayList;
+
 import java.util.List;
+import java.util.Optional;
+
+
 
 public class TaskService {
+    private TaskRepository taskRepository;
+    private AuthorService authorService;
 
-    public List<Task> getAll(int authorId) {
-        Author author = Author.values()[authorId];
-        List<Task> authorTasks = new ArrayList<>();
-
-        authorTasks.add(Task.TASK1);
-        authorTasks.add(Task.TASK2);
-        authorTasks.add(Task.TASK3);
-
-        return authorTasks;
+    public TaskService(TaskRepository taskRepository, AuthorService authorService) {
+        this.taskRepository = taskRepository;
+        this.authorService = authorService;
     }
 
-    public Task getById(int authorId, String taskName) {
-        Author author = Author.values()[authorId];
+    public List<Task> getAll() {
+        return taskRepository.findAll();
+    }
 
-        for (Task task : getAll(authorId)) {
-            if (task.name().equals(taskName)) {
-                return task;
-            }
-        }
-
-        throw new IllegalArgumentException("Task " + taskName + " is not associated with author " + author.getName());
+    public Optional<Task> getById(int id) {
+        return taskRepository.findById(id);
     }
 }
