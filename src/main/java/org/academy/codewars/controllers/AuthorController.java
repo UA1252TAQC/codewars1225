@@ -4,7 +4,6 @@ import org.academy.codewars.entities.Author;
 import org.academy.codewars.services.AuthorService;
 
 import java.util.List;
-import java.util.Map;
 
 public class AuthorController {
     private final AuthorService authorService;
