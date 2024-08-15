@@ -5,13 +5,11 @@ import org.academy.codewars.entities.Author;
 import org.academy.codewars.entities.Task;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 import java.util.function.Function;
 
 public class UIService {
-    private enum MenuActions {AUTHORS, TASKS, RUN, NOT_FOUND}
     private final AuthorService authorService;
     private final TaskService taskService;
     private final ConsoleScanner consoleScanner;
@@ -42,7 +40,6 @@ public class UIService {
                 case "3":
                     executeTask();
                     break;
-
                 case "q":
                     return;
                 default:
@@ -76,13 +73,10 @@ public class UIService {
         System.out.println("Task description: " + task.getDescription());
         List<Object> params = requestParams(task);
 
-        Object result = task.getSupplier().apply(author, params); //TODO exception handler
+         //TODO exception handler
+        String result = task.getSupplier().applyString(author, params);
 
-        if (result != null && result.getClass().isArray()) {
-            System.out.println("Result: " + Arrays.deepToString((Object[]) result));
-        } else {
-            System.out.println("Result: " + result);
-        }
+        System.out.println("Result: " + result);
     }
 
     private List<Object> requestParams(Task task) {
