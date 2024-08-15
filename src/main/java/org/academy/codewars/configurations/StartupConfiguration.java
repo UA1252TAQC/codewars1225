@@ -17,10 +17,9 @@ public class StartupConfiguration {
     public static UIController initUIController() {
         ConsoleScanner consoleScanner = new ConsoleScanner(new Scanner(System.in));
         AuthorRepository authorRepository = new AuthorRepository();
-        TaskRepository taskRepository = new TaskRepository();
 
         AuthorService authorService = new AuthorService(authorRepository);
-        TaskService taskService = new TaskService(taskRepository, authorService);
+        TaskService taskService = new TaskService();
         UIService uiService = new UIService(authorService, taskService, consoleScanner);
 
         AuthorController authorController = new AuthorController(authorService);
