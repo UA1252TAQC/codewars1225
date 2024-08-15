@@ -64,7 +64,7 @@ public class ConsoleScanner {
             try {
                 System.out.print("Enter a " + param + " number: ");
                 return scanner.nextBigInteger();
-            } catch (InputMismatchException e) {
+            } catch (InputMismatchException | NumberFormatException e) {
                 System.out.println("Invalid data format. An integer (BigInteger) is expected.");
                 scanner.next();
             }
