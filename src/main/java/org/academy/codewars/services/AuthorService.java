@@ -14,7 +14,7 @@ public class AuthorService {
     public Author getById(int id) {
         Author author = Author.findById(id);
         if (author == null) {
-            throw new NoSuchElementException("Task not found with id: " + id);
+            throw new NoSuchElementException("Author not found with id: " + id);
         }
         return author;
     }
