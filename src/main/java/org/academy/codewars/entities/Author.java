@@ -117,4 +117,13 @@ public enum Author {
         return eight;
     }
 
+    public static Author findById(int id) {
+        for (Author author: values()) {
+            if(author.getId() == id) {
+                return author;
+            }
+        }
+        return null;
+    }
+
 }

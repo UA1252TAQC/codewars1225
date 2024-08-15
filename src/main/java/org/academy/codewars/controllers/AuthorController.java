@@ -12,12 +12,10 @@ public class AuthorController {
         this.authorService = authorService;
     }
 
-    public List<Author> getAll() {
-        return authorService.getAll();
-    }
 
     public Author getById(int id) {
-        if (id < 0) throw new IllegalArgumentException("ID must be a positive number.");
+        Author author = Author.findById(id);
+        if (author == null) throw new IllegalArgumentException("ID must be a positive number.");
         return authorService.getById(id);
     }
 }
