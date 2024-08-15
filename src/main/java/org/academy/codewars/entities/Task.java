@@ -2,6 +2,8 @@ package org.academy.codewars.entities;
 
 import java.math.BigInteger;
 import org.academy.codewars.ConsoleScanner;
+
+import java.util.Arrays;
 import java.util.List;
 import java.util.function.BiFunction;
 import java.util.function.Function;
@@ -137,4 +139,17 @@ public enum Task {
     public Function<ConsoleScanner, ?>[] getRequiredParams() {
         return requiredParams;
     }
+
+    public static Task findById(int id) {
+        for (Task task: values()) {
+            if(task.getId() == id) {
+                return task;
+            }
+        }
+        return null;
     }
+
+    public static List<Task> findAll() {
+        return Arrays.asList(values());
+    }
+}
