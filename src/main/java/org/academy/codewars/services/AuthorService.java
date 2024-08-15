@@ -3,6 +3,7 @@ package org.academy.codewars.services;
 import org.academy.codewars.entities.Author;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 public class AuthorService {
 
@@ -13,7 +14,7 @@ public class AuthorService {
     public Author getById(int id) {
         Author author = Author.findById(id);
         if (author == null) {
-            throw new RuntimeException("Author not found with id: " + id);
+            throw new NoSuchElementException("Task not found with id: " + id);
         }
         return author;
     }
