@@ -3,7 +3,7 @@ package org.academy.codewars.controllers;
 import org.academy.codewars.entities.Author;
 import org.academy.codewars.services.AuthorService;
 
-import java.util.List;
+import java.util.Optional;
 
 public class AuthorController {
     private final AuthorService authorService;
@@ -14,8 +14,7 @@ public class AuthorController {
 
 
     public Author getById(int id) {
-        Author author = Author.findById(id);
-        if (author == null) throw new IllegalArgumentException("ID must be a positive number.");
-        return authorService.getById(id);
+        return Optional.ofNullable(Author.findById(id))
+                .orElseThrow(() -> new IllegalArgumentException("ID must be in a correct range"));
     }
 }
