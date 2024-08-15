@@ -17,6 +17,5 @@ public class AuthorService {
             throw new NoSuchElementException("Task not found with id: " + id);
         }
         return author;
-
     }
 }
