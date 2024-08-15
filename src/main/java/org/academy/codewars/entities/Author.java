@@ -5,6 +5,9 @@ import org.academy.kata.Five;
 import org.academy.kata.Six;
 import org.academy.kata.Seven;
 
+import java.util.Arrays;
+import java.util.List;
+
 public enum Author {
 
     MARCHENKO2005("Marchenko Maria",
@@ -115,6 +118,10 @@ public enum Author {
 
     public Eight getEight() {
         return eight;
+    }
+
+    public static List<Author> findAll() {
+        return Arrays.asList(values());
     }
 
     public static Author findById(int id) {
