@@ -57,6 +57,9 @@ public class UIService {
         for (Author author : authorService.getAll()) {
             System.out.printf("\t%d) %s%n", author.getId(), author.getName());
         }
+        for (Author author : Author.values()) {
+            System.out.printf("\t%d) %s%n", author.getId(), author.getName());
+        }
     }
 
     private void getAllTasks() {
