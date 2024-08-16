@@ -71,6 +71,7 @@ public class SixImpl implements Six {
                 .average()
                 .orElse(-1);
     }
+
     @Override
     public double variance(String town, String strng) {
         double mean = mean(town, strng);

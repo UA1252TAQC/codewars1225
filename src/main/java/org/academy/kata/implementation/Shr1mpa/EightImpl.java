@@ -48,8 +48,7 @@ public class EightImpl implements Eight {
         for (int number : input) {
             if (number > 0) {
                 numberOfPositives++;
-            }
-            else {
+            } else {
                 sumOfNegatives += number;
             }
         }
@@ -81,7 +80,7 @@ public class EightImpl implements Eight {
         long nLong = (long) n;
         BigInteger factorial = factorial(BigInteger.valueOf(nLong - 1));
         BigInteger add = factorial.add(BigInteger.ONE);
-        BigInteger divide= BigInteger.valueOf(nLong * nLong);
+        BigInteger divide = BigInteger.valueOf(nLong * nLong);
 
         return add.mod(divide).equals(BigInteger.ZERO);
     }

@@ -49,7 +49,7 @@ public class EightImpl implements Eight {
             }
         }
 
-        return new int[] { positiveCount, negativeSum };
+        return new int[]{positiveCount, negativeSum};
     }
 
     @Override

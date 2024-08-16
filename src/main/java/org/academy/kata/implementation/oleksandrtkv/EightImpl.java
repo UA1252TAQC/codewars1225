@@ -10,7 +10,7 @@ import java.util.List;
 public class EightImpl implements Eight {
     @Override
     public int liters(double time) {
-        return (int)(time / 2);
+        return (int) (time / 2);
     }
 
     @Override
@@ -26,7 +26,7 @@ public class EightImpl implements Eight {
     @Override
     public int[] squareOrSquareRoot(int[] array) {
         for (int i = 0; i < array.length; i++) {
-            if (array[i] % Math.sqrt(array[i]) == 0){
+            if (array[i] % Math.sqrt(array[i]) == 0) {
                 array[i] = (int) Math.sqrt(array[i]);
             } else {
                 array[i] *= array[i];
@@ -38,12 +38,12 @@ public class EightImpl implements Eight {
     @Override
     public int[] countPositivesSumNegatives(int[] input) {
         int[] output = new int[0];
-        if (input != null && input.length != 0){
+        if (input != null && input.length != 0) {
             output = new int[2];
             int posCount = 0;
             int negSum = 0;
             for (int i = 0; i < input.length; i++) {
-                if (input[i] > 0){
+                if (input[i] > 0) {
                     posCount++;
                 } else {
                     negSum += input[i];

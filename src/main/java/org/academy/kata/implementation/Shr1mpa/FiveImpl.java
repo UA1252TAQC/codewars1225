@@ -59,7 +59,7 @@ public class FiveImpl implements Five {
 
             if (Math.abs(mid_f - m) <= epsilon) {
                 return mid;
-            } else if(mid_f > m) {
+            } else if (mid_f > m) {
                 high = mid;
             } else {
                 low = mid;
@@ -99,7 +99,7 @@ public class FiveImpl implements Five {
         if (n <= 1) {
             return false;
         }
-        for (int i = 2; i * i <= n; i++) {
+        for (int i = 2; (long) i * i <= n; i++) {
             if (n % i == 0) {
                 return false;
             }
