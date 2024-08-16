@@ -10,7 +10,6 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
@@ -21,10 +20,26 @@ jobs:
         uses: actions/setup-java@v3
         with:
           java-version: '21'
-          distribution: 'temurin' 
+          distribution: 'temurin'
 
       - name: Build with Maven
         run: mvn clean install
 
       - name: Run tests
         run: mvn test
+
+      - name: Notify Telegram
+        if: always()
+        run: |
+          TELEGRAM_URL="https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage"
+          PR_URL="https://github.com/UA1252TAQC/codewars1225/pull/${{ github.event.pull_request.number }}"
+          MESSAGE_TEXT="Need a rewiew ${{ github.ref }}.\nPull Request: $PR_URL"
+          
+          # URL-encode the message text
+          ENCODED_TEXT=$(echo "$MESSAGE_TEXT" | jq -sRr @uri)
+
+          # Send the message
+          curl --request GET \
+            --url "$TELEGRAM_URL?chat_id=${{ secrets.TELEGRAM_CHAT_ID }}&text=$ENCODED_TEXT&message_thread_id=${{ secrets.TELEGRAM_MESSAGE_THREAD_ID }}"
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
