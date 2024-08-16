@@ -16,6 +16,7 @@ public class SevenImpl implements Seven {
             throw new IllegalArgumentException("Invalid donation amount");
         }
         return (int) newDonation;
+
     }
 
     @Override
