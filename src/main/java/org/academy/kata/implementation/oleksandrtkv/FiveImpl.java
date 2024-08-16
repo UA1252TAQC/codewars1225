@@ -22,7 +22,7 @@ public class FiveImpl implements Five {
                 }
 
                 if (end - start == g) {
-                    return new long[] { start, end };
+                    return new long[]{start, end};
                 }
             }
         }

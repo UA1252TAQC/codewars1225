@@ -15,6 +15,7 @@ public class FiveImpl implements Five {
         }
         return true;
     }
+
     @Override
     public long[] gap(int g, long m, long n) {
         long previousPrime = -1;

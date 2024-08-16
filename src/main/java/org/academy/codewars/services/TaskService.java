@@ -1,6 +1,7 @@
 package org.academy.codewars.services;
 
 import org.academy.codewars.entities.Task;
+
 import java.util.List;
 import java.util.NoSuchElementException;
 

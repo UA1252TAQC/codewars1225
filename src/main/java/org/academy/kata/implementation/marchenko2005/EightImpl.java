@@ -1,15 +1,16 @@
 package org.academy.kata.implementation.marchenko2005;
 
 import org.academy.kata.Eight;
-import java.math.RoundingMode;
+
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 
 public class EightImpl implements Eight {
     @Override
     public int liters(double time) {
         double res = time / 2;
-        return (int)res;
+        return (int) res;
     }
 
     @Override
@@ -20,19 +21,18 @@ public class EightImpl implements Eight {
     @Override
     public float mpgToKPM(float mpg) {
         double a = 1.609344 / 4.54609188;
-        return mpg * (float)a;
+        return mpg * (float) a;
     }
 
     @Override
     public int[] squareOrSquareRoot(int[] array) {
-        int[] array2 =  new int[array.length];
-        for(int i = 0; i < array.length; i++){
+        int[] array2 = new int[array.length];
+        for (int i = 0; i < array.length; i++) {
             int sqrt = (int) Math.sqrt(array[i]);
-            if(sqrt *sqrt == array[i]){
+            if (sqrt * sqrt == array[i]) {
                 array2[i] = sqrt;
-            }
-            else{
-                array2[i] = array[i]*array[i];
+            } else {
+                array2[i] = array[i] * array[i];
             }
         }
         return array2;
@@ -40,19 +40,19 @@ public class EightImpl implements Eight {
 
     @Override
     public int[] countPositivesSumNegatives(int[] input) {
-        if(input == null || input.length == 0)
-        return new int[0];
+        if (input == null || input.length == 0)
+            return new int[0];
         int negSum = 0;
         int posCount = 0;
-        for(int i = 0; i < input.length; i++){
-            if(input[i] < 0){
+        for (int i = 0; i < input.length; i++) {
+            if (input[i] < 0) {
                 negSum += input[i];
             }
-            if(input[i] > 0){
+            if (input[i] > 0) {
                 posCount++;
             }
         }
-        int[] result = new int[] {posCount, negSum};
+        int[] result = new int[]{posCount, negSum};
         return result;
     }
 
@@ -77,14 +77,16 @@ public class EightImpl implements Eight {
         }
         return a.stream().mapToInt(i -> i).toArray();
     }
-    public static long factorial(double n){
+
+    public static long factorial(double n) {
         long res = 1;
-        while((int)n > 0){
+        while ((int) n > 0) {
             res *= n;
             n--;
         }
         return res;
     }
+
     public static boolean isPrime(double n) {
         if (n <= 1) return false;
         if (n <= 3) return true;
@@ -97,10 +99,8 @@ public class EightImpl implements Eight {
 
     @Override
     public boolean am_i_wilson(double n) {
-        if(!isPrime(n))
+        if (!isPrime(n))
             return false;
-        if((factorial(n-1)/ n*n) % 1 == 0)
-            return true;
-        return false;
+        return (factorial(n - 1) / n * n) % 1 == 0;
     }
 }

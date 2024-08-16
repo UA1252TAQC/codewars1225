@@ -2,21 +2,23 @@ package org.academy.kata.implementation.AndriyVel05;
 
 import org.academy.kata.Eight;
 
+import java.util.Arrays;
+
 public class EightImpl implements Eight {
     @Override
     public int liters(double time) {
-        return (int) Math.floor(time * 0.5)
+        return (int) Math.floor(time * 0.5);
     }
 
     @Override
     public double getVolumeOfCuboid(double length, double width, double height) {
-        return length * width * height
+        return length * width * height;
     }
 
     @Override
     public float mpgToKPM(float mpg) {
         float kpl = (mpg * 1.609344f) / (4.54609188f);
-        return Math.round(kpl * 100) / 100.0f
+        return Math.round(kpl * 100) / 100.0f;
     }
 
     @Override
@@ -52,7 +54,7 @@ public class EightImpl implements Eight {
             }
         }
 
-        return  new int[]{positiveCount, negativeSum}
+        return new int[]{positiveCount, negativeSum};
     }
 
     @Override

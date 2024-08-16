@@ -1,19 +1,21 @@
 package org.academy.kata.implementation.ol271176;
 
 import org.academy.kata.Five;
-import java.util.*;
+
 import java.math.BigInteger;
+import java.util.ArrayList;
+import java.util.List;
 
 public class FiveImpl implements Five {
     @Override
     public long[] gap(int g, long m, long n) {
-        boolean[] isPrime = new boolean[(int)n + 1];
+        boolean[] isPrime = new boolean[(int) n + 1];
         for (int i = 2; i <= n; i++) {
             isPrime[i] = true;
         }
 
         //search prime numbers in current range
-        for (int p = 2; p * p <= n; p++) {
+        for (int p = 2; (long) p * p <= n; p++) {
             if (isPrime[p]) {
                 for (int i = p * p; i <= n; i += p) {
                     isPrime[i] = false;
@@ -40,7 +42,7 @@ public class FiveImpl implements Five {
             int prime1 = filteredPrimes.get(i);
             int prime2 = filteredPrimes.get(i + 1);
             if (prime2 - prime1 == g) {
-                return new long[] { prime1, prime2 };
+                return new long[]{prime1, prime2};
             }
         }
 
@@ -50,7 +52,7 @@ public class FiveImpl implements Five {
     @Override
     public int zeros(int n) {
         int cnt = 0;
-        while(n >= 5){
+        while (n >= 5) {
             n /= 5;
             cnt += n;
         }
@@ -62,8 +64,8 @@ public class FiveImpl implements Five {
         BigInteger a = BigInteger.ZERO;
         BigInteger b = BigInteger.ONE;
         BigInteger sum = BigInteger.ONE;
-        for(BigInteger i= BigInteger.valueOf(2); i.compareTo(n.add(BigInteger.ONE)) <=0;
-            i = i.add(BigInteger.ONE)){
+        for (BigInteger i = BigInteger.valueOf(2); i.compareTo(n.add(BigInteger.ONE)) <= 0;
+             i = i.add(BigInteger.ONE)) {
             BigInteger tmp = a.add(b);
             a = b;
             b = tmp;

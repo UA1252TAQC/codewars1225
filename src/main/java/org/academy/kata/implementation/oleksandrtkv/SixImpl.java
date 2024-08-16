@@ -14,14 +14,14 @@ public class SixImpl implements Six {
     public long findNb(long m) {
         long n = 1;
         long sum = 0;
-        while (sum < m){
+        while (sum < m) {
             sum += (long) Math.pow(n, 3);
-            if (sum == m){
+            if (sum == m) {
                 break;
             }
             n++;
         }
-        if(sum != m){
+        if (sum != m) {
             n = -1;
         }
         return n;
@@ -35,7 +35,7 @@ public class SixImpl implements Six {
         String replaced = book.replaceAll("[^a-zA-Z0-9. \n]", "");
         String[] split = replaced.split("\n");
         split = Arrays.stream(split).filter(line -> !line.trim().isEmpty()).toArray(String[]::new);
-        for(int i = 0; i < split.length; i++){
+        for (int i = 0; i < split.length; i++) {
             split[i] = split[i].replaceAll("\\s+", " ").trim();
         }
 

@@ -8,17 +8,17 @@ public class SevenImpl implements Seven {
         double expectedTotal = navg * (arr.length + 1);
         for (int i = 0; i < arr.length; i++) {
             expectedTotal -= arr[i];
-            if (expectedTotal <= 0){
+            if (expectedTotal <= 0) {
                 throw new IllegalArgumentException();
             }
         }
-        return (long)Math.ceil(expectedTotal);
+        return (long) Math.ceil(expectedTotal);
     }
 
     @Override
     public String seriesSum(int n) {
         String result;
-        if (n == 0){
+        if (n == 0) {
             result = "0.00";
         } else if (n == 1) {
             result = "1.00";

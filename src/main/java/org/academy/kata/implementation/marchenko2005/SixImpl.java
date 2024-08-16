@@ -1,6 +1,7 @@
 package org.academy.kata.implementation.marchenko2005;
 
 import org.academy.kata.Six;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Matcher;
@@ -150,6 +151,7 @@ public class SixImpl implements Six {
         return String.format("%s:W=%d;D=%d;L=%d;Scored=%d;Conceded=%d;Points=%d",
                 toFind, wins, draws, losses, scored, conceded, points);
     }
+
     private static boolean containsFloat(String match) {
         return match.matches(".*\\d+\\.\\d+.*");
     }
@@ -182,6 +184,7 @@ public class SixImpl implements Six {
 
         return stats;
     }
+
     @Override
     public String stockSummary(String[] lstOfArt, String[] lstOf1stLetter) {
         if (lstOfArt.length == 0 || lstOf1stLetter.length == 0) {

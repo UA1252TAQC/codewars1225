@@ -3,8 +3,6 @@ package org.academy.codewars.controllers;
 import org.academy.codewars.entities.Author;
 import org.academy.codewars.services.AuthorService;
 
-import java.util.List;
-
 public class AuthorController {
     private final AuthorService authorService;
 

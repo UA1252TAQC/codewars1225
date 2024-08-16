@@ -10,17 +10,18 @@ public class FiveImpl implements Five {
         long firstPrime;
         long secondPrime = 0;
         boolean first = true;
-        for (long i = m; i <= n; i++){
-            if(isPrime(i)) {
+        for (long i = m; i <= n; i++) {
+            if (isPrime(i)) {
                 firstPrime = secondPrime;
                 secondPrime = i;
-                if(!first) if (secondPrime - firstPrime == g) return new long[]{firstPrime, secondPrime};
+                if (!first) if (secondPrime - firstPrime == g) return new long[]{firstPrime, secondPrime};
                 first = false;
             }
         }
         return null;
     }
-    private static boolean isPrime(long n){
+
+    private static boolean isPrime(long n) {
         if (n <= 1) return false;
         if (n == 2 || n == 3) return true;
         if (n % 2 == 0) return false;
@@ -36,7 +37,7 @@ public class FiveImpl implements Five {
         int dividend = 5;
         double quotient = n * 1. / dividend;
         while (quotient >= 1) {
-            zeros += (int)quotient;
+            zeros += (int) quotient;
             dividend *= 5;
             quotient = n * 1. / dividend;
         }
@@ -91,6 +92,6 @@ public class FiveImpl implements Five {
         }
 
         long minVal = Long.parseLong(smallest);
-        return new long[] { minVal, iMin, jMin };
+        return new long[]{minVal, iMin, jMin};
     }
 }

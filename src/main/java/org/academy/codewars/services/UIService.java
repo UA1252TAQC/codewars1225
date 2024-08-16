@@ -87,7 +87,7 @@ public class UIService {
     }
 
     private List<Object> requestParams(Task task) {
-        List<Object> params =  new ArrayList<>();
+        List<Object> params = new ArrayList<>();
         for (Function<ConsoleScanner, ?> param : task.getRequiredParams()) {
             params.add(param.apply(consoleScanner));
         }

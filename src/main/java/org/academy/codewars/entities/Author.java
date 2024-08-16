@@ -2,8 +2,8 @@ package org.academy.codewars.entities;
 
 import org.academy.kata.Eight;
 import org.academy.kata.Five;
-import org.academy.kata.Six;
 import org.academy.kata.Seven;
+import org.academy.kata.Six;
 
 import java.util.Arrays;
 import java.util.List;

@@ -2,13 +2,9 @@ package org.academy.kata.implementation.Shr1mpa;
 
 import org.academy.kata.Six;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.Arrays;
-import java.util.Objects;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 public class SixImpl implements Six {
@@ -199,6 +195,7 @@ public class SixImpl implements Six {
             return new String[]{secondTeam, firstTeam, String.valueOf(score2), String.valueOf(score1)};
         }
         return null;
+    }
 
     private String findLine(String town, String strng) {
         String[] lines = strng.split("\\n");
