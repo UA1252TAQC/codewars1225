@@ -97,7 +97,7 @@ public enum Author {
     }
 
     public int getId() {
-        return this.ordinal();
+        return this.ordinal() + 1;
     }
 
     public String getName() {
@@ -125,12 +125,11 @@ public enum Author {
     }
 
     public static Author findById(int id) {
-        for (Author author: values()) {
-            if(author.getId() == id) {
+        for (Author author : values()) {
+            if (author.getId() == id) {
                 return author;
             }
         }
         return null;
     }
-
 }

@@ -72,7 +72,6 @@ public class ConsoleScanner {
     }
 
     public int[] readIntArray(String param) {
-        System.out.print("Enter the " + param + " (int array): ) ");
         int size = readInt("size for array");
         int[] array = new int[size];
         System.out.println("Enter elements int[]:");
@@ -84,7 +83,6 @@ public class ConsoleScanner {
     }
 
     public double[] readDoubleArray(String param) {
-        System.out.print("Enter the " + param + " (int array): ) ");
         int size = readInt("size for array");
         double[] array = new double[size];
         System.out.println("Enter elements double[]:");
@@ -101,7 +99,6 @@ public class ConsoleScanner {
     }
 
     public String[] readStringArray(String param) {
-        System.out.print("Enter the " + param + " (int array): ) ");
         int size = readInt("size for array");
         String[] array = new String[size];
         scanner.nextLine();
