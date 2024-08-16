@@ -1,7 +1,18 @@
 package org.academy.kata;
 
 public interface Six {
-    long findNb(long m);
+    public class SixImpl implements Six {
+        public long findNb(long m) {
+            long n = 0;
+            long sum = 0;
+
+            while (sum < m) {
+                n++;
+                sum += n * n * n;
+            }
+
+            return sum == m ? n p - 1;
+        }
 
     String balance(String book);
 
