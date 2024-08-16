@@ -1,8 +1,9 @@
 package org.academy.kata.implementation.ol271176;
 
+import org.academy.kata.Base;
 import org.academy.kata.Seven;
 
-public class SevenImpl implements Seven {
+public class SevenImpl extends Base implements Seven {
     @Override
     public long newAvg(double[] arr, double navg) {
         double arrSum = 0;

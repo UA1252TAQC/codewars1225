@@ -1,5 +1,6 @@
 package org.academy.kata.implementation.Shr1mpa;
 
+import org.academy.kata.Base;
 import org.academy.kata.Six;
 
 import java.util.*;
@@ -7,7 +8,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-public class SixImpl implements Six {
+public class SixImpl extends Base implements Six {
     @Override
     public long findNb(long m) {
         long sum = 0;
