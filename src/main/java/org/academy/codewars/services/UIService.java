@@ -6,6 +6,7 @@ import org.academy.codewars.entities.Task;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 import java.util.function.Function;
 
@@ -67,16 +68,22 @@ public class UIService {
     }
 
     private void executeTask() {
-        Author author = requestAuthor();
-        Task task = requestTask();
-        System.out.println("Author: " + author.getName());
-        System.out.println("Task description: " + task.getDescription());
-        List<Object> params = requestParams(task);
+        try {
+            Author author = requestAuthor();
+            Task task = requestTask();
+            System.out.println("Author: " + author.getName());
+            System.out.println("Task description: " + task.getDescription());
+            List<Object> params = requestParams(task);
 
-         //TODO exception handler
-        String result = task.getSupplier().applyString(author, params);
-
-        System.out.println("Result: " + result);
+            try {
+                String result = task.getSupplier().applyString(author, params);
+                System.out.println("Result: " + result);
+            } catch (Exception e) {
+                System.out.println("Result: Thrown exception: " + e.getClass() + ", with message: " + e.getMessage());
+            }
+        } catch (NoSuchElementException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
     }
 
     private List<Object> requestParams(Task task) {

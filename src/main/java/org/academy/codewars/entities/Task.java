@@ -120,7 +120,7 @@ public enum Task {
     }
 
     public int getId() {
-        return this.ordinal();
+        return this.ordinal() + 1;
     }
 
     public String getTitle() {
