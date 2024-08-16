@@ -19,15 +19,6 @@ public class ConsoleScannerTest {
         assertEquals(actual, 25);
 
     }
-    @Test
-    public void testReadIntFail() {
-        System.setIn(new ByteArrayInputStream("26".getBytes()));
-        InputStream inputStream = System.in;
-        ConsoleScanner consoleScanner = new ConsoleScanner(new Scanner(inputStream));
-        int actual = consoleScanner.readInt("test");
-        assertEquals(actual, 25);
-
-    }
 
     @Test
     public void testReadFloat() {
