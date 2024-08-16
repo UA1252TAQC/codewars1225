@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class EightDataProvider extends AbstractDataProvider{
+public class EightDataProvider extends AbstractDataProvider {
 
     @DataProvider(name = "data-Liters")
     public static Iterator<Object[]> dpLiters(){

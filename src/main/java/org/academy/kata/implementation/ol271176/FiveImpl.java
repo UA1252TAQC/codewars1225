@@ -1,12 +1,13 @@
 package org.academy.kata.implementation.ol271176;
 
+import org.academy.kata.Base;
 import org.academy.kata.Five;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FiveImpl implements Five {
+public class FiveImpl extends Base implements Five {
     @Override
     public long[] gap(int g, long m, long n) {
         boolean[] isPrime = new boolean[(int) n + 1];
