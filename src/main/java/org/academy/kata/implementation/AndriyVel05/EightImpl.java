@@ -40,7 +40,9 @@ public class EightImpl implements Eight {
 
     @Override
     public int[] divisibleBy(int[] numbers, int divider) {
-        return new int[0];
+        return Arrays.stream(numbers)
+                .filter(number -> number % divider == 0)
+                .toArray();
     }
 
     @Override
