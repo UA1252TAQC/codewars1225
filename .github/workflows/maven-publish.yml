@@ -33,9 +33,9 @@ jobs:
         run: |
           TELEGRAM_URL="https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage"
           PR_URL="https://github.com/UA1252TAQC/codewars1225/pull/${{ github.event.pull_request.number }}"
-          MESSAGE_TEXT="Need a review for the Pull Request: $PR_URL"
           
           # URL-encode the message text
+          MESSAGE_TEXT="Need a review for the Pull Request: $PR_URL"
           ENCODED_TEXT=$(echo "$MESSAGE_TEXT" | jq -sRr @uri)
 
           # Send the message
