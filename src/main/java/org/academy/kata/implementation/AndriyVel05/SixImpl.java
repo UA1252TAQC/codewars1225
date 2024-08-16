@@ -10,12 +10,12 @@ public class SixImpl implements Six {
 
     @Override
     public String balance(String book) {
-        return "";
+
     }
 
     @Override
-    public double f(double x) {
-        return 0;
+    public static double f(double x) {
+        return x / (Math.sqrt(1 + x) + 1);
     }
 
     @Override
