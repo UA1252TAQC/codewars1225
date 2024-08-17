@@ -1,11 +1,12 @@
 package org.academy.kata.implementation.Shr1mpa;
 
+import org.academy.kata.Base;
 import org.academy.kata.Eight;
 
 import java.math.BigInteger;
 import java.util.Arrays;
 
-public class EightImpl implements Eight {
+public class EightImpl extends Base implements Eight {
     @Override
     public int liters(double time) {
         return (int) Math.floor(time * 0.5);
@@ -48,8 +49,7 @@ public class EightImpl implements Eight {
         for (int number : input) {
             if (number > 0) {
                 numberOfPositives++;
-            }
-            else {
+            } else {
                 sumOfNegatives += number;
             }
         }
@@ -81,7 +81,7 @@ public class EightImpl implements Eight {
         long nLong = (long) n;
         BigInteger factorial = factorial(BigInteger.valueOf(nLong - 1));
         BigInteger add = factorial.add(BigInteger.ONE);
-        BigInteger divide= BigInteger.valueOf(nLong * nLong);
+        BigInteger divide = BigInteger.valueOf(nLong * nLong);
 
         return add.mod(divide).equals(BigInteger.ZERO);
     }

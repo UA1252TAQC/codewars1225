@@ -1,16 +1,17 @@
 package org.academy.kata.implementation.YanOleks;
 
+import org.academy.kata.Base;
 import org.academy.kata.Six;
-import java.util.HashMap;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
-public class SixImpl implements Six {
+public class SixImpl extends Base implements Six {
     @Override
     public long findNb(long m) {
         long numberOfCubes = 0;
         long volume = 0;
-        while (volume < m){
+        while (volume < m) {
             numberOfCubes++;
             volume += numberOfCubes * numberOfCubes * numberOfCubes;
         }
@@ -29,7 +30,7 @@ public class SixImpl implements Six {
 
         double totalExpense = 0;
         int numberOfExpenses = 0;
-        for (int i = 1; i < lines.length; i++){
+        for (int i = 1; i < lines.length; i++) {
             if (lines[i].isEmpty()) continue;
             String line = lines[i].replaceAll("(?<=\\s)\\s", "").trim();
             double expense = Double.parseDouble(line.substring(line.lastIndexOf(" ") + 1));
@@ -52,7 +53,7 @@ public class SixImpl implements Six {
         double coeficient = 1;
         long divider = 2L;
         short sign = -1;
-        for (int i = 0; i < precision - shift; i++){
+        for (int i = 0; i < precision - shift; i++) {
             powerOfX *= x;
             divider *= (2 * (i + shift));
             result += sign * coeficient * powerOfX / divider;
@@ -67,7 +68,7 @@ public class SixImpl implements Six {
         double[] rawData = getRawData(town, strng);
         if (rawData.length < 12) return -1;
         double sum = 0;
-        for(double number: rawData) sum += number;
+        for (double number : rawData) sum += number;
         return sum / rawData.length;
     }
 
@@ -77,11 +78,11 @@ public class SixImpl implements Six {
         if (rawData.length < 12) return -1;
         double avg = mean(town, strng);
         double sum = 0;
-        for(double number: rawData) sum += (number - avg) * (number - avg);
+        for (double number : rawData) sum += (number - avg) * (number - avg);
         return sum / rawData.length;
     }
 
-    private static double[] getRawData(String town, String data){
+    private static double[] getRawData(String town, String data) {
         System.out.println(town);
         System.out.println(data);
         int numberOfMonths = 12;
@@ -92,20 +93,21 @@ public class SixImpl implements Six {
         String townData = data.substring(beginIndex, endIndex);
         String[] numbers = townData.split("[^\\d.]+");
         double[] rawData = new double[numberOfMonths];
-        for (int i = 1; i <= numberOfMonths; i++){
+        for (int i = 1; i <= numberOfMonths; i++) {
             rawData[i - 1] = Double.parseDouble(numbers[i]);
         }
         return rawData;
     }
 
-    private static String[] getResults(String team, String sheet){
+    private static String[] getResults(String team, String sheet) {
         String[] data = sheet.split(",");
         ArrayList<String> matches = new ArrayList<>();
-        for (String match: data){
+        for (String match : data) {
             if (match.contains(team)) matches.add(match.trim());
         }
         return matches.toArray(new String[0]);
     }
+
     private static Integer tryParse(String text) {
         try {
             return Integer.parseInt(text);
@@ -113,6 +115,7 @@ public class SixImpl implements Six {
             return -1;
         }
     }
+
     @Override
     public String nbaCup(String resultSheet, String toFind) {
         if (toFind.isEmpty()) return "";
@@ -125,10 +128,10 @@ public class SixImpl implements Six {
         int numberOfDraws = 0;
         int scored = 0;
         int conceded = 0;
-        for (int i = 0; i < result.length; i++){
+        for (int i = 0; i < result.length; i++) {
             int indexOfTeam = result[i].indexOf(toFind);
             int lastSpace = result[i].lastIndexOf(' ');
-            if (indexOfTeam == 0){
+            if (indexOfTeam == 0) {
                 int toFindSize = toFind.length();
                 teamScores[i] = tryParse(result[i].substring(toFindSize + 1, result[i].indexOf(' ', toFindSize + 1)));
                 oppositeScores[i] = tryParse(result[i].substring(lastSpace + 1));
@@ -136,9 +139,10 @@ public class SixImpl implements Six {
                 teamScores[i] = tryParse(result[i].substring(lastSpace + 1));
                 oppositeScores[i] = tryParse(result[i].substring(result[i].lastIndexOf(' ', indexOfTeam - 2) + 1, indexOfTeam - 1));
             }
-            if (teamScores[i] == -1 || oppositeScores[i] == -1) return String.format("Error(float number):%s", result[i]);
+            if (teamScores[i] == -1 || oppositeScores[i] == -1)
+                return String.format("Error(float number):%s", result[i]);
             if (teamScores[i] > oppositeScores[i]) numberOfWins++;
-            else if ( teamScores[i] == oppositeScores[i]) numberOfDraws++;
+            else if (teamScores[i] == oppositeScores[i]) numberOfDraws++;
             else numberOfLoses++;
             scored += teamScores[i];
             conceded += oppositeScores[i];
@@ -152,20 +156,21 @@ public class SixImpl implements Six {
         if (lstOfArt.length == 0 || lstOf1stLetter.length == 0) return "";
         HashMap<Character, Integer> map = getCharacterIntegerHashMap(lstOfArt, lstOf1stLetter);
         StringBuilder sb = new StringBuilder();
-        for (HashMap.Entry<Character, Integer> set: map.entrySet()){
+        for (HashMap.Entry<Character, Integer> set : map.entrySet()) {
             sb.append(String.format("(%c : %d) - ", set.getKey(), set.getValue()));
         }
         sb.delete(sb.length() - 3, sb.length());
         return sb.toString();
     }
+
     private static HashMap<Character, Integer> getCharacterIntegerHashMap(String[] lstOfArt, String[] lstOf1stLetter) {
         HashMap<Character, Integer> map = new HashMap<>();
-        for(String category: lstOf1stLetter){
+        for (String category : lstOf1stLetter) {
             map.put(category.charAt(0), 0);
         }
-        for (String book: lstOfArt){
+        for (String book : lstOfArt) {
             char category = book.charAt(0);
-            if (map.containsKey(category)){
+            if (map.containsKey(category)) {
                 int lastSpace = book.lastIndexOf(' ');
                 int numberOfBooks = Integer.parseInt(book.substring(lastSpace + 1));
                 map.put(category, map.get(category) + numberOfBooks);

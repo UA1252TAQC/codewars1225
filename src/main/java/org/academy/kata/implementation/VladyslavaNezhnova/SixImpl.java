@@ -1,5 +1,6 @@
 package org.academy.kata.implementation.VladyslavaNezhnova;
 
+import org.academy.kata.Base;
 import org.academy.kata.Six;
 
 import java.util.Arrays;
@@ -8,7 +9,7 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class SixImpl implements Six {
+public class SixImpl extends Base implements Six {
     @Override
     public long findNb(long m) {
         long sum = 0;
@@ -71,6 +72,7 @@ public class SixImpl implements Six {
                 .average()
                 .orElse(-1);
     }
+
     @Override
     public double variance(String town, String strng) {
         double mean = mean(town, strng);

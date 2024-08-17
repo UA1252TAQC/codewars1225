@@ -1,14 +1,15 @@
 package org.academy.kata.implementation.VladyslavaNezhnova;
 
+import org.academy.kata.Base;
 import org.academy.kata.Eight;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class EightImpl implements Eight {
+public class EightImpl extends Base implements Eight {
     @Override
     public int liters(double time) {
-        return (int) Math.floor (time * 0.5);
+        return (int) Math.floor(time * 0.5);
     }
 
     @Override
@@ -45,7 +46,7 @@ public class EightImpl implements Eight {
         if (input == null || input.length == 0) {
             return new int[0];
         }
-        
+
         int countPositives = 0;
         int sumNegatives = 0;
 
@@ -71,7 +72,7 @@ public class EightImpl implements Eight {
 
     @Override
     public int[] divisibleBy(int[] numbers, int divider) {
-        List <Integer> resultList = new ArrayList<Integer>();
+        List<Integer> resultList = new ArrayList<Integer>();
         for (int number : numbers) {
             if (number % divider == 0) {
                 resultList.add(number);

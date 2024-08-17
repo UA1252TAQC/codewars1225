@@ -1,10 +1,11 @@
 package org.academy.kata.implementation.VladyslavaNezhnova;
 
+import org.academy.kata.Base;
 import org.academy.kata.Five;
 
 import java.math.BigInteger;
 
-public class FiveImpl implements Five {
+public class FiveImpl extends Base implements Five {
 
     private static boolean isPrime(long num) {
         if (num <= 1) return false;
@@ -15,6 +16,7 @@ public class FiveImpl implements Five {
         }
         return true;
     }
+
     @Override
     public long[] gap(int g, long m, long n) {
         long previousPrime = -1;

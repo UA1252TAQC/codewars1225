@@ -1,13 +1,14 @@
 package org.academy.kata.implementation.sbekberov;
 
+import org.academy.kata.Base;
 import org.academy.kata.Eight;
 
 import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.math.RoundingMode;
 import java.util.ArrayList;
-import java.math.BigInteger;
 
-public class EightImpl implements Eight {
+public class EightImpl extends Base implements Eight {
     @Override
     public int liters(double time) {
         return (int) Math.floor(time * 0.5);
@@ -101,7 +102,7 @@ public class EightImpl implements Eight {
     }
 
     @Override
-    public  boolean am_i_wilson(double n) {
+    public boolean am_i_wilson(double n) {
         if (n != (int) n || n <= 1) {
             return false;
         }

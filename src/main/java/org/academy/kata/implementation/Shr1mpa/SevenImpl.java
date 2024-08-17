@@ -1,11 +1,12 @@
 package org.academy.kata.implementation.Shr1mpa;
 
+import org.academy.kata.Base;
 import org.academy.kata.Seven;
-import java.util.stream.IntStream;
 
 import java.util.Arrays;
+import java.util.stream.IntStream;
 
-public class SevenImpl implements Seven {
+public class SevenImpl extends Base implements Seven {
     @Override
     public long newAvg(double[] arr, double navg) {
         int n = arr.length;

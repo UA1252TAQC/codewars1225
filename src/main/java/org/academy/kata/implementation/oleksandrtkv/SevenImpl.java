@@ -1,24 +1,25 @@
 package org.academy.kata.implementation.oleksandrtkv;
 
+import org.academy.kata.Base;
 import org.academy.kata.Seven;
 
-public class SevenImpl implements Seven {
+public class SevenImpl extends Base implements Seven {
     @Override
     public long newAvg(double[] arr, double navg) {
         double expectedTotal = navg * (arr.length + 1);
         for (int i = 0; i < arr.length; i++) {
             expectedTotal -= arr[i];
-            if (expectedTotal <= 0){
+            if (expectedTotal <= 0) {
                 throw new IllegalArgumentException();
             }
         }
-        return (long)Math.ceil(expectedTotal);
+        return (long) Math.ceil(expectedTotal);
     }
 
     @Override
     public String seriesSum(int n) {
         String result;
-        if (n == 0){
+        if (n == 0) {
             result = "0.00";
         } else if (n == 1) {
             result = "1.00";

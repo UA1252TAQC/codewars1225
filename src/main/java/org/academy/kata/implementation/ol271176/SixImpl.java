@@ -1,18 +1,20 @@
 package org.academy.kata.implementation.ol271176;
 
+import org.academy.kata.Base;
+import org.academy.kata.Six;
+
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import org.academy.kata.Six;
 
-public class SixImpl implements Six {
+public class SixImpl extends Base implements Six {
     @Override
     public long findNb(long m) {
         int n = 1;
         long totalVolume = 0;
 
-        while(m > totalVolume){
+        while (m > totalVolume) {
             totalVolume += Math.pow(n++, 3);
         }
         n--;
@@ -127,20 +129,20 @@ public class SixImpl implements Six {
 
         String[] lines = resultSheet.split(",");
 
-        int wins=0, draws=0, losses=0, scored=0, conceded=0, points=0;
+        int wins = 0, draws = 0, losses = 0, scored = 0, conceded = 0, points = 0;
         boolean teamFound = false;
 
         Pattern errorPattern = Pattern.compile("\\d+\\.\\d+");
         Pattern correctPattern = Pattern.compile("^([\\w\\s]+) (\\d+) ([\\w\\s]+) (\\d+)$");
 
-        for(String line : lines){
+        for (String line : lines) {
             Matcher errorMatcher = errorPattern.matcher(line);
 
-            if(errorMatcher.find()) return "Error(float number):the concerned string";
-            if(!line.contains(toFind)) continue;
+            if (errorMatcher.find()) return "Error(float number):the concerned string";
+            if (!line.contains(toFind)) continue;
 
             Matcher correctMatcher = correctPattern.matcher(line);
-            if(correctMatcher.find()){
+            if (correctMatcher.find()) {
                 String team1 = correctMatcher.group(1).trim();
                 String team2 = correctMatcher.group(3).trim();
                 int score1 = Integer.parseInt(correctMatcher.group(2).trim());
@@ -177,7 +179,7 @@ public class SixImpl implements Six {
             }
         }
 
-        if(!teamFound) return toFind +":This team didn't play!";
+        if (!teamFound) return toFind + ":This team didn't play!";
         return String.format("%s:W=%d;D=%d;L=%d;Scored=%d;Conceded=%d;Points=%d",
                 toFind, wins, draws, losses, scored, conceded, points);
     }
@@ -185,15 +187,15 @@ public class SixImpl implements Six {
     @Override
     public String stockSummary(String[] lstOfArt, String[] lstOf1stLetter) {
         Map<Character, Integer> mapOfBooks = new LinkedHashMap<>();
-        for(String letter : lstOf1stLetter) mapOfBooks.put(letter.charAt(0), 0);
+        for (String letter : lstOf1stLetter) mapOfBooks.put(letter.charAt(0), 0);
 
         Pattern pattern = Pattern.compile("(\\D+)\\s(\\d+)");
-        for(String bookInfo : lstOfArt){
+        for (String bookInfo : lstOfArt) {
             Matcher matcher = pattern.matcher(bookInfo);
-            if(matcher.find()){
+            if (matcher.find()) {
                 char key = matcher.group(1).charAt(0);
                 int value = Integer.parseInt(matcher.group(2));
-                if(mapOfBooks.containsKey(key)){
+                if (mapOfBooks.containsKey(key)) {
                     mapOfBooks.put(key, mapOfBooks.get(key) + value);
                 } else {
                     continue;
@@ -201,7 +203,7 @@ public class SixImpl implements Six {
             }
         }
         StringBuffer sb = new StringBuffer();
-        for(Map.Entry<Character, Integer> entry : mapOfBooks.entrySet()){
+        for (Map.Entry<Character, Integer> entry : mapOfBooks.entrySet()) {
             if (sb.length() > 0) sb.append(" - ");
             sb.append(String.format("(%c : %d)", entry.getKey(), entry.getValue()));
 

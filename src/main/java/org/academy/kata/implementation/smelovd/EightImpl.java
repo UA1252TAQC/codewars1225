@@ -1,11 +1,12 @@
 package org.academy.kata.implementation.smelovd;
 
+import org.academy.kata.Base;
 import org.academy.kata.Eight;
 
 import java.math.BigInteger;
 import java.util.Arrays;
 
-public class EightImpl implements Eight {
+public class EightImpl extends Base implements Eight {
     @Override
     public int liters(double time) {
         return (int) (time * 0.5);
@@ -49,7 +50,7 @@ public class EightImpl implements Eight {
             }
         }
 
-        return new int[] { positiveCount, negativeSum };
+        return new int[]{positiveCount, negativeSum};
     }
 
     @Override

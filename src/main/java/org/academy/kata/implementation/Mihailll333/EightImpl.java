@@ -1,8 +1,9 @@
 package org.academy.kata.implementation.Mihailll333;
 
+import org.academy.kata.Base;
 import org.academy.kata.Eight;
 
-public class EightImpl implements Eight {
+public class EightImpl extends Base implements Eight {
     @Override
     public int liters(double time) {
         return (int) (time * 0.5);
@@ -67,16 +68,14 @@ public class EightImpl implements Eight {
     @Override
     public int[] divisibleBy(int[] numbers, int divider) {
         int count = 0;
-        for (int number : numbers)
-        {
+        for (int number : numbers) {
             if (number % divider == 0) {
                 count++;
             }
         }
         int[] result = new int[count];
         int index = 0;
-        for (int number : numbers)
-        {
+        for (int number : numbers) {
             if (number % divider == 0) {
                 result[index++] = number;
             }

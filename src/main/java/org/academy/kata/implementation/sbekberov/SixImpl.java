@@ -1,8 +1,13 @@
 package org.academy.kata.implementation.sbekberov;
 
+import org.academy.kata.Base;
 import org.academy.kata.Six;
 
-public class SixImpl implements Six {
+import java.util.HashMap;
+import java.util.Map;
+import java.util.StringJoiner;
+
+public class SixImpl extends Base implements Six {
     @Override
     public long findNb(long m) {
         long n = 0;
@@ -93,6 +98,50 @@ public class SixImpl implements Six {
 
     @Override
     public String stockSummary(String[] lstOfArt, String[] lstOf1stLetter) {
-        return "";
+        if (lstOfArt == null || lstOfArt.length == 0 || lstOf1stLetter == null || lstOf1stLetter.length == 0) {
+            return "";
+        }
+
+        Map<Character, Integer> categorySums = new HashMap<>();
+
+        for (String category : lstOf1stLetter) {
+            if (!category.isEmpty()) {
+                categorySums.put(category.charAt(0), 0);
+            }
+        }
+
+        for (String art : lstOfArt) {
+            if (art.isEmpty()) continue;
+
+            String[] parts = art.split(" ");
+            if (parts.length < 2) continue;
+
+            String code = parts[0];
+            int quantity;
+
+            try {
+                quantity = Integer.parseInt(parts[1]);
+            } catch (NumberFormatException e) {
+                continue;
+            }
+
+            if (code.isEmpty()) continue;
+
+            char category = code.charAt(0);
+            if (categorySums.containsKey(category)) {
+                categorySums.put(category, categorySums.get(category) + quantity);
+            }
+        }
+
+        StringJoiner sj = new StringJoiner(" - ");
+        for (String category : lstOf1stLetter) {
+            if (!category.isEmpty()) {
+                char cat = category.charAt(0);
+                int sum = categorySums.getOrDefault(cat, 0);
+                sj.add("(" + cat + " : " + sum + ")");
+            }
+        }
+
+        return sj.toString();
     }
 }

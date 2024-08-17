@@ -1,21 +1,22 @@
 package org.academy.kata.implementation.smelovd;
 
+import org.academy.kata.Base;
 import org.academy.kata.Five;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.math.RoundingMode;
 import java.util.Arrays;
 import java.util.stream.LongStream;
-import java.math.RoundingMode;
 
-public class FiveImpl implements Five {
+public class FiveImpl extends Base implements Five {
     @Override
     public long[] gap(int g, long m, long n) {
         final long[] primeNumbers = LongStream.rangeClosed(m, n)
                 .filter(FiveImpl::isPrimeNumber).toArray();
         for (int i = 0; i + 1 < primeNumbers.length; i++) {
             if (primeNumbers[i + 1] - primeNumbers[i] == g) {
-                return new long[] {primeNumbers[i], primeNumbers[i + 1]};
+                return new long[]{primeNumbers[i], primeNumbers[i + 1]};
             }
         }
         return null;
@@ -84,13 +85,13 @@ public class FiveImpl implements Five {
             if (firstNum < secondNum) {
                 while (firstFromIndex > 0 && digits[firstFromIndex] == digits[firstFromIndex - 1]) firstFromIndex--;
                 while (firstToIndex > 0 && sortedDigits[i] == digits[firstToIndex - 1]) firstToIndex--;
-                return new long[] { firstNum, firstFromIndex, firstToIndex };
+                return new long[]{firstNum, firstFromIndex, firstToIndex};
             }
             while (secondFromIndex > 0 && digits[secondFromIndex] == digits[secondFromIndex - 1]) secondFromIndex--;
             while (secondToIndex < s.length() - 1 && digits[i] == digits[secondToIndex + 1]) secondToIndex++;
-            return new long[] { secondNum, secondFromIndex, secondToIndex };
+            return new long[]{secondNum, secondFromIndex, secondToIndex};
         }
-        return new long[] { n, -1, -1 };
+        return new long[]{n, -1, -1};
     }
 
     private static int findSecondToIndex(int fromIndex, String s, char[] digits) {

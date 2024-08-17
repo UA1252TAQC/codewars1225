@@ -1,12 +1,14 @@
 package org.academy.kata.implementation.YanOleks;
 
+import org.academy.kata.Base;
 import org.academy.kata.Eight;
+
 import java.util.ArrayList;
 
-public class EightImpl implements Eight {
+public class EightImpl extends Base implements Eight {
     @Override
     public int liters(double time) {
-        return (int)Math.floor(time * 0.5);
+        return (int) Math.floor(time * 0.5);
     }
 
     @Override
@@ -21,10 +23,10 @@ public class EightImpl implements Eight {
 
     @Override
     public int[] squareOrSquareRoot(int[] array) {
-        for (int i = 0; i < array.length; i++){
+        for (int i = 0; i < array.length; i++) {
             double root = Math.sqrt(array[i]);
-            if (root == (int)root){
-                array[i] = (int)root;
+            if (root == (int) root) {
+                array[i] = (int) root;
             } else {
                 array[i] *= array[i];
             }
@@ -36,9 +38,9 @@ public class EightImpl implements Eight {
     public int[] countPositivesSumNegatives(int[] input) {
         if (input == null || input.length == 0) return new int[0];
         int[] result = {0, 0};
-        for (int val: input){
+        for (int val : input) {
             if (val > 0) result[0]++;
-            else if (val < 0) result[1]+= val;
+            else if (val < 0) result[1] += val;
         }
         return result;
     }
@@ -56,7 +58,7 @@ public class EightImpl implements Eight {
     @Override
     public int[] divisibleBy(int[] numbers, int divider) {
         ArrayList<Integer> divided = new ArrayList<Integer>();
-        for (int val: numbers){
+        for (int val : numbers) {
             if (val % divider == 0) divided.add(val);
         }
         return divided.stream().mapToInt(i -> i).toArray();
@@ -66,7 +68,7 @@ public class EightImpl implements Eight {
     public boolean am_i_wilson(double n) {
         if (n <= 1) return false;
         double factorial_mod = 1;
-        for (int i = 2; i < n; i++){
+        for (int i = 2; i < n; i++) {
             factorial_mod = (factorial_mod * i) % (n * n);
         }
         return (((factorial_mod + 1) % (n * n)) == 0);

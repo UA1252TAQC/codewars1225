@@ -1,11 +1,12 @@
 package org.academy.kata.implementation.marchenko2005;
 
+import org.academy.kata.Base;
 import org.academy.kata.Five;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
 
-public class FiveImpl implements Five {
+public class FiveImpl extends Base implements Five {
     public static boolean isPrime(double n) {
         if (n <= 1) return false;
         if (n <= 3) return true;
@@ -15,16 +16,17 @@ public class FiveImpl implements Five {
         }
         return true;
     }
+
     @Override
     public long[] gap(int g, long m, long n) {
         ArrayList<Long> primes = new ArrayList<>();
-        for(long i = m; i<=n; i++){
-            if(isPrime(i)){
+        for (long i = m; i <= n; i++) {
+            if (isPrime(i)) {
                 primes.add(i);
             }
         }
         for (int i = 1; i < primes.size(); i++) {
-            if(primes.get(i) - primes.get(i - 1) == g){
+            if (primes.get(i) - primes.get(i - 1) == g) {
                 return new long[]{primes.get(i - 1), primes.get(i)};
             }
         }

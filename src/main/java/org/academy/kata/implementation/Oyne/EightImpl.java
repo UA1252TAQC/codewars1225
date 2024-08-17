@@ -1,12 +1,13 @@
 package org.academy.kata.implementation.Oyne;
 
+import org.academy.kata.Base;
 import org.academy.kata.Eight;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
 
 
-public class EightImpl implements Eight {
+public class EightImpl extends Base implements Eight{
     @Override
     public int liters(double time) {
         return (int) (time / 2);
@@ -26,7 +27,7 @@ public class EightImpl implements Eight {
     @Override
     public int[] squareOrSquareRoot(int[] array) {
         for (int i = 0; i < array.length; i++) {
-            if ((double) Math.sqrt(array[i]) == (int) Math.sqrt(array[i])) {
+            if (Math.sqrt(array[i]) == (int) Math.sqrt(array[i])) {
                 array[i] = (int) Math.sqrt(array[i]);
             } else {
                 array[i] = array[i] * array[i];
@@ -95,7 +96,7 @@ public class EightImpl implements Eight {
         }
 
         BigInteger numerator = factorial.add(BigInteger.ONE);
-        BigInteger denominator = BigInteger.valueOf((long)n).multiply(BigInteger.valueOf((long)n));
+        BigInteger denominator = BigInteger.valueOf((long) n).multiply(BigInteger.valueOf((long) n));
         BigInteger[] divisionResult = numerator.divideAndRemainder(denominator);
 
         return divisionResult[1].equals(BigInteger.ZERO);

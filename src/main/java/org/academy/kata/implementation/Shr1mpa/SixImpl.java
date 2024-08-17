@@ -1,16 +1,14 @@
 package org.academy.kata.implementation.Shr1mpa;
 
+import org.academy.kata.Base;
 import org.academy.kata.Six;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.Arrays;
-import java.util.Map;
 import java.util.stream.Collectors;
 
-public class SixImpl implements Six {
+public class SixImpl extends Base implements Six {
     @Override
     public long findNb(long m) {
         long sum = 0;
@@ -94,7 +92,48 @@ public class SixImpl implements Six {
 
     @Override
     public String nbaCup(String resultSheet, String toFind) {
-        return "";
+        if (toFind.isEmpty()) {
+            return "";
+        }
+
+        List<String[]> matches = new ArrayList<>();
+        try {
+            matches = Arrays.stream(resultSheet.split(","))
+                    .map(line -> processMatchLine(line, toFind))
+                    .filter(Objects::nonNull)
+                    .collect(Collectors.toList());
+        } catch (IllegalArgumentException e) {
+            return "Error(float number):" + e.getMessage();
+        }
+
+        if (matches.isEmpty()) {
+            return String.format("%s:This team didn't play!", toFind);
+        }
+
+        long wins = matches.stream()
+                .filter(match -> Integer.parseInt(match[2]) > Integer.parseInt(match[3]))
+                .count();
+
+        long draws = matches.stream()
+                .filter(match -> Integer.parseInt(match[2]) == Integer.parseInt(match[3]))
+                .count();
+
+        long losses = matches.stream()
+                .filter(match -> Integer.parseInt(match[2]) < Integer.parseInt(match[3])
+                ).count();
+
+        long totalPoints = matches.stream()
+                .mapToInt(match -> Integer.parseInt(match[2]))
+                .sum();
+
+        long concededPoints = matches.stream()
+                .mapToInt(match -> Integer.parseInt(match[3]))
+                .sum();
+
+        int points = (int) ((wins * 3) + draws);
+
+        return String.format("%s:W=%d;D=%d;L=%d;Scored=%d;Conceded=%d;Points=%d",
+                toFind, wins, draws, losses, totalPoints, concededPoints, points);
     }
 
     @Override
@@ -118,6 +157,45 @@ public class SixImpl implements Six {
         return map.entrySet().stream()
                 .map(entry -> String.format("(%c : %d)", entry.getKey(), entry.getValue()))
                 .collect(Collectors.joining(" - "));
+    }
+
+    private List<Integer> findNumberIndices(String[] parts) {
+        List<Integer> numberIndices = new ArrayList<>();
+        for (int i = 0; i < parts.length; i++) {
+            if (parts[i].matches("\\d+")) {
+                numberIndices.add(i);
+            }
+        }
+        return numberIndices;
+    }
+
+    private String[] processMatchLine(String line, String toFind) {
+        if (line.contains(".")) {
+            throw new IllegalArgumentException(line);
+        }
+
+        String[] parts = line.trim().split("\\s+");
+        List<Integer> numberIndices = findNumberIndices(parts);
+
+        if (numberIndices.size() < 2) {
+            return null;
+        }
+
+        int score1Index = numberIndices.get(0);
+        int score2Index = numberIndices.get(1);
+
+        String firstTeam = String.join(" ", Arrays.copyOfRange(parts, 0, score1Index)).trim();
+        String secondTeam = String.join(" ", Arrays.copyOfRange(parts, score1Index + 1, score2Index)).trim();
+
+        int score1 = Integer.parseInt(parts[score1Index]);
+        int score2 = Integer.parseInt(parts[score2Index]);
+
+        if (firstTeam.equals(toFind)) {
+            return new String[]{firstTeam, secondTeam, String.valueOf(score1), String.valueOf(score2)};
+        } else if (secondTeam.equals(toFind)) {
+            return new String[]{secondTeam, firstTeam, String.valueOf(score2), String.valueOf(score1)};
+        }
+        return null;
     }
 
     private String findLine(String town, String strng) {
