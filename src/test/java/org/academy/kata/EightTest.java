@@ -7,8 +7,6 @@ import static org.testng.Assert.*;
 
 public class EightTest extends EightDataProvider {
 
-
-
     @Test(dataProvider = "data-Liters")
     public void testLiters(Eight eight, double time, int expected) {
         int actual = eight.liters(time);
@@ -44,7 +42,9 @@ public class EightTest extends EightDataProvider {
     public void testDivisibleBy() {
     }
 
-    @Test
-    public void testAm_i_wilson() {
+    @Test(dataProvider = "data-Wilson")
+    public void testAm_i_wilson(Eight eight, long n, boolean expected) {
+        boolean actual = eight.am_i_wilson(n);
+        assertEquals(actual, expected);
     }
 }
