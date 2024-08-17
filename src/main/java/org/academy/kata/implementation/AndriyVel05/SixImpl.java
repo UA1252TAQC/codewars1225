@@ -10,7 +10,32 @@ public class SixImpl implements Six {
 
     @Override
     public String balance(String book) {
-        return "";
+        String[] lines = book.split("\n");
+        double originBalance = Double.parseDouble(lines[0]);
+        double balance = originBalance;
+        double totalExpense = 0.0;
+        StringBuilder report = new StringBuilder();
+
+        report.append(String.format("Original Balance: %.2f\n", originBalance));
+
+        for (int i = 1; i < lines.length; i++) {
+            if (lines[i].trim().isEmpty()) continue;
+
+            String cleanLine = lines[i].replaceAll("[^a-zA-Z0-9. ]", "");
+            String[] parts = cleanLine.split(" ");
+            double expense = Double.parseDouble(parts[parts.length - 1]);
+            balance -= expense;
+            totalExpense += expense;
+
+            report.append(String.format("%s %s %.2f Balance %.2f\n",
+                    parts[0], parts[1], expense, balance));
+        }
+
+        report.append(String.format("Total expense  %.2f\n", totalExpense));
+        report.append(String.format("Average expense  %.2f", totalExpense / (lines.length - 1)));
+
+        return report.toString();
+
     }
 
     @Override
