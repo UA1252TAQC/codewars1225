@@ -21,7 +21,9 @@ public class EightDataProvider extends AbstractDataProvider {
     @DataProvider(name = "data-Wilson")
     public static Iterator<Object[]> dpWilson(){
         List<Object[]> inputs = new ArrayList<>();
+        inputs.add(new Object[]{-1, false});
         inputs.add(new Object[]{1, false});
+        inputs.add(new Object[]{1.1, false});
         inputs.add(new Object[]{2, false});
         inputs.add(new Object[]{5, true});
         inputs.add(new Object[]{13, true});

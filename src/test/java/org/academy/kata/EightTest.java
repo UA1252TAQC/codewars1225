@@ -43,7 +43,7 @@ public class EightTest extends EightDataProvider {
     }
 
     @Test(dataProvider = "data-Wilson")
-    public void testAm_i_wilson(Eight eight, long n, boolean expected) {
+    public void testAm_i_wilson(Eight eight, double n, boolean expected) {
         boolean actual = eight.am_i_wilson(n);
         assertEquals(actual, expected);
     }
