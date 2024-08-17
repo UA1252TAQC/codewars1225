@@ -49,6 +49,38 @@ public class ConsoleScannerTest {
     }
 
     @Test
-    public void testReadStringArray() {
+    public void testReadStringArrayValidData() {
+        String testData =
+                """
+                        3
+                        First arg
+                        Second arg
+                        Third arg
+                        """;
+        String[] expected = new String[]{"First arg", "Second arg", "Third arg"};
+        System.setIn(new ByteArrayInputStream(testData.getBytes()));
+        InputStream inputStream = System.in;
+        ConsoleScanner consoleScanner = new ConsoleScanner(new Scanner(inputStream));
+        String[] actual = consoleScanner.readStringArray("test");
+        assertEquals(actual, expected);
+    }
+
+    @Test
+    public void testReadStringArrayInvalidData() {
+        String testData =
+                """
+                        test
+                        -3
+                        3
+                        First arg\s
+                        Second arg
+                        Third arg
+                       \s""";
+        String[] expected = new String[]{"First arg", "Second arg", "Third arg"};
+        System.setIn(new ByteArrayInputStream(testData.getBytes()));
+        InputStream inputStream = System.in;
+        ConsoleScanner consoleScanner = new ConsoleScanner(new Scanner(inputStream));
+        String[] actual = consoleScanner.readStringArray("test");
+        assertEquals(actual, expected);
     }
 }
