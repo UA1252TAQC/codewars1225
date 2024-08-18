@@ -1,13 +1,16 @@
 package org.academy.kata;
 
+import org.academy.kata.dataprovider.SixDataProvider;
 import org.testng.annotations.Test;
 
 import static org.testng.Assert.*;
 
-public class SixTest {
+public class SixTest extends SixDataProvider {
 
-    @Test
-    public void testFindNb() {
+    @Test(dataProvider = "data-findNb")
+    public void testFindNb(Six six, long input, long expected) {
+        long actual = six.findNb(input);
+        assertEquals(actual, expected);
     }
 
     @Test
