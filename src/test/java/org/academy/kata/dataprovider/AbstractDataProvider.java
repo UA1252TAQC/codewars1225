@@ -74,8 +74,9 @@ public class AbstractDataProvider {
     protected static Iterator<Object[]> combineData(List<Object[]> objects, List<?> impls) {
         List<Object[]> data = new ArrayList<>();
         for (Object impl : impls) {
-            for (Object[] o: objects) {
+            for (Object[] o : objects) {
                 data.add(Stream.concat(Stream.of(impl), Arrays.stream(o).map(obj -> {
+                            if (obj == null) return null;
                             if (obj.getClass().isArray()) {
                                 var componentType = obj.getClass().getComponentType();
                                 if (componentType.isPrimitive()) {
