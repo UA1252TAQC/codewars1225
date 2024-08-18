@@ -51,7 +51,7 @@ public class SixDataProvider extends AbstractDataProvider {
     inputs.add(new Object[]{
         new String[]{"ABAR 200"}, new String[]{"A"}, "(A : 200)"
     });
-        
+      
     return combineData(inputs, SIX);
   }
 }
