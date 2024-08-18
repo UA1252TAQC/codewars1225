@@ -27,7 +27,7 @@ jobs:
         run: mvn -B package --file pom.xml
 
       - name: Check and Notify Telegram
-        if: github.event_name == 'pull_request' && github.event.action == 'opened' && success()
+        if: github.event_name == 'pull_request' && success()
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
@@ -35,10 +35,21 @@ jobs:
           REPO_ACCESS_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
         run: |
           PR_BRANCH=${{ github.head_ref }}
+          PR_ID=${{ github.event.pull_request.number }}
           FLAG_FILE=".github/flag_file_${PR_BRANCH}.txt"
-          PR_URL="https://github.com/UA1252TAQC/codewars1225/pull/${{ github.event.pull_request.number }}"
+          PR_URL="https://github.com/${{ github.repository }}/pull/${PR_ID}"
           MESSAGE_TEXT="Need a review for the Pull Request: $PR_URL"
           ENCODED_TEXT=$(echo "$MESSAGE_TEXT" | jq -sRr @uri)
+
+          # Clone the repository for checking and storing the message ID
+          git clone https://x-access-token:${{ secrets.REPO_ACCESS_TOKEN }}@github.com/moqs2/messages.git repo
+          cd repo
+
+          # Check if the PR ID already exists in messages.json
+          if jq --exit-status --arg pr_id "$PR_ID" '.[$pr_id]' messages.json > /dev/null; then
+            echo "Message ID for PR #$PR_ID already exists. Skipping notification."
+            exit 0
+          fi
 
           # Send the message to Telegram
           RESPONSE=$(curl -s -X POST "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage" \
@@ -51,12 +62,8 @@ jobs:
           MESSAGE_ID=$(echo "$RESPONSE" | jq -r '.result.message_id')
           echo "Message ID: $MESSAGE_ID"
 
-          # Clone the repository for storing the message ID
-          git clone https://x-access-token:${{ secrets.REPO_ACCESS_TOKEN }}@github.com/moqs2/messages.git repo
-          cd repo
-
           # Update the JSON file with the new message ID
-          jq --arg pr_id "${{ github.event.pull_request.number }}" --arg msg_id "$MESSAGE_ID" \
+          jq --arg pr_id "$PR_ID" --arg msg_id "$MESSAGE_ID" \
             '.[$pr_id] = $msg_id' messages.json > updated_messages.json
           mv updated_messages.json messages.json
 
@@ -64,6 +71,5 @@ jobs:
           git config --global user.email "action@github.com"
           git config --global user.name "GitHub Actions"
           git add messages.json
-          git commit -m "Add message ID for PR #${{ github.event.pull_request.number }}"
+          git commit -m "Add message ID for PR #$PR_ID"
           git push
-          fi
