@@ -41,7 +41,24 @@ public class ConsoleScannerTest {
     }
 
     @Test
-    public void testReadDoubleArray() {
+    public void testReadDoubleArrayCorrectData() {
+        String testData = "3\n1.1\n2.2\n3.3\n";
+        double [] expected = new double[] {1.1, 2.2, 3.3};
+        System.setIn(new ByteArrayInputStream(testData.getBytes()));
+        InputStream inputStream = System.in;
+        ConsoleScanner consoleScanner = new ConsoleScanner(new Scanner(inputStream));
+        double [] actual = consoleScanner.readDoubleArray("test array");
+        assertEquals(actual, expected);
+    }
+    @Test
+    public void testReadDoubleArrayIncorrectData() {
+        String testData = "3\n1.1\n2.2\n3.3\n";
+        double [] expected = new double[] {1.5, 2.2, 3.3};
+        System.setIn(new ByteArrayInputStream(testData.getBytes()));
+        InputStream inputStream = System.in;
+        ConsoleScanner consoleScanner = new ConsoleScanner(new Scanner(inputStream));
+        double [] actual = consoleScanner.readDoubleArray("test array");
+        assertEquals(actual, expected);
     }
 
     @Test
