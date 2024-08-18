@@ -19,6 +19,22 @@ public class EightDataProvider extends AbstractDataProvider {
         return combineData(inputs, EIGHT);
     }
 
+    @DataProvider(name = "data-Wilson")
+    public static Iterator<Object[]> dpWilson(){
+        List<Object[]> inputs = new ArrayList<>();
+        inputs.add(new Object[]{-1, false});
+        inputs.add(new Object[]{1, false});
+        inputs.add(new Object[]{1.1, false});
+        inputs.add(new Object[]{2, false});
+        inputs.add(new Object[]{5, true});
+        inputs.add(new Object[]{13, true});
+        inputs.add(new Object[]{12, false});
+        inputs.add(new Object[]{563, true});
+        inputs.add(new Object[]{562, false});
+  
+      return combineData(inputs, EIGHT);
+    }
+
     @DataProvider(name = "data-decimal-places")
     public static Iterator<Object[]> dpDecimalPlaces(){
         List<Object[]> inputs = new ArrayList<>();
