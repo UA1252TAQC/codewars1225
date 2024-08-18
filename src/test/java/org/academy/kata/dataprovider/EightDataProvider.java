@@ -45,4 +45,73 @@ public class EightDataProvider extends AbstractDataProvider {
 
         return combineData(inputs, EIGHT);
     }
+    @DataProvider (name = "data-countPositivesSumNegatives")
+    public static Iterator<Object[]> dpCountPositivesSumNegatives (){
+        List<Object[]> inputs = new ArrayList<>();
+        inputs.add(new Object[]{
+                 new int[]{1, 2, 3, -1, -2, -3},
+                 new int[]{3, -6}
+        });
+        inputs.add(new Object[]{
+                new int[]{},
+                new int[0]
+        });
+
+        inputs.add(new Object[]{
+                new int[]{0},
+                new int[]{0, 0}
+        });
+
+        inputs.add(new Object[]{
+                new int[]{10},
+                new int[]{1, 0}
+        });
+
+        inputs.add(new Object[]{
+                new int[]{-10},
+                new int[]{0, -10}
+        });
+
+        inputs.add(new Object[]{
+                new int[]{1, 2, 3, 4},
+                new int[]{4, 0}
+        });
+
+        inputs.add(new Object[]{
+                new int[]{-1, -2, -3, -4},
+                new int[]{0, -10}
+        });
+
+        inputs.add(new Object[]{
+                new int[]{0, 1, 2, 3},
+                new int[]{3, 0}
+        });
+
+        inputs.add(new Object[]{
+                new int[]{0, -1, -2, -3},
+                new int[]{0, -6}
+        });
+
+        inputs.add(new Object[]{
+                new int[]{1, 1, 1, -1, -1, -1},
+                new int[]{3, -3}
+        });
+
+        inputs.add(new Object[]{
+                new int[]{1, -1, 2, -2, 3, -3},
+                new int[]{3, -6}
+        });
+
+        inputs.add(new Object[]{
+                new int[]{0},
+                new int[]{0, 0}
+        });
+
+        inputs.add(new Object[]{
+                null,
+                new int[0]
+        });
+        
+        return combineData(inputs, EIGHT);
+    }
 }

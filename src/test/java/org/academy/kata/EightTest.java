@@ -28,8 +28,10 @@ public class EightTest extends EightDataProvider {
     public void testSquareOrSquareRoot() {
     }
 
-    @Test
-    public void testCountPositivesSumNegatives() {
+    @Test(dataProvider = "data-countPositivesSumNegatives")
+    public void testCountPositivesSumNegatives(Eight eight, Object input, Object expected) {
+    int[] actual = eight.countPositivesSumNegatives((int[]) input);
+    assertEquals(actual, (int[]) expected);
     }
 
     @Test(dataProvider = "data-stringToNumber")
