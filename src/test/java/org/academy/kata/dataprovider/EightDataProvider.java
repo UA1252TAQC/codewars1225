@@ -19,6 +19,16 @@ public class EightDataProvider extends AbstractDataProvider {
         return combineData(inputs, EIGHT);
     }
 
+    @DataProvider(name = "data-SquareOrSquareRoot")
+    public static Iterator<Object[]> dpSquareOrSquareRoot(){
+        List<Object[]> inputs = new ArrayList<>();
+        inputs.add(new Object[]{new int[] { 4, 3, 9, 7, 2, 1 }, new int[] { 2, 9, 3, 49, 4, 1 }});
+        inputs.add(new Object[]{new int[] { 100, 101, 5, 5, 1, 1 }, new int[] { 10, 10201, 25, 25, 1, 1 }});
+        inputs.add(new Object[]{new int[] { 1, 2, 3, 4, 5, 6 }, new int[] { 1, 4, 9, 2, 25, 36 }});
+
+        return combineData(inputs, EIGHT);
+    }
+
     @DataProvider(name = "data-stringToNumber")
     public static Iterator<Object[]> dpStringToNumber(){
         List<Object[]> inputs = new ArrayList<>();
