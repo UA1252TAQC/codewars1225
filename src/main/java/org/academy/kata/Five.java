@@ -9,8 +9,14 @@ public interface Five {
 
     BigInteger perimeter(BigInteger n);
 
-    double solve(double m);
+    public class SequenceSolver implements Five {
 
-    long[] smallest(long n);
+        @Override
+        public double solve(double m) {
+            return (-m + Math.sqrt(m * (m + 4))) / (2 * m);
+        }
+
+
+            long[] smallest(long n);
 
 }
