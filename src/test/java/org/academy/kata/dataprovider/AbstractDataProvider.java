@@ -13,12 +13,12 @@ import java.util.stream.Stream;
 
 public class AbstractDataProvider {
     protected static final List<Five> FIVE = List.of(
-            new org.academy.kata.implementation.AndriyVel05.FiveImpl(),
+            //new org.academy.kata.implementation.AndriyVel05.FiveImpl(),
             new org.academy.kata.implementation.marchenko2005.FiveImpl(),
             new org.academy.kata.implementation.Mihailll333.FiveImpl(),
             new org.academy.kata.implementation.ol271176.FiveImpl(),
             new org.academy.kata.implementation.oleksandrtkv.FiveImpl(),
-            new org.academy.kata.implementation.Oyne.FiveImpl(),
+            //new org.academy.kata.implementation.Oyne.FiveImpl(),
             //new org.academy.kata.implementation.RocketMan2k21.FiveImpl(),
             new org.academy.kata.implementation.sbekberov.FiveImpl(),
             new org.academy.kata.implementation.Shr1mpa.FiveImpl(),
