@@ -38,8 +38,10 @@ public class EightTest extends EightDataProvider {
         assertEquals(actual, expected);
     }
 
-    @Test
-    public void testTwoDecimalPlaces() {
+    @Test(dataProvider = "data-decimal-places")
+    public void testTwoDecimalPlaces(Eight eight, double number, double expected) {
+        double actual = eight.TwoDecimalPlaces(number);
+        assertEquals(actual, expected);
     }
 
     @Test
