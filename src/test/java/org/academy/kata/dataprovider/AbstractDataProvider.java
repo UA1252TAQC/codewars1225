@@ -14,12 +14,12 @@ import java.util.stream.Stream;
 
 public class AbstractDataProvider {
     protected static final List<Five> FIVE = List.of(
-            new org.academy.kata.implementation.AndriyVel05.FiveImpl(),
+            //new org.academy.kata.implementation.AndriyVel05.FiveImpl(),
             new org.academy.kata.implementation.marchenko2005.FiveImpl(),
             new org.academy.kata.implementation.Mihailll333.FiveImpl(),
             new org.academy.kata.implementation.ol271176.FiveImpl(),
             new org.academy.kata.implementation.oleksandrtkv.FiveImpl(),
-            new org.academy.kata.implementation.Oyne.FiveImpl(),
+            //new org.academy.kata.implementation.Oyne.FiveImpl(),
             //new org.academy.kata.implementation.RocketMan2k21.FiveImpl(),
             new org.academy.kata.implementation.sbekberov.FiveImpl(),
             new org.academy.kata.implementation.Shr1mpa.FiveImpl(),
@@ -28,7 +28,7 @@ public class AbstractDataProvider {
             new org.academy.kata.implementation.YanOleks.FiveImpl()
     );
     protected static final List<Six> SIX = List.of(
-            new org.academy.kata.implementation.AndriyVel05.SixImpl(),
+            //new org.academy.kata.implementation.AndriyVel05.SixImpl(),
             new org.academy.kata.implementation.marchenko2005.SixImpl(),
             new org.academy.kata.implementation.Mihailll333.SixImpl(),
             new org.academy.kata.implementation.ol271176.SixImpl(),
@@ -57,11 +57,11 @@ public class AbstractDataProvider {
     );
     protected static final List<Eight> EIGHT = List.of(
             //new org.academy.kata.implementation.AndriyVel05.EightImpl(),
-            new org.academy.kata.implementation.marchenko2005.EightImpl(),
+            //new org.academy.kata.implementation.marchenko2005.EightImpl(),
             //new org.academy.kata.implementation.Mihailll333.EightImpl(),
-            new org.academy.kata.implementation.ol271176.EightImpl(),
+            //new org.academy.kata.implementation.ol271176.EightImpl(),
             new org.academy.kata.implementation.oleksandrtkv.EightImpl(),
-            new org.academy.kata.implementation.Oyne.EightImpl(),
+            //new org.academy.kata.implementation.Oyne.EightImpl(),
             //new org.academy.kata.implementation.RocketMan2k21.EightImpl(),
             new org.academy.kata.implementation.sbekberov.EightImpl(),
             new org.academy.kata.implementation.Shr1mpa.EightImpl(),

@@ -25,6 +25,38 @@ public class EightDataProvider extends AbstractDataProvider {
         inputs.add(new Object[]{new int[] { 4, 3, 9, 7, 2, 1 }, new int[] { 2, 9, 3, 49, 4, 1 }});
         inputs.add(new Object[]{new int[] { 100, 101, 5, 5, 1, 1 }, new int[] { 10, 10201, 25, 25, 1, 1 }});
         inputs.add(new Object[]{new int[] { 1, 2, 3, 4, 5, 6 }, new int[] { 1, 4, 9, 2, 25, 36 }});
+      
+        return combineData(inputs, EIGHT);
+    }
+  
+    @DataProvider(name = "data-Wilson")
+    public static Iterator<Object[]> dpWilson(){
+        List<Object[]> inputs = new ArrayList<>();
+        inputs.add(new Object[]{-1, false});
+        inputs.add(new Object[]{1, false});
+        inputs.add(new Object[]{1.1, false});
+        inputs.add(new Object[]{2, false});
+        inputs.add(new Object[]{5, true});
+        inputs.add(new Object[]{13, true});
+        inputs.add(new Object[]{12, false});
+        inputs.add(new Object[]{563, true});
+        inputs.add(new Object[]{562, false});
+  
+      return combineData(inputs, EIGHT);
+    }
+
+    @DataProvider(name = "data-decimal-places")
+    public static Iterator<Object[]> dpDecimalPlaces(){
+        List<Object[]> inputs = new ArrayList<>();
+        inputs.add(new Object[]{5.5589, 5.56});
+        inputs.add(new Object[]{3.3424, 3.34});
+        inputs.add(new Object[]{7.1234, 7.12});
+        inputs.add(new Object[]{1.9999, 2.00});
+        inputs.add(new Object[]{0.005, 0.01});
+        inputs.add(new Object[]{-2.678, -2.68});
+        inputs.add(new Object[]{-256789.567890, -256789.57});
+        inputs.add(new Object[]{100.0049, 100.00});
+        inputs.add(new Object[]{0.0, 0.00});
 
         return combineData(inputs, EIGHT);
     }
@@ -37,6 +69,26 @@ public class EightDataProvider extends AbstractDataProvider {
         inputs.add(new Object[]{"1405", 1405});
         inputs.add(new Object[]{"-7", -7});
 
+        return combineData(inputs, EIGHT);
+    }
+  
+    @DataProvider (name = "data-countPositivesSumNegatives")
+    public static Iterator<Object[]> dpCountPositivesSumNegatives (){
+        List<Object[]> inputs = new ArrayList<>();
+        inputs.add(new Object[]{new int[]{1, 2, 3, -1, -2, -3}, new int[]{3, -6}});
+        inputs.add(new Object[]{new int[]{}, new int[0]});
+        inputs.add(new Object[]{new int[]{0}, new int[]{0, 0}});
+        inputs.add(new Object[]{new int[]{10}, new int[]{1, 0}});
+        inputs.add(new Object[]{new int[]{-10}, new int[]{0, -10}});
+        inputs.add(new Object[]{new int[]{1, 2, 3, 4}, new int[]{4, 0}});
+        inputs.add(new Object[]{new int[]{-1, -2, -3, -4}, new int[]{0, -10}});
+        inputs.add(new Object[]{new int[]{0, 1, 2, 3}, new int[]{3, 0}});
+        inputs.add(new Object[]{new int[]{0, -1, -2, -3}, new int[]{0, -6}});
+        inputs.add(new Object[]{new int[]{1, 1, 1, -1, -1, -1}, new int[]{3, -3}});
+        inputs.add(new Object[]{new int[]{1, -1, 2, -2, 3, -3}, new int[]{3, -6}});
+        inputs.add(new Object[]{new int[]{0}, new int[]{0, 0} });
+        inputs.add(new Object[]{null, new int[0]});
+        
         return combineData(inputs, EIGHT);
     }
 }

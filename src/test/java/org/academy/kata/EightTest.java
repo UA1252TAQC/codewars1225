@@ -9,8 +9,6 @@ import static org.testng.Assert.*;
 
 public class EightTest extends EightDataProvider {
 
-
-
     @Test(dataProvider = "data-Liters")
     public void testLiters(Eight eight, double time, int expected) {
         int actual = eight.liters(time);
@@ -34,25 +32,31 @@ public class EightTest extends EightDataProvider {
         assertEquals(actual, expected);
     }
 
-    @Test
-    public void testCountPositivesSumNegatives() {
+    @Test(dataProvider = "data-countPositivesSumNegatives")
+    public void testCountPositivesSumNegatives(Eight eight, Object input, Object expected) {
+    int[] actual = eight.countPositivesSumNegatives((int[]) input);
+    assertEquals(actual, (int[]) expected);
     }
 
     @Test(dataProvider = "data-stringToNumber")
     public void testStringToNumber(Eight eight, String str, int expected) {
-        int acutal = eight.stringToNumber(str);
-        assertEquals(acutal, expected);
+        int actual = eight.stringToNumber(str);
+        assertEquals(actual, expected);
     }
 
-    @Test
-    public void testTwoDecimalPlaces() {
+    @Test(dataProvider = "data-decimal-places")
+    public void testTwoDecimalPlaces(Eight eight, double number, double expected) {
+        double actual = eight.TwoDecimalPlaces(number);
+        assertEquals(actual, expected);
     }
 
     @Test
     public void testDivisibleBy() {
     }
 
-    @Test
-    public void testAm_i_wilson() {
+    @Test(dataProvider = "data-Wilson")
+    public void testAm_i_wilson(Eight eight, double n, boolean expected) {
+        boolean actual = eight.am_i_wilson(n);
+        assertEquals(actual, expected);
     }
 }
