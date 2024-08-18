@@ -33,7 +33,11 @@ public class SixTest extends SixDataProvider {
     public void testNbaCup() {
     }
 
-    @Test
-    public void testStockSummary() {
+    @Test(dataProvider = "data-stockSummary")
+    public void testStockSummary(Six six, String [] L, String [] M, String expected) {
+    String actual = six.stockSummary (L, M);
+    assertEquals(actual, expected);
     }
+
+
 }
