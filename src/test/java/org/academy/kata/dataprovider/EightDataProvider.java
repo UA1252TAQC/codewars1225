@@ -1,5 +1,6 @@
 package org.academy.kata.dataprovider;
 
+import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 
 import java.util.ArrayList;
@@ -30,6 +31,17 @@ public class EightDataProvider extends AbstractDataProvider {
         inputs.add(new Object[]{-256789.567890, -256789.57});
         inputs.add(new Object[]{100.0049, 100.00});
         inputs.add(new Object[]{0.0, 0.00});
+
+        return combineData(inputs, EIGHT);
+    }
+
+    @DataProvider(name = "data-stringToNumber")
+    public static Iterator<Object[]> dpStringToNumber(){
+        List<Object[]> inputs = new ArrayList<>();
+        inputs.add(new Object[]{"1234", 1234});
+        inputs.add(new Object[]{"605", 605});
+        inputs.add(new Object[]{"1405", 1405});
+        inputs.add(new Object[]{"-7", -7});
 
         return combineData(inputs, EIGHT);
     }

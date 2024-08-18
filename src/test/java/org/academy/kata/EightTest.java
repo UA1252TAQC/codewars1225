@@ -32,8 +32,10 @@ public class EightTest extends EightDataProvider {
     public void testCountPositivesSumNegatives() {
     }
 
-    @Test
-    public void testStringToNumber() {
+    @Test(dataProvider = "data-stringToNumber")
+    public void testStringToNumber(Eight eight, String str, int expected) {
+        int actual = eight.stringToNumber(str);
+        assertEquals(actual, expected);
     }
 
     @Test(dataProvider = "data-decimal-places")
