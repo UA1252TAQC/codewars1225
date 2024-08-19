@@ -11,8 +11,8 @@ public class SevenDataProvider extends AbstractDataProvider {
     @DataProvider(name = "data-nth-series")
     public static Iterator<Object[]> seriesSum() {
         List<Object[]> inputs = new ArrayList<>();
-        return combineData(inputs, SEVEN);
 
+        return combineData(inputs, SEVEN);
     }
 
 }
