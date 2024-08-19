@@ -28,8 +28,10 @@ public class FiveTest extends FiveDataProvider {
         assertEquals(actual, expected);
     }
 
-    @Test
-    public void testSolve() {
+    @Test(dataProvider = "data-solve")
+    public void testSolve(Five five, double input, double expected) {
+        double actual = five.solve(input);
+        assertEquals(actual, expected, 1e-6);
     }
 
     @Test(dataProvider = "data-Smallest")
