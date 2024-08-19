@@ -11,13 +11,25 @@ import org.testng.annotations.Test;
 public class ConsoleScannerTest {
 
     @Test
-    public void testReadInt() {
-        System.setIn(new ByteArrayInputStream("25".getBytes()));
+    public void testReadIntValidData() {
+        String testData = "25\n";
+        int expected = 25;
+        System.setIn(new ByteArrayInputStream(testData.getBytes()));
         InputStream inputStream = System.in;
         ConsoleScanner consoleScanner = new ConsoleScanner(new Scanner(inputStream));
-        int actual = consoleScanner.readInt("test");
-        assertEquals(actual, 25);
+        int actual = consoleScanner.readInt("test int");
+        assertEquals(actual, expected);
+    }
 
+    @Test
+    public void testReadIntInvalidData() {
+        String testData = "invalid\n25\n";
+        int expected = 25;
+        System.setIn(new ByteArrayInputStream(testData.getBytes()));
+        InputStream inputStream = System.in;
+        ConsoleScanner consoleScanner = new ConsoleScanner(new Scanner(inputStream));
+        int actual = consoleScanner.readInt("test int");
+        assertEquals(actual, expected);
     }
 
     @Test
