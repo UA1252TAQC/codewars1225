@@ -1,10 +1,13 @@
 package org.academy.kata;
 
+import org.academy.kata.dataprovider.FiveDataProvider;
 import org.testng.annotations.Test;
+
+import java.util.Arrays;
 
 import static org.testng.Assert.*;
 
-public class FiveTest {
+public class FiveTest extends FiveDataProvider {
 
     @Test
     public void testGap() {
@@ -22,7 +25,9 @@ public class FiveTest {
     public void testSolve() {
     }
 
-    @Test
-    public void testSmallest() {
+    @Test(dataProvider = "data-Smallest")
+    public void testSmallest(Five five, long n, long[] expected) {
+        long[] actual = five.smallest(n);
+        assertEquals(actual, expected);
     }
 }
