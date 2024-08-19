@@ -58,7 +58,7 @@ public class FiveImpl extends Base implements Five {
 
     @Override
     public double solve(double m) {
-        return 0;
+        return (Math.sqrt(1 + 2 * m) - 1) / m;
     }
 
     @Override
