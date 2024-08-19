@@ -56,7 +56,14 @@ public class ConsoleScannerTest {
     }
 
     @Test
-    public void testReadLong() {
+    public void testReadLongInvalidData() {
+        String testData = "invalid\n987654321\n";
+        long expected = 987654321L;
+        System.setIn(new ByteArrayInputStream(testData.getBytes()));
+        InputStream inputStream = System.in;
+        ConsoleScanner consoleScanner = new ConsoleScanner(new Scanner(inputStream));
+        long actual = consoleScanner.readLong("test long");
+        assertEquals(expected, actual);
     }
 
     @Test
