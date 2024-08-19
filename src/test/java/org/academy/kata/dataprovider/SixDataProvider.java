@@ -44,5 +44,23 @@ public class SixDataProvider extends AbstractDataProvider {
 
     return combineData(inputs, SIX);
   }
+
+  @DataProvider(name = "data-nbaCup")
+  public static Iterator<Object[]> dpNbaCup() {
+    List<Object[]> inputs = new ArrayList<>();
+
+    String resultSheet = "Los Angeles Clippers 104 Dallas Mavericks 88,New York Knicks 101 Atlanta Hawks 112,Indiana Pacers 103 Memphis Grizzlies 112,"
+            + "Los Angeles Clippers 111 Minnesota Timberwolves 112,Phoenix Suns 95 Dallas Mavericks 111,Portland Trail Blazers 112 New Orleans Pelicans 94,"
+            + "Sacramento Kings 104 Los Angeles Clippers 111,Houston Rockets 85 Denver Nuggets 105";
+
+    String resultSheetDecimal = "New York Knicks 101.12 Atlanta Hawks 112";
+
+    inputs.add(new Object[]{resultSheet, "Los Angeles Clippers", "Los Angeles Clippers:W=2;D=0;L=1;Scored=326;Conceded=304;Points=6"});
+    inputs.add(new Object[]{resultSheetDecimal, "Atlanta Hawks", "Error(float number):New York Knicks 101.12 Atlanta Hawks 112"});
+    inputs.add(new Object[]{resultSheet, "", ""});
+    inputs.add(new Object[]{resultSheet, "Soft Serve QA", "Soft Serve QA:This team didn't play!"});
+
+    return combineData(inputs, SIX);
+  }
 }
 
