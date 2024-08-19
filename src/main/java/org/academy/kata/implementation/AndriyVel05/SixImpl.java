@@ -1,6 +1,8 @@
 package org.academy.kata.implementation.AndriyVel05;
 
 import org.academy.kata.Six;
+import java.util.HashMap;
+import java.util.Map;
 
 public class SixImpl implements Six {
     @Override
@@ -35,6 +37,36 @@ public class SixImpl implements Six {
 
     @Override
     public String stockSummary(String[] lstOfArt, String[] lstOf1stLetter) {
-        return "";
+        if (lstOfArt.length == 0 || lstOf1stLetter.length == 0) {
+            return "";
+        }
+
+        Map<String, Integer> categoryMap = new HashMap<>();
+
+        // Initialize the map with categories
+        for (String category : lstOf1stLetter) {
+            categoryMap.put(category, 0);
+        }
+
+        // Sum up the quantities for each category
+        for (String art : lstOfArt) {
+            String category = art.substring(0, 1);
+            if (categoryMap.containsKey(category)) {
+                int quantity = Integer.parseInt(art.split(" ")[1]);
+                categoryMap.put(category, categoryMap.get(category) + quantity);
+            }
+        }
+
+        // Build the result string
+        StringBuilder result = new StringBuilder();
+        for (String category : lstOf1stLetter) {
+            if (result.length() > 0) {
+                result.append(" - ");
+            }
+            result.append("(").append(category).append(" : ").append(categoryMap.get(category)).append(")");
+        }
+
+        return result.toString();
     }
 }
+
