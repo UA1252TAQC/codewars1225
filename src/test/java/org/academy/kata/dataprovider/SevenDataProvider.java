@@ -11,18 +11,14 @@ public class SevenDataProvider extends AbstractDataProvider {
 
   @DataProvider(name = "data-NewAvg")
   public static Iterator<Object[]> dpNewAvg() {
-    List<Object[]> inputs = new ArrayList<>();
-    inputs.add(new Object[]{ new double[]{14, 30, 5, 7, 9, 11, 15}, 30, 149L});
-    inputs.add(new Object[]{ new double[]{14, 30, 5, 7, 9, 11, 15}, 92, 645L});
-
-    return combineData(inputs, SEVEN);
-    }
-
-    @DataProvider(name = "data-nth-series")
-    public static Iterator<Object[]> seriesSum() {
         List<Object[]> inputs = new ArrayList<>();
+        inputs.add(new Object[]{ new double[]{14, 30, 5, 7, 9, 11, 15}, 30, 149L});
+        inputs.add(new Object[]{ new double[]{14, 30, 5, 7, 9, 11, 15}, 92, 645L});
 
         return combineData(inputs, SEVEN);
+    }
+
+    public static Iterator<Object[]> seriesSum() {
     }
 
 }
