@@ -71,7 +71,7 @@ public class EightImpl implements Eight {
     public int[] divisibleBy(int[] numbers, int divider) {
         return Arrays.stream(numbers)
                 .filter(number -> number % divider == 0)
-                .toArray(); // solved
+                .toArray();
     }
 
     @Override
