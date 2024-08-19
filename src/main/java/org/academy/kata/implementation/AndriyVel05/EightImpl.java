@@ -24,6 +24,7 @@ public class EightImpl implements Eight {
     @Override
     public int[] squareOrSquareRoot(int[] array) {
         int[] result = new int[array.length];
+        // solved
 
         for (int i = 0; i < array.length; i++) {
             int sqrt = (int) Math.sqrt(array[i]);
