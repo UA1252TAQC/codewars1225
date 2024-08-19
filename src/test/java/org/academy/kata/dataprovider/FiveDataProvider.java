@@ -27,4 +27,16 @@ public class FiveDataProvider extends AbstractDataProvider {
 
         return combineData(inputs, FIVE);
     }
+
+    @DataProvider(name = "data-gap")
+    public static Iterator<Object[]> dpGap(){
+        List<Object[]> inputs = new ArrayList<>();
+        inputs.add(new Object[]{2,100,110, new long[]{101,103}});
+        inputs.add(new Object[]{4,100,110, new long[]{103,107}});
+        inputs.add(new Object[]{6,100,110, null});
+        inputs.add(new Object[]{8,300,400, new long[]{359,367}});
+        inputs.add(new Object[]{10,300,400, new long[]{337,347}});
+
+        return combineData(inputs, FIVE);
+    }
 }

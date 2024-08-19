@@ -16,7 +16,7 @@ public class AbstractDataProvider {
     protected static final List<Five> FIVE = List.of(
             //new org.academy.kata.implementation.AndriyVel05.FiveImpl(),
             new org.academy.kata.implementation.marchenko2005.FiveImpl(),
-            new org.academy.kata.implementation.Mihailll333.FiveImpl(),
+            //new org.academy.kata.implementation.Mihailll333.FiveImpl(),
             new org.academy.kata.implementation.ol271176.FiveImpl(),
             new org.academy.kata.implementation.oleksandrtkv.FiveImpl(),
             //new org.academy.kata.implementation.Oyne.FiveImpl(),

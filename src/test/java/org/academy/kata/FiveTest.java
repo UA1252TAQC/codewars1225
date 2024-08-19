@@ -9,8 +9,10 @@ import static org.testng.Assert.*;
 
 public class FiveTest extends FiveDataProvider {
 
-    @Test
-    public void testGap() {
+    @Test(dataProvider = "data-gap")
+    public void testGap(Five five, int g, long m, long n, long[] expected) {
+        long[] actual = five.gap(g, m, n);
+        assertEquals(actual, expected);
     }
 
     @Test(dataProvider = "data-Zeros")
