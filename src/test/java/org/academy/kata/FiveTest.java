@@ -1,14 +1,19 @@
 package org.academy.kata;
 
 import org.academy.kata.dataprovider.FiveDataProvider;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import java.math.BigInteger;
-import java.util.Arrays;
+import java.util.Locale;
 
 import static org.testng.Assert.*;
 
 public class FiveTest extends FiveDataProvider {
+    @BeforeClass()
+    public void beforeClass() {
+        Locale.setDefault(Locale.US);
+    }
 
     @Test(dataProvider = "data-gap")
     public void testGap(Five five, int g, long m, long n, long[] expected) {

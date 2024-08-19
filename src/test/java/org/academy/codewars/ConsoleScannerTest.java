@@ -5,11 +5,17 @@ import static org.testng.Assert.assertEquals;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.math.BigInteger;
+import java.util.Locale;
 import java.util.Scanner;
 
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 public class ConsoleScannerTest {
+    @BeforeClass()
+    public void beforeClass() {
+        Locale.setDefault(Locale.US);
+    }
 
     @Test
     public void testReadIntValidData() {
