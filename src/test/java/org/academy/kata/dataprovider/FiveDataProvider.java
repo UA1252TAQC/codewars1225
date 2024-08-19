@@ -52,4 +52,25 @@ public class FiveDataProvider extends AbstractDataProvider {
 
         return combineData(inputs, FIVE);
     }
+
+    @DataProvider(name = "data-solve")
+    public static Iterator<Object[]> whichXForThatSum(){
+        List<Object[]> inputs = new ArrayList<>();
+
+        inputs.add(new Object[]{2.0, 0.5});
+        inputs.add(new Object[]{4.0, 0.6096117967978});
+        inputs.add(new Object[]{5.0, 0.6417424305044});
+        inputs.add(new Object[]{6.0, 0.6666666666667});
+        inputs.add(new Object[]{8.0, 0.7034648345914});
+        inputs.add(new Object[]{10.0, 0.7298437881284});
+        inputs.add(new Object[]{12.0, 0.75});
+        inputs.add(new Object[]{13.0, 0.7584573119507});
+        inputs.add(new Object[]{14.0, 0.7660773415975});
+        inputs.add(new Object[]{17.0, 0.7850992981495});
+        inputs.add(new Object[]{20.0, 0.8});
+        inputs.add(new Object[]{50.0, 0.868225531212422});
+        inputs.add(new Object[]{500000.0, 0.9985867860840736});
+
+        return combineData(inputs, FIVE);
+    }
 }
