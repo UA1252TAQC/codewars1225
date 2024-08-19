@@ -1,12 +1,13 @@
 package org.academy.kata.implementation.marchenko2005;
 
+import org.academy.kata.Base;
 import org.academy.kata.Seven;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
 
-public class SevenImpl implements Seven {
+public class SevenImpl extends Base implements Seven {
     @Override
     public long newAvg(double[] arr, double navg) {
         double sum = 0;

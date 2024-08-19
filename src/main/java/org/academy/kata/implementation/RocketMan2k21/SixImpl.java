@@ -1,8 +1,9 @@
 package org.academy.kata.implementation.RocketMan2k21;
 
+import org.academy.kata.Base;
 import org.academy.kata.Six;
 
-public class SixImpl implements Six {
+public class SixImpl extends Base implements Six {
     @Override
     public long findNb(long m) {
         return 0;

@@ -1,5 +1,6 @@
 package org.academy.kata.implementation.smelovd;
 
+import org.academy.kata.Base;
 import org.academy.kata.Five;
 
 import java.math.BigDecimal;
@@ -8,7 +9,7 @@ import java.math.RoundingMode;
 import java.util.Arrays;
 import java.util.stream.LongStream;
 
-public class FiveImpl implements Five {
+public class FiveImpl extends Base implements Five {
     @Override
     public long[] gap(int g, long m, long n) {
         final long[] primeNumbers = LongStream.rangeClosed(m, n)

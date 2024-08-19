@@ -1,10 +1,11 @@
 package org.academy.kata.implementation.Shr1mpa;
 
+import org.academy.kata.Base;
 import org.academy.kata.Five;
 
 import java.math.BigInteger;
 
-public class FiveImpl implements Five {
+public class FiveImpl extends Base implements Five {
     @Override
     public long[] gap(int g, long m, long n) {
         long prevPrime = -1;
