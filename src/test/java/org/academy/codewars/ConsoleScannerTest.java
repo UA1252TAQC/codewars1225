@@ -67,6 +67,17 @@ public class ConsoleScannerTest {
     }
 
     @Test
+    public void testReadLongValidData() {
+        String testData = "123456789\n";
+        long expected = 123456789L;
+        System.setIn(new ByteArrayInputStream(testData.getBytes()));
+        InputStream inputStream = System.in;
+        ConsoleScanner consoleScanner = new ConsoleScanner(new Scanner(inputStream));
+        long actual = consoleScanner.readLong("test long");
+        assertEquals(expected, actual);
+    }
+
+    @Test
     public void testReadDoubleValidData() {
         String testData = "7.5\n";
         double expected = 7.5;
