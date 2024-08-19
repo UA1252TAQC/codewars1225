@@ -113,6 +113,13 @@ public class ConsoleScannerTest {
 
     @Test
     public void testReadString() {
+        String testData = "test 123123#readString\n";
+        System.setIn(new ByteArrayInputStream(testData.getBytes()));
+        InputStream inputStream = System.in;
+        ConsoleScanner consoleScanner = new ConsoleScanner(new Scanner(inputStream));
+        String actual = consoleScanner.readString("test");
+        String expected = "test 123123#readString";
+        assertEquals(actual, expected);
     }
 
     @Test
