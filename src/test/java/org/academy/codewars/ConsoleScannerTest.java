@@ -11,7 +11,7 @@ import org.testng.annotations.Test;
 public class ConsoleScannerTest {
 
     @Test
-    public void testReadIntValidData() {
+    public void testReadIntValidDataValidData() {
         String testData = "25\n";
         int expected = 25;
         System.setIn(new ByteArrayInputStream(testData.getBytes()));
