@@ -34,7 +34,25 @@ public class ConsoleScannerTest {
     }
 
     @Test
-    public void testReadFloat() {
+    public void testReadFloatValidData() {
+        String testData = "23.4\n";
+        float expected = 23.4f;
+        System.setIn(new ByteArrayInputStream(testData.getBytes()));
+        InputStream inputStream = System.in;
+        ConsoleScanner consoleScanner = new ConsoleScanner(new Scanner(inputStream));
+        float actual = consoleScanner.readFloat("test float");
+        assertEquals(actual, expected);
+    }
+
+    @Test
+    public void testReadFloatInvalidData() {
+        String testData = "invalid 1.4\n";
+        float expected = 1.4f;
+        System.setIn(new ByteArrayInputStream(testData.getBytes()));
+        InputStream inputStream = System.in;
+        ConsoleScanner consoleScanner = new ConsoleScanner(new Scanner(inputStream));
+        float actual = consoleScanner.readFloat("test float");
+        assertEquals(actual, expected);
     }
 
     @Test
