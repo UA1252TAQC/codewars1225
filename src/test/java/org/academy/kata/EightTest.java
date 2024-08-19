@@ -3,16 +3,22 @@ package org.academy.kata;
 import static org.testng.Assert.assertEquals;
 
 import org.academy.kata.dataprovider.EightDataProvider;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import java.util.Locale;
+
 public class EightTest extends EightDataProvider {
+    @BeforeClass()
+    public void beforeClass() {
+        Locale.setDefault(Locale.US);
+    }
 
     @Test(dataProvider = "data-Liters")
     public void testLiters(Eight eight, double time, int expected) {
         int actual = eight.liters(time);
         assertEquals(actual, expected);
     }
-
 
     @Test(dataProvider = "data-getVolumeOfCuboid")
     public void testGetVolumeOfCuboid(Eight eight, double length, double width, double height, double expected) {
