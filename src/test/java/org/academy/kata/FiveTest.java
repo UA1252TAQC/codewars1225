@@ -3,6 +3,7 @@ package org.academy.kata;
 import org.academy.kata.dataprovider.FiveDataProvider;
 import org.testng.annotations.Test;
 
+import java.math.BigInteger;
 import java.util.Arrays;
 
 import static org.testng.Assert.*;
@@ -21,8 +22,10 @@ public class FiveTest extends FiveDataProvider {
         assertEquals(actual, expected);
     }
 
-    @Test
-    public void testPerimeter() {
+    @Test(dataProvider = "data-perimeter")
+    public void testPerimeter(Five five, BigInteger n, BigInteger expected) {
+        BigInteger actual = five.perimeter(n);
+        assertEquals(actual, expected);
     }
 
     @Test
