@@ -50,8 +50,10 @@ public class EightTest extends EightDataProvider {
         assertEquals(actual, expected);
     }
 
-    @Test
-    public void testDivisibleBy() {
+    @Test(dataProvider = "data-divisibleBy")
+    public void testDivisibleBy(Eight eight, int[] numbers, int divider, int[] expected) {
+        int[] actual = eight.divisibleBy(numbers, divider);
+        assertEquals(actual, expected);
     }
 
     @Test(dataProvider = "data-Wilson")

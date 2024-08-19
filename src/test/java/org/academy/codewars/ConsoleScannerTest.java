@@ -34,7 +34,25 @@ public class ConsoleScannerTest {
     }
 
     @Test
-    public void testReadFloat() {
+    public void testReadFloatValidData() {
+        String testData = "23.4\n";
+        float expected = 23.4f;
+        System.setIn(new ByteArrayInputStream(testData.getBytes()));
+        InputStream inputStream = System.in;
+        ConsoleScanner consoleScanner = new ConsoleScanner(new Scanner(inputStream));
+        float actual = consoleScanner.readFloat("test float");
+        assertEquals(actual, expected);
+    }
+
+    @Test
+    public void testReadFloatInvalidData() {
+        String testData = "invalid 1.4\n";
+        float expected = 1.4f;
+        System.setIn(new ByteArrayInputStream(testData.getBytes()));
+        InputStream inputStream = System.in;
+        ConsoleScanner consoleScanner = new ConsoleScanner(new Scanner(inputStream));
+        float actual = consoleScanner.readFloat("test float");
+        assertEquals(actual, expected);
     }
 
     @Test
@@ -86,7 +104,25 @@ public class ConsoleScannerTest {
     }
 
     @Test
-    public void testReadIntArray() {
+    public void testReadIntArrayValidData() {
+        String testData = "3\n1\n-2\n0\n";
+        int[] expected = new int[]{1, -2, 0};
+        System.setIn(new ByteArrayInputStream(testData.getBytes()));
+        InputStream inputStream = System.in;
+        ConsoleScanner consoleScanner = new ConsoleScanner(new Scanner(inputStream));
+        int[] actual = consoleScanner.readIntArray("test array");
+        assertEquals(actual, expected);
+    }
+
+    @Test
+    public void testReadIntArrayInvalidData() {
+        String testData = "-3\n3\ninvalid 1\n-2\n0\n";
+        int[] expected = new int[]{1, -2, 0};
+        System.setIn(new ByteArrayInputStream(testData.getBytes()));
+        InputStream inputStream = System.in;
+        ConsoleScanner consoleScanner = new ConsoleScanner(new Scanner(inputStream));
+        int[] actual = consoleScanner.readIntArray("test array");
+        assertEquals(actual, expected);
     }
 
     @Test
@@ -113,6 +149,13 @@ public class ConsoleScannerTest {
 
     @Test
     public void testReadString() {
+        String testData = "test 123123#readString\n";
+        System.setIn(new ByteArrayInputStream(testData.getBytes()));
+        InputStream inputStream = System.in;
+        ConsoleScanner consoleScanner = new ConsoleScanner(new Scanner(inputStream));
+        String actual = consoleScanner.readString("test");
+        String expected = "test 123123#readString";
+        assertEquals(actual, expected);
     }
 
     @Test
