@@ -10,7 +10,7 @@ import java.util.List;
 public class EightDataProvider extends AbstractDataProvider {
 
     @DataProvider(name = "data-Liters")
-    public static Iterator<Object[]> dpLiters(){
+    public static Iterator<Object[]> dpLiters() {
         List<Object[]> inputs = new ArrayList<>();
         inputs.add(new Object[]{80, 40});
         inputs.add(new Object[]{1600.20, 800});
@@ -20,17 +20,17 @@ public class EightDataProvider extends AbstractDataProvider {
     }
 
     @DataProvider(name = "data-SquareOrSquareRoot")
-    public static Iterator<Object[]> dpSquareOrSquareRoot(){
+    public static Iterator<Object[]> dpSquareOrSquareRoot() {
         List<Object[]> inputs = new ArrayList<>();
-        inputs.add(new Object[]{new int[] { 4, 3, 9, 7, 2, 1 }, new int[] { 2, 9, 3, 49, 4, 1 }});
-        inputs.add(new Object[]{new int[] { 100, 101, 5, 5, 1, 1 }, new int[] { 10, 10201, 25, 25, 1, 1 }});
-        inputs.add(new Object[]{new int[] { 1, 2, 3, 4, 5, 6 }, new int[] { 1, 4, 9, 2, 25, 36 }});
-      
+        inputs.add(new Object[]{new int[]{4, 3, 9, 7, 2, 1}, new int[]{2, 9, 3, 49, 4, 1}});
+        inputs.add(new Object[]{new int[]{100, 101, 5, 5, 1, 1}, new int[]{10, 10201, 25, 25, 1, 1}});
+        inputs.add(new Object[]{new int[]{1, 2, 3, 4, 5, 6}, new int[]{1, 4, 9, 2, 25, 36}});
+
         return combineData(inputs, EIGHT);
     }
-  
+
     @DataProvider(name = "data-Wilson")
-    public static Iterator<Object[]> dpWilson(){
+    public static Iterator<Object[]> dpWilson() {
         List<Object[]> inputs = new ArrayList<>();
         inputs.add(new Object[]{-1, false});
         inputs.add(new Object[]{1, false});
@@ -41,12 +41,12 @@ public class EightDataProvider extends AbstractDataProvider {
         inputs.add(new Object[]{12, false});
         inputs.add(new Object[]{563, true});
         inputs.add(new Object[]{562, false});
-  
-      return combineData(inputs, EIGHT);
+
+        return combineData(inputs, EIGHT);
     }
 
     @DataProvider(name = "data-decimal-places")
-    public static Iterator<Object[]> dpDecimalPlaces(){
+    public static Iterator<Object[]> dpDecimalPlaces() {
         List<Object[]> inputs = new ArrayList<>();
         inputs.add(new Object[]{5.5589, 5.56});
         inputs.add(new Object[]{3.3424, 3.34});
@@ -62,7 +62,7 @@ public class EightDataProvider extends AbstractDataProvider {
     }
 
     @DataProvider(name = "data-stringToNumber")
-    public static Iterator<Object[]> dpStringToNumber(){
+    public static Iterator<Object[]> dpStringToNumber() {
         List<Object[]> inputs = new ArrayList<>();
         inputs.add(new Object[]{"1234", 1234});
         inputs.add(new Object[]{"605", 605});
@@ -71,9 +71,9 @@ public class EightDataProvider extends AbstractDataProvider {
 
         return combineData(inputs, EIGHT);
     }
-  
-    @DataProvider (name = "data-countPositivesSumNegatives")
-    public static Iterator<Object[]> dpCountPositivesSumNegatives (){
+
+    @DataProvider(name = "data-countPositivesSumNegatives")
+    public static Iterator<Object[]> dpCountPositivesSumNegatives() {
         List<Object[]> inputs = new ArrayList<>();
         inputs.add(new Object[]{new int[]{1, 2, 3, -1, -2, -3}, new int[]{3, -6}});
         inputs.add(new Object[]{new int[]{}, new int[0]});
@@ -86,14 +86,14 @@ public class EightDataProvider extends AbstractDataProvider {
         inputs.add(new Object[]{new int[]{0, -1, -2, -3}, new int[]{0, -6}});
         inputs.add(new Object[]{new int[]{1, 1, 1, -1, -1, -1}, new int[]{3, -3}});
         inputs.add(new Object[]{new int[]{1, -1, 2, -2, 3, -3}, new int[]{3, -6}});
-        inputs.add(new Object[]{new int[]{0}, new int[]{0, 0} });
+        inputs.add(new Object[]{new int[]{0}, new int[]{0, 0}});
         inputs.add(new Object[]{null, new int[0]});
-        
+
         return combineData(inputs, EIGHT);
     }
 
     @DataProvider(name = "data-getVolumeOfCuboid")
-    public static Iterator<Object[]> dpGetVolumeOfCuboid(){
+    public static Iterator<Object[]> dpGetVolumeOfCuboid() {
         List<Object[]> inputs = new ArrayList<>();
         inputs.add(new Object[]{2.0, 3.0, 4.0, 24.0});
         inputs.add(new Object[]{1.5, 2.5, 3.5, 13.125});
@@ -103,5 +103,15 @@ public class EightDataProvider extends AbstractDataProvider {
         return combineData(inputs, EIGHT);
     }
 
+    @DataProvider(name = "data-MpgToKPM")
+    public static Iterator<Object[]> dpmpgToKPM() {
+        List<Object[]> inputs = new ArrayList<>();
+        inputs.add(new Object[]{10f, 3.54f});
+        inputs.add(new Object[]{20f, 7.08f});
+        inputs.add(new Object[]{30f, 10.62f});
+        inputs.add(new Object[]{50f, 17.7f});
+        inputs.add(new Object[]{70f, 24.78f});
 
+        return combineData(inputs, EIGHT);
+    }
 }
