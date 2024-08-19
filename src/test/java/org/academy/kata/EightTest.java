@@ -22,14 +22,16 @@ public class EightTest extends EightDataProvider {
     public void testMpgToKPM() {
     }
 
-    @Test
-    public void testSquareOrSquareRoot() {
+    @Test(dataProvider = "data-SquareOrSquareRoot")
+    public void testSquareOrSquareRoot(Eight eight, int[] array, int[] expected) {
+        int[] actual = eight.squareOrSquareRoot(array);
+        assertEquals(actual, expected);
     }
 
     @Test(dataProvider = "data-countPositivesSumNegatives")
     public void testCountPositivesSumNegatives(Eight eight, Object input, Object expected) {
-    int[] actual = eight.countPositivesSumNegatives((int[]) input);
-    assertEquals(actual, (int[]) expected);
+        int[] actual = eight.countPositivesSumNegatives((int[]) input);
+        assertEquals(actual, (int[]) expected);
     }
 
     @Test(dataProvider = "data-stringToNumber")

@@ -13,8 +13,10 @@ public class FiveTest extends FiveDataProvider {
     public void testGap() {
     }
 
-    @Test
-    public void testZeros() {
+    @Test(dataProvider = "data-Zeros")
+    public void testZeros(Five five, int n, int expected) {
+        int actual = five.zeros(n);
+        assertEquals(actual, expected);
     }
 
     @Test

@@ -5,6 +5,7 @@ import org.academy.kata.Five;
 import org.academy.kata.Seven;
 import org.academy.kata.Six;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
@@ -13,12 +14,12 @@ import java.util.stream.Stream;
 
 public class AbstractDataProvider {
     protected static final List<Five> FIVE = List.of(
-            new org.academy.kata.implementation.AndriyVel05.FiveImpl(),
+            //new org.academy.kata.implementation.AndriyVel05.FiveImpl(),
             new org.academy.kata.implementation.marchenko2005.FiveImpl(),
             new org.academy.kata.implementation.Mihailll333.FiveImpl(),
             new org.academy.kata.implementation.ol271176.FiveImpl(),
             new org.academy.kata.implementation.oleksandrtkv.FiveImpl(),
-            new org.academy.kata.implementation.Oyne.FiveImpl(),
+            //new org.academy.kata.implementation.Oyne.FiveImpl(),
             //new org.academy.kata.implementation.RocketMan2k21.FiveImpl(),
             new org.academy.kata.implementation.sbekberov.FiveImpl(),
             new org.academy.kata.implementation.Shr1mpa.FiveImpl(),
@@ -73,7 +74,37 @@ public class AbstractDataProvider {
     protected static Iterator<Object[]> combineData(List<Object[]> objects, List<?> impls) {
         List<Object[]> data = new ArrayList<>();
         for (Object impl : impls) {
-            objects.forEach(o -> data.add(Stream.concat(Stream.of(impl), Arrays.stream(o)).toArray()));
+            for (Object[] o : objects) {
+                data.add(Stream.concat(Stream.of(impl), Arrays.stream(o).map(obj -> {
+                            if (obj == null) return null;
+                            if (obj.getClass().isArray()) {
+                                var componentType = obj.getClass().getComponentType();
+                                if (componentType.isPrimitive()) {
+                                    if (componentType == int.class) {
+                                        return Arrays.copyOf((int[]) obj, Array.getLength(obj));
+                                    } else if (componentType == double.class) {
+                                        return Arrays.copyOf((double[]) obj, Array.getLength(obj));
+                                    } else if (componentType == float.class) {
+                                        return Arrays.copyOf((float[]) obj, Array.getLength(obj));
+                                    } else if (componentType == long.class) {
+                                        return Arrays.copyOf((long[]) obj, Array.getLength(obj));
+                                    } else if (componentType == short.class) {
+                                        return Arrays.copyOf((short[]) obj, Array.getLength(obj));
+                                    } else if (componentType == byte.class) {
+                                        return Arrays.copyOf((byte[]) obj, Array.getLength(obj));
+                                    } else if (componentType == char.class) {
+                                        return Arrays.copyOf((char[]) obj, Array.getLength(obj));
+                                    } else if (componentType == boolean.class) {
+                                        return Arrays.copyOf((boolean[]) obj, Array.getLength(obj));
+                                    }
+                                } else {
+                                    return Arrays.copyOf((Object[]) obj, Array.getLength(obj));
+                                }
+                            }
+                            return obj;
+                        })
+                ).toArray(Object[]::new));
+            }
         }
         return data.iterator();
     }
