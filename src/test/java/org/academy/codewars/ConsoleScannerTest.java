@@ -42,7 +42,14 @@ public class ConsoleScannerTest {
     }
 
     @Test
-    public void testReadDouble() {
+    public void testReadDoubleValidData() {
+        String testData = "7.5\n";
+        double expected = 7.5;
+        System.setIn(new ByteArrayInputStream(testData.getBytes()));
+        InputStream inputStream = System.in;
+        ConsoleScanner consoleScanner = new ConsoleScanner(new Scanner(inputStream));
+        double actual = consoleScanner.readDouble("test double");
+        assertEquals(actual, expected);
     }
 
     @Test
