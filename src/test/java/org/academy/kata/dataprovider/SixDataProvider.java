@@ -22,9 +22,9 @@ public class SixDataProvider extends AbstractDataProvider {
   public static Iterator<Object[]> dpStockSummary() {
     List<Object[]> inputs = new ArrayList<>();
 
-    inputs.add(new Object[]{new String[]{"ABAR 200", "CDXE 500", "BKWR 250", "BTSQ 890", "DRTY 600"}, 
+    inputs.add(new Object[]{new String[]{"ABAR 200", "CDXE 500", "BKWR 250", "BTSQ 890", "DRTY 600"},
                             new String[]{"A", "B", "C", "D"}, "(A : 200) - (B : 1140) - (C : 500) - (D : 600)"});
-    inputs.add(new Object[]{new String[]{"XYZ 300", "LMN 400", "OPQ 100", "RST 500"}, 
+    inputs.add(new Object[]{new String[]{"XYZ 300", "LMN 400", "OPQ 100", "RST 500"},
                             new String[]{"X", "L", "O"}, "(X : 300) - (L : 400) - (O : 100)"});
     inputs.add(new Object[]{new String[]{"JKL 150", "MNO 250", "PQR 350"}, new String[]{"J", "M"},"(J : 150) - (M : 250)"});
     inputs.add(new Object[]{new String[]{"ABAR 200", "CDXE 500"}, new String[]{"X", "Y"}, "(X : 0) - (Y : 0)"});
@@ -60,6 +60,45 @@ public class SixDataProvider extends AbstractDataProvider {
             "1242.00\n122 Hardware;! 13.60\n127 Hairdresser 13.10\n123 Fruits 93.50?;\n132 Stamps;!{ 13.60?;\n160 Pen;! 17.60?;\n002 Car;! 34.00",
             "Original Balance: 1242,00\\r\\n122 Hardware 13.60 Balance 1228,40\\r\\n127 Hairdresser 13.10 Balance 1215,30\\r\\n123 Fruits 93.50 Balance 1121,80\\r\\n132 Stamps 13.60 Balance 1108,20\\r\\n160 Pen 17.60 Balance 1090,60\\r\\n002 Car 34.00 Balance 1056,60\\r\\nTotal expense  185,40\\r\\nAverage expense  30,90"
     });
+
+    return combineData(inputs, SIX);
+  }
+  
+  @DataProvider(name = "data-mean")
+  public static Iterator<Object[]> dpMean() {
+    List<Object[]> inputs = new ArrayList<>();
+    inputs.add(new Object[]{"London", "London:Jan 20.5,Feb 30.2,Mar 40.3\nParis:Jan 25.2,Feb 28.3,Mar 35.4", 30.333333333333332});
+    inputs.add(new Object[]{"Paris", "London:Jan 20.5,Feb 30.2,Mar 40.3\nParis:Jan 25.2,Feb 28.3,Mar 35.4", 29.633333333333333});
+    inputs.add(new Object[]{"Berlin", "London:Jan 20.5,Feb 30.2,Mar 40.3\nParis:Jan 25.2,Feb 28.3,Mar 35.4", -1.0});
+
+    return combineData(inputs, SIX);
+  }
+
+  @DataProvider(name = "data-variance")
+  public static Iterator<Object[]> dpVariance() {
+    List<Object[]> inputs = new ArrayList<>();
+    inputs.add(new Object[]{"London", "London:Jan 20.5,Feb 30.2,Mar 40.3\nParis:Jan 25.2,Feb 28.3,Mar 35.4", 65.3436111111111});
+    inputs.add(new Object[]{"Paris", "London:Jan 20.5,Feb 30.2,Mar 40.3\nParis:Jan 25.2,Feb 28.3,Mar 35.4", 18.229333333333332});
+    inputs.add(new Object[]{"Berlin", "London:Jan 20.5,Feb 30.2,Mar 40.3\nParis:Jan 25.2,Feb 28.3,Mar 35.4", -1.0});
+
+    return combineData(inputs, SIX);
+  }
+
+  @DataProvider(name = "data-nbaCup")
+  public static Iterator<Object[]> dpNbaCup() {
+    List<Object[]> inputs = new ArrayList<>();
+
+    String resultSheet = "Los Angeles Clippers 104 Dallas Mavericks 88,New York Knicks 101 Atlanta Hawks 112,Indiana Pacers 103 Memphis Grizzlies 112,"
+            + "Los Angeles Clippers 111 Minnesota Timberwolves 112,Phoenix Suns 95 Dallas Mavericks 111,Portland Trail Blazers 112 New Orleans Pelicans 94,"
+            + "Sacramento Kings 104 Los Angeles Clippers 111,Houston Rockets 85 Denver Nuggets 105";
+
+    String resultSheetDecimal = "New York Knicks 101.12 Atlanta Hawks 112";
+
+    inputs.add(new Object[]{resultSheet, "Los Angeles Clippers", "Los Angeles Clippers:W=2;D=0;L=1;Scored=326;Conceded=304;Points=6"});
+    inputs.add(new Object[]{resultSheetDecimal, "Atlanta Hawks", "Error(float number):New York Knicks 101.12 Atlanta Hawks 112"});
+    inputs.add(new Object[]{resultSheet, "", ""});
+    inputs.add(new Object[]{resultSheet, "Soft Serve QA", "Soft Serve QA:This team didn't play!"});
+
     return combineData(inputs, SIX);
   }
 }
