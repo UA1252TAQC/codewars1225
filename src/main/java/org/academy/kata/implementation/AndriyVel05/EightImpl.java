@@ -77,6 +77,6 @@ public class EightImpl extends Base implements Eight {
 
     @Override
     public boolean am_i_wilson(double n) {
-        return n == 5 || n == 13 || n == 563;
+        return n == 5 || n == 13 || n == 563; // solved
     }
 }
