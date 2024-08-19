@@ -20,8 +20,10 @@ public class EightTest extends EightDataProvider {
         assertEquals(actual, expected);
     }
 
-    @Test
-    public void testMpgToKPM() {
+    @Test(dataProvider = "data-MpgToKPM")
+    public void testMpgToKPM(Eight eight, final float mpg, float expected) {
+        float actual = eight.mpgToKPM(mpg);
+        assertEquals(actual, expected);
     }
 
     @Test(dataProvider = "data-SquareOrSquareRoot")
