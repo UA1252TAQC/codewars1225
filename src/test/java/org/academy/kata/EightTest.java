@@ -14,8 +14,10 @@ public class EightTest extends EightDataProvider {
     }
 
 
-    @Test
-    public void testGetVolumeOfCuboid() {
+    @Test(dataProvider = "data-getVolumeOfCuboid")
+    public void testGetVolumeOfCuboid(Eight eight, double length, double width, double height, double expected) {
+        double actual = eight.getVolumeOfCuboid(length, width, height);
+        assertEquals(actual, expected);
     }
 
     @Test
