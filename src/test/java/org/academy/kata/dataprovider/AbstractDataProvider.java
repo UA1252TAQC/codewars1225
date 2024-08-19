@@ -42,7 +42,7 @@ public class AbstractDataProvider {
             new org.academy.kata.implementation.YanOleks.SixImpl()
     );
     protected static final List<Seven> SEVEN = List.of(
-            new org.academy.kata.implementation.AndriyVel05.SevenImpl(),
+            //new org.academy.kata.implementation.AndriyVel05.SevenImpl(),
             new org.academy.kata.implementation.marchenko2005.SevenImpl(),
             new org.academy.kata.implementation.Mihailll333.SevenImpl(),
             new org.academy.kata.implementation.ol271176.SevenImpl(),
