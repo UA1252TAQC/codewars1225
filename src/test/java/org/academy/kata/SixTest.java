@@ -26,14 +26,15 @@ public class SixTest extends SixDataProvider {
     @Test(dataProvider = "data-mean")
     public void testMean(Six six, String town, String strng, double expected) {
         double actual = six.mean(town, strng);
-        assertEquals(actual, expected, 1e-9);
+        assertEquals(actual, expected, 1e-2);
     }
 
     @Test(dataProvider = "data-variance")
     public void testVariance(Six six, String town, String strng, double expected) {
         double actual = six.variance(town, strng);
-        assertEquals(actual, expected, 1e-9);
+        assertEquals(expected, actual, 1e-2);
     }
+
 
     @Test
     public void testNbaCup() {

@@ -64,5 +64,6 @@ public class SixDataProvider extends AbstractDataProvider {
 
     return combineData(inputs, SIX);
   }
+
 }
 
