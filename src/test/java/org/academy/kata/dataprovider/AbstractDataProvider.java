@@ -30,7 +30,7 @@ public class AbstractDataProvider {
     protected static final List<Six> SIX = List.of(
             //new org.academy.kata.implementation.AndriyVel05.SixImpl(),
             new org.academy.kata.implementation.marchenko2005.SixImpl(),
-            new org.academy.kata.implementation.Mihailll333.SixImpl(),
+            //new org.academy.kata.implementation.Mihailll333.SixImpl(),
             new org.academy.kata.implementation.ol271176.SixImpl(),
             new org.academy.kata.implementation.oleksandrtkv.SixImpl(),
             //new org.academy.kata.implementation.Oyne.SixImpl(),
@@ -38,8 +38,8 @@ public class AbstractDataProvider {
             new org.academy.kata.implementation.sbekberov.SixImpl(),
             new org.academy.kata.implementation.Shr1mpa.SixImpl(),
             new org.academy.kata.implementation.smelovd.SixImpl(),
-            new org.academy.kata.implementation.VladyslavaNezhnova.SixImpl(),
-            new org.academy.kata.implementation.YanOleks.SixImpl()
+            new org.academy.kata.implementation.VladyslavaNezhnova.SixImpl()
+           // new org.academy.kata.implementation.YanOleks.SixImpl()
     );
     protected static final List<Seven> SEVEN = List.of(
             //new org.academy.kata.implementation.AndriyVel05.SevenImpl(),
