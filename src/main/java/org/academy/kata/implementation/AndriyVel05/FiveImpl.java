@@ -16,7 +16,7 @@ public class FiveImpl implements Five {
                 prevPrime = i;
             }
         }
-        return new long[0]; // return an empty array if no such gap exists
+        return new long[0];
     }
 
     private boolean isPrime(long num) {
@@ -29,7 +29,6 @@ public class FiveImpl implements Five {
         return true;
     }
 
-    // Other methods
     @Override
     public int zeros(int n) {
         return 0;
