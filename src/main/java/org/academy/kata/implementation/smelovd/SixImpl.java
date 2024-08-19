@@ -1,5 +1,6 @@
 package org.academy.kata.implementation.smelovd;
 
+import org.academy.kata.Base;
 import org.academy.kata.Six;
 
 import java.math.BigInteger;
@@ -8,7 +9,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.DoubleStream;
 
-public class SixImpl implements Six {
+public class SixImpl extends Base implements Six {
     @Override
     public long findNb(long m) {
         final BigInteger expectedVolume = BigInteger.valueOf(m);
