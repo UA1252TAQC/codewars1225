@@ -1,6 +1,8 @@
 package org.academy.kata.implementation.AndriyVel05;
 import org.academy.kata.Base;
 import org.academy.kata.Six;
+import java.util.HashMap;
+import java.util.Map;
 
 public class SixImpl extends Base implements Six {
     @Override
@@ -124,21 +126,29 @@ public class SixImpl extends Base implements Six {
             return "";
         }
 
+        Map<String, Integer> categoryMap = new HashMap<>();
+        for (String category : lstOf1stLetter) {
+            categoryMap.put(category, 0);
+        }
+
+        for (String art : lstOfArt) {
+            String category = art.substring(0, 1);
+            if (categoryMap.containsKey(category)) {
+                int quantity = Integer.parseInt(art.split(" ")[1]);
+                categoryMap.put(category, categoryMap.get(category) + quantity);
+            }
+        }
+
         StringBuilder result = new StringBuilder();
         for (String category : lstOf1stLetter) {
-            int sum = 0;
-            for (String art : lstOfArt) {
-                if (art.startsWith(category)) {
-                    sum += Integer.parseInt(art.split(" ")[1]);
-                }
-            }
             if (result.length() > 0) {
                 result.append(" - ");
             }
-            result.append("(").append(category).append(" : ").append(sum).append(")");
+            result.append("(").append(category).append(" : ").append(categoryMap.get(category)).append(")");
         }
 
         return result.toString();
     }
 
 }
+
