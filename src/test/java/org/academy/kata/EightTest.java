@@ -1,9 +1,9 @@
 package org.academy.kata;
 
+import static org.testng.Assert.assertEquals;
+
 import org.academy.kata.dataprovider.EightDataProvider;
 import org.testng.annotations.Test;
-
-import static org.testng.Assert.*;
 
 public class EightTest extends EightDataProvider {
 
@@ -31,9 +31,9 @@ public class EightTest extends EightDataProvider {
     }
 
     @Test(dataProvider = "data-countPositivesSumNegatives")
-    public void testCountPositivesSumNegatives(Eight eight, Object input, Object expected) {
-        int[] actual = eight.countPositivesSumNegatives((int[]) input);
-        assertEquals(actual, (int[]) expected);
+    public void testCountPositivesSumNegatives(Eight eight, int[] input, int[] expected) {
+        int[] actual = eight.countPositivesSumNegatives(input);
+        assertEquals(actual, expected);
     }
 
     @Test(dataProvider = "data-stringToNumber")
