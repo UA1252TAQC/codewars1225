@@ -43,12 +43,12 @@ public class SixImpl implements Six {
 
         Map<String, Integer> categoryMap = new HashMap<>();
 
-        // Initialize the map with categories
+
         for (String category : lstOf1stLetter) {
             categoryMap.put(category, 0);
         }
 
-        // Sum up the quantities for each category
+
         for (String art : lstOfArt) {
             String category = art.substring(0, 1);
             if (categoryMap.containsKey(category)) {
@@ -57,7 +57,7 @@ public class SixImpl implements Six {
             }
         }
 
-        // Build the result string
+
         StringBuilder result = new StringBuilder();
         for (String category : lstOf1stLetter) {
             if (result.length() > 0) {
