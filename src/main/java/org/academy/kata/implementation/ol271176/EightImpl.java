@@ -3,6 +3,8 @@ package org.academy.kata.implementation.ol271176;
 import org.academy.kata.Base;
 import org.academy.kata.Eight;
 
+import java.math.BigInteger;
+
 public class EightImpl extends Base implements Eight {
     @Override
     public int liters(double time) {
@@ -78,12 +80,22 @@ public class EightImpl extends Base implements Eight {
 
     @Override
     public boolean am_i_wilson(double n) {
-        if (n < 2) return false;
-        long factorial = 1;
-        for (int i = 2; i <= n - 1; i++) {
-            factorial *= i;
+        if (n != (int) n || n < 2) return false;
+
+        int num = (int) n;
+
+        if (num <= 3) return false;
+        if (num % 2 == 0 || num % 3 == 0) return false;
+        for (int i = 5; i * i <= num; i += 6) {
+            if (num % i == 0 || num % (i + 2) == 0) return false;
         }
-        double result = (factorial + 1) / (n * n);
-        return (long) result == result;
+
+        BigInteger factorial = BigInteger.ONE;
+        for (int i = 2; i <= num - 1; i++) {
+            factorial = factorial.multiply(BigInteger.valueOf(i));
+        }
+
+        BigInteger numSquared = BigInteger.valueOf(num).multiply(BigInteger.valueOf(num));
+        return factorial.add(BigInteger.ONE).mod(numSquared).equals(BigInteger.ZERO);
     }
 }
