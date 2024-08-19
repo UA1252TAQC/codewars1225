@@ -105,6 +105,13 @@ public class ConsoleScannerTest {
 
     @Test
     public void testReadIntArray() {
+        String testData = "3\n1\n-2\n0\n";
+        int[] expected = new int[]{1, -2, 0};
+        System.setIn(new ByteArrayInputStream(testData.getBytes()));
+        InputStream inputStream = System.in;
+        ConsoleScanner consoleScanner = new ConsoleScanner(new Scanner(inputStream));
+        int[] actual = consoleScanner.readIntArray("test array");
+        assertEquals(actual, expected);
     }
 
     @Test
