@@ -53,6 +53,17 @@ public class ConsoleScannerTest {
     }
 
     @Test
+    public void testReadDoubleInvalidData() {
+        String testData = "invalid\n2.718\n";
+        double expected = 2.718;
+        System.setIn(new ByteArrayInputStream(testData.getBytes()));
+        InputStream inputStream = System.in;
+        ConsoleScanner consoleScanner = new ConsoleScanner(new Scanner(inputStream));
+        double actual = consoleScanner.readDouble("test double");
+        assertEquals(actual, expected);
+    }
+
+    @Test
     public void testReadBigIntegerValidData() {
         String testData = "12345678901234567890\n";
         BigInteger expected = new BigInteger("12345678901234567890");
