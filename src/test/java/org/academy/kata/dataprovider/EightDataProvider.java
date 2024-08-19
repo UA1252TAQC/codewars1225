@@ -91,4 +91,15 @@ public class EightDataProvider extends AbstractDataProvider {
         
         return combineData(inputs, EIGHT);
     }
+
+    @DataProvider(name = "data-getVolumeOfCuboid")
+    public static Iterator<Object[]> dpGetVolumeOfCuboid(){
+        List<Object[]> inputs = new ArrayList<>();
+        inputs.add(new Object[]{2.0, 3.0, 4.0, 24.0});
+        inputs.add(new Object[]{1.5, 2.5, 3.5, 13.125});
+        inputs.add(new Object[]{0.0, 3.0, 4.0, 0.0});
+        inputs.add(new Object[]{5.0, 5.0, 5.0, 125.0});
+
+        return combineData(inputs, EIGHT);
+    }
 }
