@@ -76,6 +76,6 @@ public class EightImpl implements Eight {
 
     @Override
     public boolean am_i_wilson(double n) {
-        return false;
+        return false; // solved
     }
 }
