@@ -34,11 +34,8 @@ public class SixTest extends SixDataProvider {
     }
 
     @Test(dataProvider = "data-stockSummary")
-    public void testStockSummary(Six six, String [] L, String [] M, String expected) {
-    String actual = six.stockSummary (L, M);
-    assertEquals(actual, expected);
+    public void testStockSummary(Six six, String [] l, String [] m, String expected) {
+        String actual = six.stockSummary(l, m);
+        assertEquals(actual, expected);
     }
-
-
-
 }
