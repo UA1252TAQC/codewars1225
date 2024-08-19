@@ -4,6 +4,7 @@ import static org.testng.Assert.assertEquals;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
+import java.math.BigInteger;
 import java.util.Scanner;
 
 import org.testng.annotations.Test;
@@ -33,7 +34,25 @@ public class ConsoleScannerTest {
     }
 
     @Test
-    public void testReadBigInteger() {
+    public void testReadBigIntegerValidData() {
+        String testData = "12345678901234567890\n";
+        BigInteger expected = new BigInteger("12345678901234567890");
+        System.setIn(new ByteArrayInputStream(testData.getBytes()));
+        InputStream inputStream = System.in;
+        ConsoleScanner consoleScanner = new ConsoleScanner(new Scanner(inputStream));
+        BigInteger actual = consoleScanner.readBigInteger("test BigInteger");
+        assertEquals(actual, expected);
+    }
+
+    @Test
+    public void testReadBigIntegerInvalidData() {
+        String testData = "invalid\nsecondInvalid\n12345678901234567890\n";
+        BigInteger expected = new BigInteger("12345678901234567890");
+        System.setIn(new ByteArrayInputStream(testData.getBytes()));
+        InputStream inputStream = System.in;
+        ConsoleScanner consoleScanner = new ConsoleScanner(new Scanner(inputStream));
+        BigInteger actual = consoleScanner.readBigInteger("test BigInteger");
+        assertEquals(actual, expected);
     }
 
     @Test
