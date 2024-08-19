@@ -16,9 +16,7 @@ public class SevenDataProvider extends AbstractDataProvider {
     inputs.add(new Object[]{ new double[]{14, 30, 5, 7, 9, 11, 15}, 92, 645L});
 
     return combineData(inputs, SEVEN);
-}
-
-public class SevenDataProvider extends AbstractDataProvider {
+    }
 
     @DataProvider(name = "data-nth-series")
     public static Iterator<Object[]> seriesSum() {
