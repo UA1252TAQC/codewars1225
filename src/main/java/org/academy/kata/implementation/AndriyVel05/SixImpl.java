@@ -72,8 +72,8 @@ public class SixImpl implements Six {
 
         }
 
-            @Override
-    public String stockSummary(String[] lstOfArt, String[] lstOf1stLetter) {
-        return "";
+        @Override
+        public String stockSummary(String[] lstOfArt, String[] lstOf1stLetter) {
+            return "";
+        }
     }
-}
