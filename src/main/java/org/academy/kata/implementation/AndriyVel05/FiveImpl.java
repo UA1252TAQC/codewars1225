@@ -17,7 +17,7 @@ public class FiveImpl implements Five {
     public BigInteger perimeter(BigInteger n) {
         BigInteger a = BigInteger.ONE;
         BigInteger b = BigInteger.ONE;
-        BigInteger sum = BigInteger.valueOf(2); // Sum of first two Fibonacci numbers (1 + 1)
+        BigInteger sum = BigInteger.valueOf(2);
 
         for (BigInteger i = BigInteger.valueOf(2); i.compareTo(n) <= 0; i = i.add(BigInteger.ONE)) {
             BigInteger next = a.add(b);
@@ -26,7 +26,7 @@ public class FiveImpl implements Five {
             b = next;
         }
 
-        return sum.multiply(BigInteger.valueOf(4)); // 4 times the sum of Fibonacci numbers
+        return sum.multiply(BigInteger.valueOf(4));
     }
 
 
