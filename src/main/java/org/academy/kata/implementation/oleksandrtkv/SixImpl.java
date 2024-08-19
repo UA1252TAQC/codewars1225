@@ -1,5 +1,6 @@
 package org.academy.kata.implementation.oleksandrtkv;
 
+import org.academy.kata.Base;
 import org.academy.kata.Six;
 
 import java.text.DecimalFormat;
@@ -9,7 +10,7 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class SixImpl implements Six {
+public class SixImpl extends Base implements Six {
     @Override
     public long findNb(long m) {
         long n = 1;

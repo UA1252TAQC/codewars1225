@@ -1,10 +1,11 @@
 package org.academy.kata.implementation.AndriyVel05;
 
+import org.academy.kata.Base;
 import org.academy.kata.Five;
 
 import java.math.BigInteger;
 
-public class FiveImpl implements Five {
+public class FiveImpl extends Base implements Five {
     @Override
     public long[] gap(int g, long m, long n) {
         return new long[0];
@@ -12,7 +13,12 @@ public class FiveImpl implements Five {
 
     @Override
     public int zeros(int n) {
-        return 0;
+        int count = 0;
+        while (n > 0) {
+            n /= 5;
+            count += n;
+        }
+        return count;
     }
 
     @Override

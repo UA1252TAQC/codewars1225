@@ -1,11 +1,12 @@
 package org.academy.kata.implementation.Shr1mpa;
 
+import org.academy.kata.Base;
 import org.academy.kata.Eight;
 
 import java.math.BigInteger;
 import java.util.Arrays;
 
-public class EightImpl implements Eight {
+public class EightImpl extends Base implements Eight {
     @Override
     public int liters(double time) {
         return (int) Math.floor(time * 0.5);

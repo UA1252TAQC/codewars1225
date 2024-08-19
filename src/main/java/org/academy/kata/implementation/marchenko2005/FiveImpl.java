@@ -1,11 +1,12 @@
 package org.academy.kata.implementation.marchenko2005;
 
+import org.academy.kata.Base;
 import org.academy.kata.Five;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
 
-public class FiveImpl implements Five {
+public class FiveImpl extends Base implements Five {
     public static boolean isPrime(double n) {
         if (n <= 1) return false;
         if (n <= 3) return true;
