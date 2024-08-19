@@ -17,8 +17,10 @@ public class SixTest extends SixDataProvider {
     public void testBalance() {
     }
 
-    @Test
-    public void testF() {
+    @Test(dataProvider = "data-f")
+    public void testF(Six six, double input, double expected) {
+        double actual = six.f(input);
+        assertEquals(actual, expected, 1e-9);
     }
 
     @Test

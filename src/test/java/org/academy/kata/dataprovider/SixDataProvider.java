@@ -34,5 +34,15 @@ public class SixDataProvider extends AbstractDataProvider {
 
     return combineData(inputs, SIX);
   }
+
+  @DataProvider(name = "data-f")
+  public static Iterator<Object[]> dpF() {
+    List<Object[]> inputs = new ArrayList<>();
+    inputs.add(new Object[]{1e-15, 4.99999999999999875e-16});
+    inputs.add(new Object[]{1e-10, 4.99999999975000000e-11});
+    inputs.add(new Object[]{1e-5, 4.99999997499999875e-6});
+
+    return combineData(inputs, SIX);
+  }
 }
 
