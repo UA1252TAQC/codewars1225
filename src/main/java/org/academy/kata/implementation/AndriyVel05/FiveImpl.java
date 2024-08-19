@@ -30,7 +30,7 @@ public class FiveImpl implements Five {
         String numStr = String.valueOf(n);
         int len = numStr.length();
         long smallestNum = n;
-        int[] result = {0, 0, 0}; // {smallestNum, i, j}
+        int[] result = {0, 0, 0};
 
         for (int i = 0; i < len; i++) {
             for (int j = 0; j < len; j++) {
