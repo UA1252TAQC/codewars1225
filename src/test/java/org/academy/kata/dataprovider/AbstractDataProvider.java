@@ -59,7 +59,7 @@ public class AbstractDataProvider {
             //new org.academy.kata.implementation.AndriyVel05.EightImpl(),
             //new org.academy.kata.implementation.marchenko2005.EightImpl(),
             //new org.academy.kata.implementation.Mihailll333.EightImpl(),
-            //new org.academy.kata.implementation.ol271176.EightImpl(),
+            new org.academy.kata.implementation.ol271176.EightImpl(),
             new org.academy.kata.implementation.oleksandrtkv.EightImpl(),
             //new org.academy.kata.implementation.Oyne.EightImpl(),
             //new org.academy.kata.implementation.RocketMan2k21.EightImpl(),
