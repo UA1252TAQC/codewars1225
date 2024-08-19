@@ -1,6 +1,5 @@
 package org.academy.kata;
 
-import org.academy.kata.dataprovider.EightDataProvider;
 import org.academy.kata.dataprovider.SevenDataProvider;
 import org.testng.annotations.Test;
 
