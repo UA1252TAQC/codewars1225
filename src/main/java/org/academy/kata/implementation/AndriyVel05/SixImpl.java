@@ -41,7 +41,6 @@ public class SixImpl implements Six {
                 int team1ScoreIndex = parts.length - 2;
                 int team2ScoreIndex = parts.length - 1;
 
-                // Validate if scores are integers
                 try {
                     int team1Score = Integer.parseInt(parts[team1ScoreIndex]);
                     int team2Score = Integer.parseInt(parts[team2ScoreIndex]);
