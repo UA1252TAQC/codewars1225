@@ -17,8 +17,4 @@ public class SevenDataProvider extends AbstractDataProvider {
 
         return combineData(inputs, SEVEN);
     }
-
-    public static Iterator<Object[]> seriesSum() {
-    }
-
 }
