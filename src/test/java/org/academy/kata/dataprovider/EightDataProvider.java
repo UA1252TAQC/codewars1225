@@ -103,5 +103,15 @@ public class EightDataProvider extends AbstractDataProvider {
         return combineData(inputs, EIGHT);
     }
 
+    @DataProvider(name = "data-MpgToKPM")
+    public static Iterator<Object[]> dpmpgToKPM(){
+        List<Object[]> inputs = new ArrayList<>();
+        inputs.add(new Object[]{10f, 3.54f});
+        inputs.add(new Object[]{20f, 7.08f});
+        inputs.add(new Object[]{30f, 10.62f});
+        inputs.add(new Object[]{50f, 17.7f});
+        inputs.add(new Object[]{70f, 24.78f});
 
+        return combineData(inputs, EIGHT);
+    }
 }
