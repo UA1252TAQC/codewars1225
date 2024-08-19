@@ -13,8 +13,12 @@ public class SixTest extends SixDataProvider {
         assertEquals(actual, expected);
     }
 
-    @Test
-    public void testBalance() {
+    @Test(dataProvider = "data-balance")
+    public void testBalance(Six six, String book, String expected) {
+        String actual = six.balance(book);
+        System.out.println("Expected: " + expected);
+        System.out.println("Actual: " + actual);
+        assertEquals(actual, expected);
     }
 
     @Test(dataProvider = "data-f")
