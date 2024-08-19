@@ -73,6 +73,9 @@ public class ConsoleScanner {
 
     public int[] readIntArray(String param) {
         int size = readInt("size for array " + param);
+        while (size <= 0) {
+            size = readInt("size for array > 0 " + param);
+        }
         int[] array = new int[size];
         System.out.println("Enter elements int[]:");
         for (int i = 0; i < size; i++) {
