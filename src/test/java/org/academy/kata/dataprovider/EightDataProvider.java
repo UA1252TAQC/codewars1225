@@ -114,4 +114,22 @@ public class EightDataProvider extends AbstractDataProvider {
 
         return combineData(inputs, EIGHT);
     }
+
+    @DataProvider(name = "data-divisibleBy")
+    public static Iterator<Object[]> findNumbersWhichAreDivisibleByGivenNumber() {
+        List<Object[]> inputs = new ArrayList<>();
+
+        inputs.add(new Object[] { new int[]{2, 4, 6, 8, 10}, 2, new int[]{2, 4, 6, 8, 10}});            // All numbers are divisible by the divisor.
+        inputs.add(new Object[] { new int[]{3, 5, 7, 10, 15}, 5, new int[]{5, 10, 15}});                // Some numbers are divisible by the divisor, and some are not.
+        inputs.add(new Object[] { new int[]{1, 2, 3}, 4, new int[]{}});                                 // None of the numbers is divisible by the divisor.
+        inputs.add(new Object[] { new int[]{}, 3, new int[]{}});                                        // Checks if the input array is empty.
+        inputs.add(new Object[] { new int[]{10}, 5, new int[]{10}});                                    // The input array has only one element.
+        inputs.add(new Object[] { new int[]{1, 2, 3}, 10, new int[]{}});                                // The divisor is greater than all the numbers
+        inputs.add(new Object[] { new int[]{3, 5, 7}, 1, new int[]{3, 5, 7} });                         // The divisor is equal to 1
+        inputs.add(new Object[] { new int[]{-2, -4, -6, -8, -10}, 2, new int[]{-2, -4, -6, -8, -10}});  // Negative numbers in an array with a positive divisor
+        inputs.add(new Object[] { new int[]{2, 4, 6, 8, 10}, -2, new int[]{2, 4, 6, 8, 10}});           // Positive numbers with a negative divisor
+        inputs.add(new Object[] { new int[]{-2, -4, -6, -8, -10}, -2, new int[]{-2, -4, -6, -8, -10}}); // Negative numbers with a negative divisor
+
+        return combineData(inputs, EIGHT);
+    }
 }
