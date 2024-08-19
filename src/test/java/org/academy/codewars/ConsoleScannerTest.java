@@ -1,12 +1,12 @@
 package org.academy.codewars;
 
-import org.testng.annotations.Test;
+import static org.testng.Assert.assertEquals;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.util.Scanner;
 
-import static org.testng.Assert.*;
+import org.testng.annotations.Test;
 
 public class ConsoleScannerTest {
 
@@ -41,7 +41,25 @@ public class ConsoleScannerTest {
     }
 
     @Test
-    public void testReadDoubleArray() {
+    public void testReadDoubleArrayValidData() {
+        String testData = "3\n1.1\n2.2\n3.3\n";
+        double[] expected = new double[]{1.1, 2.2, 3.3};
+        System.setIn(new ByteArrayInputStream(testData.getBytes()));
+        InputStream inputStream = System.in;
+        ConsoleScanner consoleScanner = new ConsoleScanner(new Scanner(inputStream));
+        double[] actual = consoleScanner.readDoubleArray("test array");
+        assertEquals(actual, expected);
+    }
+
+    @Test
+    public void testReadDoubleArrayInvalidData() {
+        String testData = "invalid\n-3\n3\n1.1\n2.2\n3.3\n";
+        double[] expected = new double[]{1.1, 2.2, 3.3};
+        System.setIn(new ByteArrayInputStream(testData.getBytes()));
+        InputStream inputStream = System.in;
+        ConsoleScanner consoleScanner = new ConsoleScanner(new Scanner(inputStream));
+        double[] actual = consoleScanner.readDoubleArray("test array");
+        assertEquals(actual, expected);
     }
 
     @Test
@@ -52,6 +70,8 @@ public class ConsoleScannerTest {
     public void testReadStringArrayValidData() {
         String testData =
                 """
+                        t
+                        -3
                         3
                         First arg
                         Second arg
@@ -69,13 +89,13 @@ public class ConsoleScannerTest {
     public void testReadStringArrayInvalidData() {
         String testData =
                 """
-                        test
-                        -3
-                        3
-                        First arg\s
-                        Second arg
-                        Third arg
-                       \s""";
+                         test
+                         -3
+                         3
+                         First arg\s
+                         Second arg
+                         Third arg
+                        \s""";
         String[] expected = new String[]{"First arg", "Second arg", "Third arg"};
         System.setIn(new ByteArrayInputStream(testData.getBytes()));
         InputStream inputStream = System.in;

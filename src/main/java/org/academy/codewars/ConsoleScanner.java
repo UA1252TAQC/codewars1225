@@ -83,7 +83,10 @@ public class ConsoleScanner {
     }
 
     public double[] readDoubleArray(String param) {
-        int size = readInt("size for array " + param);
+        int size = readInt("size for array > 0 " + param);
+        while (size <= 0) {
+            size = readInt("size for array > 0 " + param);
+        }
         double[] array = new double[size];
         System.out.println("Enter elements double[]:");
         for (int i = 0; i < size; i++) {
