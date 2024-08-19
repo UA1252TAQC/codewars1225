@@ -1,8 +1,9 @@
 package org.academy.kata.implementation.RocketMan2k21;
 
+import org.academy.kata.Base;
 import org.academy.kata.Eight;
 
-public class EightImpl implements Eight {
+public class EightImpl extends Base implements Eight {
     @Override
     public int liters(double time) {
         return 0;

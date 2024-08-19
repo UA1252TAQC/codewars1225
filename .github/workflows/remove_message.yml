@@ -1,0 +1,29 @@
+name: Remove Telegram Message on Pull Request Merge
+
+on:
+  pull_request:
+    types: [closed]
+
+jobs:
+  remove_message:
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.merged == true
+
+    steps:
+    - name: Retrieve message ID and delete it
+      env:
+        TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+        TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        REPO_ACCESS_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
+      run: |
+        # Clone the repository containing message IDs
+        git clone https://x-access-token:${{ secrets.REPO_ACCESS_TOKEN }}@github.com/moqs2/messages.git repo
+        cd repo
+
+        # Retrieve the message ID from the JSON file
+        MESSAGE_ID=$(jq -r --arg pr_id "${{ github.event.pull_request.number }}" '.[$pr_id]' messages.json)
+
+        # Delete the message from Telegram
+        curl -X POST "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/deleteMessage" \
+          -d "chat_id=${TELEGRAM_CHAT_ID}" \
+          -d "message_id=${MESSAGE_ID}"

@@ -1,10 +1,11 @@
 package org.academy.kata.implementation.smelovd;
 
+import org.academy.kata.Base;
 import org.academy.kata.Seven;
 
 import java.util.Arrays;
 
-public class SevenImpl implements Seven {
+public class SevenImpl extends Base implements Seven {
     @Override
     public long newAvg(double[] arr, double navg) {
         final long requiredValue = (long) Math.ceil(((navg * (arr.length + 1)) - Arrays.stream(arr).sum()));

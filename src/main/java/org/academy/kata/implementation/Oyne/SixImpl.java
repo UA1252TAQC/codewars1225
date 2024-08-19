@@ -1,8 +1,9 @@
 package org.academy.kata.implementation.Oyne;
 
+import org.academy.kata.Base;
 import org.academy.kata.Six;
 
-public class SixImpl implements Six {
+public class SixImpl extends Base implements Six {
     @Override
     public long findNb(long m) {
         long i = 1;
