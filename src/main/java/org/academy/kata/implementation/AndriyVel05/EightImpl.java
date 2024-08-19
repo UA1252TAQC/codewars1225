@@ -8,7 +8,7 @@ public class EightImpl implements Eight {
     @Override
     public int liters(double time) {
         return (int) Math.floor(time * 0.5);
-    }
+    } // solved
 
     @Override
     public double getVolumeOfCuboid(double length, double width, double height) {
