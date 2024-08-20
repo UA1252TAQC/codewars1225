@@ -49,7 +49,7 @@ public class SixImpl extends Base implements Six {
             totalExpense += checkAmount;
             count++;
 
-            result.append(String.format("%d %s %.2f Balance %.2f\\r\\n", checkNumber, category, checkAmount, balance));
+            result.append(String.format("%03d %s %.2f Balance %.2f\\r\\n", checkNumber, category, checkAmount, balance));
         }
         result.append(String.format("Total expense  %.2f\\r\\n", totalExpense));
         result.append(String.format("Average expense  %.2f", totalExpense / count));
@@ -138,7 +138,7 @@ public class SixImpl extends Base implements Six {
         for (String line : lines) {
             Matcher errorMatcher = errorPattern.matcher(line);
 
-            if (errorMatcher.find()) return "Error(float number):the concerned string";
+            if (errorMatcher.find()) return "Error(float number):" + line;
             if (!line.contains(toFind)) continue;
 
             Matcher correctMatcher = correctPattern.matcher(line);
