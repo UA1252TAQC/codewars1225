@@ -31,6 +31,14 @@ public class SixDataProvider extends AbstractDataProvider {
     inputs.add(new Object[]{new String[]{"ABAR 200", "CDXE 500"}, new String[]{"X", "Y"}, "(X : 0) - (Y : 0)"});
     inputs.add(new Object[]{new String[]{"ABAR 200"}, new String[]{"B"}, "(B : 0)"});
     inputs.add(new Object[]{new String[]{"ABAR 200"}, new String[]{"A"}, "(A : 200)"});
+    inputs.add(new Object[]{new String[]{}, new String[]{}, ""});
+    inputs.add(new Object[]{new String[]{"ABAR 200", "CDXE 500"}, new String[]{}, ""});
+    inputs.add(new Object[]{new String[]{"ABAR 200", "ABAR 300", "CDXE 500"}, new String[]{"A", "C"}, "(A : 500) - (C : 500)"});
+    inputs.add(new Object[]{new String[]{"AAAAAAAAAAAAAA 200"}, new String[]{"A"}, "(A : 200)"});
+    inputs.add(new Object[]{null, null, ""});
+    inputs.add(new Object[]{new String[]{"ABAR 200", "CDXE 500"}, null, ""});
+    inputs.add(new Object[]{null, new String[]{"A", "B"}, ""});
+
 
     return combineData(inputs, SIX);
   }

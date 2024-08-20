@@ -180,7 +180,7 @@ public class SixImpl extends Base implements Six {
 
     @Override
     public String stockSummary(String[] lstOfArt, String[] lstOf1stLetter) {
-        if (lstOfArt.length == 0 || lstOf1stLetter.length == 0) {
+        if (lstOfArt == null || lstOfArt.length == 0 || lstOf1stLetter == null || lstOf1stLetter.length == 0) {
             return "";
         }
 

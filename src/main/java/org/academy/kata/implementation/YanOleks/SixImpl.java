@@ -158,7 +158,9 @@ public class SixImpl extends Base implements Six {
 
     @Override
     public String stockSummary(String[] lstOfArt, String[] lstOf1stLetter) {
-        if (lstOfArt.length == 0 || lstOf1stLetter.length == 0) return "";
+        if (lstOfArt == null || lstOfArt.length == 0 || lstOf1stLetter == null || lstOf1stLetter.length == 0) {
+            return "";
+        }
         HashMap<Character, Integer> map = getCharacterIntegerHashMap(lstOfArt, lstOf1stLetter);
         StringBuilder sb = new StringBuilder();
         for (Map.Entry<Character, Integer> set : map.entrySet()) {
