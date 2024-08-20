@@ -45,7 +45,7 @@ public class SixDataProvider extends AbstractDataProvider {
     return combineData(inputs, SIX);
   }
 
-  @DataProvider(name = "data-balance")
+   @DataProvider(name = "data-balance")
   public static Iterator<Object[]> dpBalance() {
     List<Object[]> inputs = new ArrayList<>();
     inputs.add(new Object[]{
