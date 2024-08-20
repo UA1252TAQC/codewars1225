@@ -1,8 +1,9 @@
 package org.academy.kata.implementation.YanOleks;
 
+import org.academy.kata.Base;
 import org.academy.kata.Seven;
 
-public class SevenImpl implements Seven {
+public class SevenImpl extends Base implements Seven {
     @Override
     public long newAvg(double[] arr, double navg) {
         if (arr.length == 0) return (long) navg;

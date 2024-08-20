@@ -5,7 +5,7 @@ This project is a console application written in Java that allows running specif
 
 ## Architecture
 
-![Architecture Diagram](src/main/java/org/academy/codewars/images/architecture.png)
+![Architecture Diagram](docs/images/architecture.png)
 
 ### Enums
 

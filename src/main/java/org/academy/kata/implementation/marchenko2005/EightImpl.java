@@ -1,12 +1,13 @@
 package org.academy.kata.implementation.marchenko2005;
 
+import org.academy.kata.Base;
 import org.academy.kata.Eight;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
 
-public class EightImpl implements Eight {
+public class EightImpl extends Base implements Eight {
     @Override
     public int liters(double time) {
         double res = time / 2;

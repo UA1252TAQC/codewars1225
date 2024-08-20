@@ -1,12 +1,13 @@
 package org.academy.kata.implementation.Mihailll333;
 
+import org.academy.kata.Base;
 import org.academy.kata.Five;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FiveImpl implements Five {
+public class FiveImpl extends Base implements Five {
     @Override
     public long[] gap(int g, long m, long n) {
         if (g < 2 || m < 2 || n < m) {
