@@ -4,6 +4,7 @@ import org.academy.kata.Five;
 import java.math.BigInteger;
 
 public class FiveImpl extends Base implements Five {
+
     @Override
     public long[] gap(int g, long m, long n) {
         long prevPrime = 0;
@@ -11,13 +12,15 @@ public class FiveImpl extends Base implements Five {
         for (long i = m; i <= n; i++) {
             if (isPrime(i)) {
                 if (prevPrime != 0 && i - prevPrime == g) {
-                    return new long[] {prevPrime, i};
+                    return new long[]{prevPrime, i};
                 }
                 prevPrime = i;
             }
         }
-        return new long[0];
+
+        return null;
     }
+
 
     private boolean isPrime(long num) {
         if (num <= 1) return false;
@@ -58,8 +61,15 @@ public class FiveImpl extends Base implements Five {
 
     @Override
     public double solve(double m) {
-        return (Math.sqrt(1 + 2 * m) - 1) / m;
+        double numeratorPart1 = 2 * m + 1;
+        double numeratorPart2 = Math.sqrt(4 * m + 1);
+        double numerator = numeratorPart1 - numeratorPart2;
+        double denominator = 2 * m;
+
+        return numerator / denominator;
     }
+
+
 
     @Override
     public long[] smallest(long n) {

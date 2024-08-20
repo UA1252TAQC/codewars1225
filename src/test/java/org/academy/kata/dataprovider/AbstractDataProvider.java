@@ -14,7 +14,7 @@ import java.util.stream.Stream;
 
 public class AbstractDataProvider {
     protected static final List<Five> FIVE = List.of(
-            //new org.academy.kata.implementation.AndriyVel05.FiveImpl(),
+            new org.academy.kata.implementation.AndriyVel05.FiveImpl(),
             new org.academy.kata.implementation.marchenko2005.FiveImpl(),
             //new org.academy.kata.implementation.Mihailll333.FiveImpl(),
             new org.academy.kata.implementation.ol271176.FiveImpl(),
@@ -28,7 +28,7 @@ public class AbstractDataProvider {
             new org.academy.kata.implementation.YanOleks.FiveImpl()
     );
     protected static final List<Six> SIX = List.of(
-            //new org.academy.kata.implementation.AndriyVel05.SixImpl(),
+            new org.academy.kata.implementation.AndriyVel05.SixImpl(),
             new org.academy.kata.implementation.marchenko2005.SixImpl(),
             //new org.academy.kata.implementation.Mihailll333.SixImpl(),
             //new org.academy.kata.implementation.ol271176.SixImpl(),
