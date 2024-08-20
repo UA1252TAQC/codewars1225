@@ -1,12 +1,10 @@
 package org.academy.kata;
-
 import org.academy.kata.dataprovider.SevenDataProvider;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-
 import java.util.Locale;
-
 import static org.testng.Assert.*;
+
 
 public class SevenTest extends SevenDataProvider {
     @BeforeClass()
@@ -20,7 +18,10 @@ public class SevenTest extends SevenDataProvider {
         assertEquals(actual, expected);
     }
 
-    @Test
-    public void testSeriesSum() {
+    @Test(dataProvider = "data-SeriesSum")
+    public void testSeriesSum(Seven seven, int n, String expected) {
+        String actual = seven.seriesSum(n);
+        assertEquals(actual, expected);
     }
+
 }
