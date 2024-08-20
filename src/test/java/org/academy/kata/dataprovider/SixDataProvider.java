@@ -45,7 +45,7 @@ public class SixDataProvider extends AbstractDataProvider {
     return combineData(inputs, SIX);
   }
 
-  @DataProvider(name = "data-balance")
+   @DataProvider(name = "data-balance")
   public static Iterator<Object[]> dpBalance() {
     List<Object[]> inputs = new ArrayList<>();
     inputs.add(new Object[]{
@@ -60,7 +60,18 @@ public class SixDataProvider extends AbstractDataProvider {
             "1242.00\n122 Hardware;! 13.60\n127 Hairdresser 13.10\n123 Fruits 93.50?;\n132 Stamps;!{ 13.60?;\n160 Pen;! 17.60?;\n002 Car;! 34.00",
             "Original Balance: 1242.00\\r\\n122 Hardware 13.60 Balance 1228.40\\r\\n127 Hairdresser 13.10 Balance 1215.30\\r\\n123 Fruits 93.50 Balance 1121.80\\r\\n132 Stamps 13.60 Balance 1108.20\\r\\n160 Pen 17.60 Balance 1090.60\\r\\n002 Car 34.00 Balance 1056.60\\r\\nTotal expense  185.40\\r\\nAverage expense  30.90"
     });
-
+    inputs.add(new Object[]{
+            "0.00\n100 Food 10.00\n101 Drinks 5.00",
+            "Original Balance: 0.00\\r\\n100 Food 10.00 Balance -10.00\\r\\n101 Drinks 5.00 Balance -15.00\\r\\nTotal expense  15.00\\r\\nAverage expense  7.50"
+    });
+    inputs.add(new Object[]{
+            "10000.00\n200 Yacht 9000.00\n201 Car 500.00\n202 Watch 1500.00",
+            "Original Balance: 10000.00\\r\\n200 Yacht 9000.00 Balance 1000.00\\r\\n201 Car 500.00 Balance 500.00\\r\\n202 Watch 1500.00 Balance -1000.00\\r\\nTotal expense  11000.00\\r\\nAverage expense  3666.67"
+    });
+    inputs.add(new Object[]{
+            "800.00\n102 Snack 2.00\n103 Juice 1.50",
+            "Original Balance: 800.00\\r\\n102 Snack 2.00 Balance 798.00\\r\\n103 Juice 1.50 Balance 796.50\\r\\nTotal expense  3.50\\r\\nAverage expense  1.75"
+    });
     return combineData(inputs, SIX);
   }
   
