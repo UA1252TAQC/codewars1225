@@ -31,7 +31,7 @@ public class AbstractDataProvider {
             //new org.academy.kata.implementation.AndriyVel05.SixImpl(),
             new org.academy.kata.implementation.marchenko2005.SixImpl(),
             //new org.academy.kata.implementation.Mihailll333.SixImpl(),
-            //new org.academy.kata.implementation.ol271176.SixImpl(),
+            new org.academy.kata.implementation.ol271176.SixImpl(),
             new org.academy.kata.implementation.oleksandrtkv.SixImpl(),
             //new org.academy.kata.implementation.Oyne.SixImpl(),
             //new org.academy.kata.implementation.RocketMan2k21.SixImplSixImpl(),
