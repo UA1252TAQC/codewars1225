@@ -5,6 +5,7 @@ import org.academy.kata.Six;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 public class SixImpl extends Base implements Six {
     @Override
@@ -66,38 +67,42 @@ public class SixImpl extends Base implements Six {
     @Override
     public double mean(String town, String strng) {
         double[] rawData = getRawData(town, strng);
-        if (rawData.length < 12) return -1;
+        if (rawData.length == 0) return -1;
         double sum = 0;
-        for (double number : rawData) sum += number;
+        for (double number : rawData) {
+            sum += number;
+        }
         return sum / rawData.length;
     }
 
     @Override
     public double variance(String town, String strng) {
         double[] rawData = getRawData(town, strng);
-        if (rawData.length < 12) return -1;
+        if (rawData.length == 0) return -1;
         double avg = mean(town, strng);
         double sum = 0;
-        for (double number : rawData) sum += (number - avg) * (number - avg);
+        for (double number : rawData) {
+            sum += (number - avg) * (number - avg);
+        }
         return sum / rawData.length;
     }
 
     private static double[] getRawData(String town, String data) {
-        System.out.println(town);
-        System.out.println(data);
-        int numberOfMonths = 12;
         int beginIndex = data.indexOf(town + ":");
         if (beginIndex == -1) return new double[0];
         int endIndex = data.indexOf("\n", beginIndex);
         if (endIndex == -1) endIndex = data.length();
+
         String townData = data.substring(beginIndex, endIndex);
         String[] numbers = townData.split("[^\\d.]+");
-        double[] rawData = new double[numberOfMonths];
-        for (int i = 1; i <= numberOfMonths; i++) {
+
+        double[] rawData = new double[numbers.length - 1];
+        for (int i = 1; i < numbers.length; i++) {
             rawData[i - 1] = Double.parseDouble(numbers[i]);
         }
         return rawData;
     }
+
 
     private static String[] getResults(String team, String sheet) {
         String[] data = sheet.split(",");
@@ -156,7 +161,7 @@ public class SixImpl extends Base implements Six {
         if (lstOfArt.length == 0 || lstOf1stLetter.length == 0) return "";
         HashMap<Character, Integer> map = getCharacterIntegerHashMap(lstOfArt, lstOf1stLetter);
         StringBuilder sb = new StringBuilder();
-        for (HashMap.Entry<Character, Integer> set : map.entrySet()) {
+        for (Map.Entry<Character, Integer> set : map.entrySet()) {
             sb.append(String.format("(%c : %d) - ", set.getKey(), set.getValue()));
         }
         sb.delete(sb.length() - 3, sb.length());
