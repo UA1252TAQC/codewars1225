@@ -186,6 +186,9 @@ public class SixImpl extends Base implements Six {
 
     @Override
     public String stockSummary(String[] lstOfArt, String[] lstOf1stLetter) {
+        if (lstOfArt == null || lstOfArt.length == 0 || lstOf1stLetter == null || lstOf1stLetter.length == 0) {
+            return "";
+        }
         Map<Character, Integer> mapOfBooks = new LinkedHashMap<>();
         for (String letter : lstOf1stLetter) mapOfBooks.put(letter.charAt(0), 0);
 
