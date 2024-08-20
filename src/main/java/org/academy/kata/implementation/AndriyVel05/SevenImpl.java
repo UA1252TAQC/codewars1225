@@ -27,7 +27,7 @@ public class SevenImpl extends Base implements Seven {
         }
         double sum = 0.0;
         for (int i = 0; i < n; i++) {
-            sum += 1.0 / (3 * (3 * i + 1));
+            sum += 1.0 / (3 * i + 1); // Виправлений розрахунок
         }
         return String.format("%.2f", sum);
     }
