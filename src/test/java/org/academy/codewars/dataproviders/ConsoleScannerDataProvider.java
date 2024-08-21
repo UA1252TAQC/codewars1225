@@ -23,4 +23,13 @@ public class ConsoleScannerDataProvider {
 
         return inputs.iterator();
     }
+
+    @DataProvider(name = "dp-testReadInt")
+    public Object[][] dpTestReadIntValues() {
+        return new Object[][]{
+                {"25\n", 25},
+                {"invalid\n25\n", 25},
+        };
+    }
+
 }

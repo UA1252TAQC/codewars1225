@@ -1,9 +1,7 @@
 package org.academy.codewars;
-
 import org.academy.codewars.dataproviders.ConsoleScannerDataProvider;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
@@ -20,16 +18,15 @@ public class ConsoleScannerTest extends ConsoleScannerDataProvider {
         Locale.setDefault(Locale.US);
     }
 
-    @Test
-    public void testReadInt() {
-        String testData = "25\n";
-        int expected = 25;
-        System.setIn(new ByteArrayInputStream(testData.getBytes()));
+    @Test(dataProvider = "dp-testReadInt")
+    public void testReadInt(String input, int expected) {
+        System.setIn(new ByteArrayInputStream(input.getBytes()));
         InputStream inputStream = System.in;
         ConsoleScanner consoleScanner = new ConsoleScanner(new Scanner(inputStream));
         int actual = consoleScanner.readInt("test int");
         assertEquals(actual, expected);
     }
+
 
     @Test
     public void testReadIntInvalidData() {
@@ -200,4 +197,6 @@ public class ConsoleScannerTest extends ConsoleScannerDataProvider {
         assertEquals(actualValue, expectedValue);
         assertEquals(actualOutputStream.toString(), expectedOutput);
     }
+
+
 }
