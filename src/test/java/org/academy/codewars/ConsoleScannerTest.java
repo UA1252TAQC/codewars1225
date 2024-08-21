@@ -43,15 +43,20 @@ public class ConsoleScannerTest extends ConsoleScannerDataProvider {
         assertEquals(actual, expected);
     }
 
-    @Test
-    public void testReadFloat() {
-        String testData = "23.4\n";
-        float expected = 23.4f;
-        System.setIn(new ByteArrayInputStream(testData.getBytes()));
-        InputStream inputStream = System.in;
-        ConsoleScanner consoleScanner = new ConsoleScanner(new Scanner(inputStream));
-        float actual = consoleScanner.readFloat("test float");
-        assertEquals(actual, expected);
+    @Test(dataProvider = "dp-testReadFloat")
+    public void testReadFloat(String input, Float expectedValue, String expectedOutput, String param) {
+        System.setIn(new ByteArrayInputStream(input.getBytes()));
+        ConsoleScanner consoleScanner = new ConsoleScanner(new Scanner(System.in));
+
+        var actualOutputStream = new ByteArrayOutputStream();
+        var originalOut = System.out;
+        System.setOut(new PrintStream(actualOutputStream));
+
+        Float actualValue = consoleScanner.readFloat(param);
+
+        System.setOut(originalOut);
+        assertEquals(actualValue, expectedValue);
+        assertEquals(actualOutputStream.toString(), expectedOutput);
     }
 
     @Test
