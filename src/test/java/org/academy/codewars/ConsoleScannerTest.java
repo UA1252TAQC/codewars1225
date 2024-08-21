@@ -30,7 +30,7 @@ public class ConsoleScannerTest extends ConsoleScannerDataProvider {
         int actualValue = consoleScanner.readInt(param);
         System.setOut(originalOut);
         assertEquals(actualValue, expectedValue);
-        assertEquals(outputStream.toString().trim(), expectedOutput.trim());
+        assertEquals(outputStream.toString(), expectedOutput.replaceAll("\\n|\\r\\n", System.lineSeparator()));
     }
 
     @Test(dataProvider = "dp-testReadFloat")
