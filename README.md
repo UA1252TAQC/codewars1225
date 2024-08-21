@@ -7,7 +7,7 @@ This project is a console application written in Java that allows running specif
 
 ![Architecture Diagram](docs/images/architecture.png)
 
-### Enums
+### En[academy](src%2Fmain%2Fjava%2Forg%2Facademy)ums
 
 - **Enum `Authors`:** Contains a list of authors and their corresponding identifiers.
 - **Enum `Tasks`:** Contains a list of tasks, including their descriptions and the required parameters for execution.
