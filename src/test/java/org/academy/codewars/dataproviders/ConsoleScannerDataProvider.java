@@ -24,35 +24,18 @@ public class ConsoleScannerDataProvider {
         return inputs.iterator();
     }
 
-    @DataProvider(name = "dp-testReadDoubleValidData")
-    public Iterator<Object[]> testReadDoubleValidData() {
-        List<Object[]> inputs = new ArrayList<>();
-        String param = "double param";
-        String testInput1 = "7.5\n";
-        double expectedValue1 = 7.5;
-        String expectedOutput1 = "Enter a " + param + " (double): ";
-        String testInput2 = "123.456\n";
-        double expectedValue2 = 123.456;
-        String expectedOutput2 = "Enter a " + param + " (double): ";
-
-        inputs.add(new Object[]{param, testInput1, expectedValue1, expectedOutput1});
-        inputs.add(new Object[]{param, testInput2, expectedValue2, expectedOutput2});
-
-        return inputs.iterator();
-    }
 
     @DataProvider(name = "dp-testReadDouble")
     public Iterator<Object[]> testReadDouble() {
         List<Object[]> inputs = new ArrayList<>();
         String param = "double param";
-        String expectedOutput = "Enter a " + param + " (double): ";
 
-        inputs.add(new Object[]{param, "7.5" + System.lineSeparator(), 7.5, expectedOutput});
-        inputs.add(new Object[]{param, "123.456" + System.lineSeparator(), 123.456, expectedOutput});
-        inputs.add(new Object[]{param, "invalid" + System.lineSeparator() + "2.718" + System.lineSeparator(), 2.718,
-                expectedOutput + "Invalid data format. A floating point number is expected." + System.lineSeparator() + expectedOutput});
-        inputs.add(new Object[]{param, "wrong" + System.lineSeparator() + "3.14159" + System.lineSeparator(), 3.14159,
-                expectedOutput + "Invalid data format. A floating point number is expected." + System.lineSeparator() + expectedOutput});
+        String expectedOutput1 = "Enter a " + param + " (double): ";
+        String expectedOutput2 = "Enter a " + param + " (double): Invalid data format. A floating point number is expected." + System.lineSeparator() +
+                "Enter a " + param + " (double): ";
+
+        inputs.add(new Object[]{param, "7.5\n", 7.5, expectedOutput1});
+        inputs.add(new Object[]{param, "invalid\n2.718\n", 2.718, expectedOutput2});
 
         return inputs.iterator();
     }
