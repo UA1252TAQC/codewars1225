@@ -86,11 +86,11 @@ public class ConsoleScannerTest extends ConsoleScannerDataProvider {
         assertEquals(expected, actual);
     }
 
-    @Test(dataProvider = "dp-testReadDoubleValidData")
+    @Test(dataProvider = "dp-testReadDouble")
     public void testReadDouble(String param, String input, double expectedValue, String expectedOutput) {
         System.setIn(new ByteArrayInputStream(input.getBytes()));
         InputStream inputStream = System.in;
-        ConsoleScanner consoleScanner = new ConsoleScanner(new Scanner(inputStream));
+        ConsoleScanner consoleScanner = new ConsoleScanner(new java.util.Scanner(inputStream));
 
         ByteArrayOutputStream actualOutputStream = new ByteArrayOutputStream();
         PrintStream originalOut = System.out;
@@ -103,27 +103,6 @@ public class ConsoleScannerTest extends ConsoleScannerDataProvider {
         assertEquals(actualOutputStream.toString(), expectedOutput);
         assertEquals(actualValue, expectedValue);
     }
-
-    @Test(dataProvider = "dp-testReadDoubleInvalidData")
-    public void testReadDoubleInvalidData(String param, String input, double expectedValue, String expectedOutput) {
-        System.setIn(new ByteArrayInputStream(input.getBytes()));
-        InputStream inputStream = System.in;
-        ConsoleScanner consoleScanner = new ConsoleScanner(new Scanner(inputStream));
-
-        ByteArrayOutputStream actualOutputStream = new ByteArrayOutputStream();
-        PrintStream originalOut = System.out;
-        System.setOut(new PrintStream(actualOutputStream));
-
-        double actualValue = consoleScanner.readDouble(param);
-
-        System.setOut(originalOut);
-
-        assertEquals(actualOutputStream.toString(), expectedOutput);
-        assertEquals(actualValue, expectedValue);
-    }
-
-
-
 
     @Test
     public void testReadBigInteger() {
