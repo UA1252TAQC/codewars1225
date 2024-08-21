@@ -127,28 +127,21 @@ public class SixImpl extends Base implements Six {
         for (String game : games) {
             if (game.contains(toFind)) {
                 try {
-
                     String regex = "(.*)\\s(\\d+)\\s(.*)\\s(\\d+)";
                     Pattern pattern = Pattern.compile(regex);
                     Matcher matcher = pattern.matcher(game);
 
                     if (!matcher.matches()) {
-
                         if (game.matches(".*\\d+\\.\\d+.*")) {
                             return "Error(float number):" + game.trim();
                         }
-                        return "Error in score format: " + game.trim();
+                        continue;
                     }
 
                     String team1 = matcher.group(1).trim();
                     int team1Score = Integer.parseInt(matcher.group(2));
                     String team2 = matcher.group(3).trim();
                     int team2Score = Integer.parseInt(matcher.group(4));
-
-
-                    System.out.println("Processing game: " + game);
-                    System.out.println("Team 1: " + team1 + " Score: " + team1Score);
-                    System.out.println("Team 2: " + team2 + " Score: " + team2Score);
 
                     if (toFind.equals(team1)) {
                         scored += team1Score;

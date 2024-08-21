@@ -1,5 +1,7 @@
-package org.academy.kata.dataprovider;
+package org.academy.kata.dataproviders;
+
 import org.testng.annotations.DataProvider;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
