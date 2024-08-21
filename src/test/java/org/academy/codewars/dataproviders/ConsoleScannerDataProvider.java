@@ -23,4 +23,20 @@ public class ConsoleScannerDataProvider {
 
         return inputs.iterator();
     }
+
+    @DataProvider(name = "dp-testReadFloat")
+    public Iterator<Object[]> dpTestReadFloat() {
+        List<Object[]> inputs = new ArrayList<>();
+        String param = "test param";
+        String expectedOutput1 = "Enter a " + param + " (float): ";
+        String expectedOutput2 = "Enter a " + param + " (float): " +
+                "Invalid data format. A floating point number is expected.\n" +
+                "Enter a " + param + " (float): ";
+        expectedOutput2 = expectedOutput2.replaceAll("\\n|\\r\\n", System.lineSeparator());
+
+        inputs.add(new Object[]{"3.5\n", 3.5F, expectedOutput1, param});
+        inputs.add(new Object[]{"; 3.5\n", 3.5F, expectedOutput2, param});
+
+        return inputs.iterator();
+    }
 }
