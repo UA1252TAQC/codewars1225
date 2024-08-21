@@ -1,6 +1,8 @@
 package org.academy.kata.implementation.AndriyVel05;
+
 import org.academy.kata.Base;
 import org.academy.kata.Six;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Matcher;
@@ -51,9 +53,6 @@ public class SixImpl extends Base implements Six {
 
         return report.toString();
     }
-
-
-
 
 
     @Override
@@ -149,6 +148,7 @@ public class SixImpl extends Base implements Six {
                     } else {
                         draws++;
                     }
+
                 } else if (toFind.equals(team2)) {
                     scored += team2Score;
                     conceded += team1Score;

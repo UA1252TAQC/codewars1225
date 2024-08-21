@@ -96,12 +96,12 @@ public class SixImpl extends Base implements Six {
             return "";
         }
 
-        List<String[]> matches = new ArrayList<>();
+        List<String[]> matches;
         try {
             matches = Arrays.stream(resultSheet.split(","))
                     .map(line -> processMatchLine(line, toFind))
                     .filter(Objects::nonNull)
-                    .collect(Collectors.toList());
+                    .toList();
         } catch (IllegalArgumentException e) {
             return "Error(float number):" + e.getMessage();
         }

@@ -1,12 +1,12 @@
 package org.academy.kata;
 
-import static org.testng.Assert.assertEquals;
-
-import org.academy.kata.dataprovider.EightDataProvider;
+import org.academy.kata.dataproviders.EightDataProvider;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import java.util.Locale;
+
+import static org.testng.Assert.assertEquals;
 
 public class EightTest extends EightDataProvider {
     @BeforeClass()

@@ -1,9 +1,12 @@
 package org.academy.kata;
-import org.academy.kata.dataprovider.SevenDataProvider;
+
+import org.academy.kata.dataproviders.SevenDataProvider;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+
 import java.util.Locale;
-import static org.testng.Assert.*;
+
+import static org.testng.Assert.assertEquals;
 
 
 public class SevenTest extends SevenDataProvider {
