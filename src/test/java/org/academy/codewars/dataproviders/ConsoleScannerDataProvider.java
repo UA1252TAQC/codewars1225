@@ -34,6 +34,6 @@ public class ConsoleScannerDataProvider {
         String expectedOutput2 = "Enter a " + param + " (int): Invalid data format. An integer is expected." + lineSeparator + "Enter a " + param + " (int): ";
         inputs.add(new Object[]{param, "invalid" + lineSeparator + "25" + lineSeparator, 25, expectedOutput2});
         return inputs.iterator();
-    } // fixing commit
+    } // fixing commit //
 
 }

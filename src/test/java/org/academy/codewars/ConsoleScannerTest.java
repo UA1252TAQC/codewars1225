@@ -29,7 +29,7 @@ public class ConsoleScannerTest extends ConsoleScannerDataProvider {
         System.setOut(originalOut);
         assertEquals(actualValue, expectedValue);
         assertEquals(outputStream.toString().trim(), expectedOutput.trim());
-    } // fixing commit//
+    } // fixing commit////
 
     @Test
     public void testReadFloat() {
