@@ -74,6 +74,7 @@ public class SixImpl extends Base implements Six {
         int wins = 0, draws = 0, losses = 0, totalScored = 0, totalConceded = 0;
 
         for (String match : resultSheet.split(",")) {
+            if (match.isEmpty()) return toFind + ":This team didn't play!";
             String[] teams = match.split("(?<=\\d)\\s+");
             if (!isMatchMember(teams, toFind)) continue;
 

@@ -2,8 +2,9 @@ package org.academy.kata.implementation.marchenko2005;
 
 import org.academy.kata.Base;
 import org.academy.kata.Eight;
-import java.math.BigInteger;
+
 import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.math.RoundingMode;
 import java.util.ArrayList;
 
@@ -21,8 +22,7 @@ public class EightImpl extends Base implements Eight {
 
     @Override
     public float mpgToKPM(float mpg) {
-        float res =  Math.round(mpg * (1.609344f / 4.54609188f) * 100.0f) / 100.0f;
-        return res;
+        return Math.round(mpg * (1.609344f / 4.54609188f) * 100.0f) / 100.0f;
     }
 
     @Override
@@ -45,16 +45,15 @@ public class EightImpl extends Base implements Eight {
             return new int[0];
         int negSum = 0;
         int posCount = 0;
-        for (int i = 0; i < input.length; i++) {
-            if (input[i] < 0) {
-                negSum += input[i];
+        for (int j : input) {
+            if (j < 0) {
+                negSum += j;
             }
-            if (input[i] > 0) {
+            if (j > 0) {
                 posCount++;
             }
         }
-        int[] result = new int[]{posCount, negSum};
-        return result;
+        return new int[]{posCount, negSum};
     }
 
     @Override
@@ -72,30 +71,11 @@ public class EightImpl extends Base implements Eight {
     @Override
     public int[] divisibleBy(int[] numbers, int divider) {
         ArrayList<Integer> a = new ArrayList<>();
-        for (int i = 0; i < numbers.length; i++) {
-            if (numbers[i] % divider == 0)
-                a.add(numbers[i]);
+        for (int number : numbers) {
+            if (number % divider == 0)
+                a.add(number);
         }
         return a.stream().mapToInt(i -> i).toArray();
-    }
-
-    public static long factorial(double n) {
-        long res = 1;
-        while ((int) n > 0) {
-            res *= n;
-            n--;
-        }
-        return res;
-    }
-
-    public static boolean isPrime(double n) {
-        if (n <= 1) return false;
-        if (n <= 3) return true;
-        if (n % 2 == 0 || n % 3 == 0) return false;
-        for (int i = 5; i * i <= n; i += 6) {
-            if (n % i == 0 || n % (i + 2) == 0) return false;
-        }
-        return true;
     }
 
     @Override
