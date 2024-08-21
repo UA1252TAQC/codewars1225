@@ -44,7 +44,7 @@ public class ConsoleScannerTest extends ConsoleScannerDataProvider {
     }
 
     @Test(dataProvider = "dp-testReadFloat")
-    public void testReadFloat(String input, Float expectedValue, String expectedOutput, String param) {
+    public void testReadFloat(String param, String input, Float expectedValue, String expectedOutput) {
         System.setIn(new ByteArrayInputStream(input.getBytes()));
         ConsoleScanner consoleScanner = new ConsoleScanner(new Scanner(System.in));
 

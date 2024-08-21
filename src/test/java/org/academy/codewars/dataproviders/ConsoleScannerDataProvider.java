@@ -68,8 +68,8 @@ public class ConsoleScannerDataProvider {
                 "Enter a " + param + " (float): ";
         expectedOutput2 = expectedOutput2.replaceAll("\\n|\\r\\n", System.lineSeparator());
 
-        inputs.add(new Object[]{"3.5\n", 3.5F, expectedOutput1, param});
-        inputs.add(new Object[]{"; 3.5\n", 3.5F, expectedOutput2, param});
+        inputs.add(new Object[]{param, "3.5\n", 3.5F, expectedOutput1});
+        inputs.add(new Object[]{param, "; 3.5\n", 3.5F, expectedOutput2});
 
         return inputs.iterator();
     }
