@@ -114,9 +114,11 @@ public class SixDataProvider extends AbstractDataProvider {
     String resultSheetDecimal = "New York Knicks 101.12 Atlanta Hawks 112";
 
     inputs.add(new Object[]{resultSheet, "Los Angeles Clippers", "Los Angeles Clippers:W=2;D=0;L=1;Scored=326;Conceded=304;Points=6"});
-    inputs.add(new Object[]{resultSheetDecimal, "Atlanta Hawks", "Error(float number):New York Knicks 101.12 Atlanta Hawks 112"});
     inputs.add(new Object[]{resultSheet, "", ""});
+    inputs.add(new Object[]{"", "", ""});
     inputs.add(new Object[]{resultSheet, "Soft Serve QA", "Soft Serve QA:This team didn't play!"});
+    inputs.add(new Object[]{"", "Soft Serve QA", "Soft Serve QA:This team didn't play!"});
+    inputs.add(new Object[]{resultSheetDecimal, "Atlanta Hawks", "Error(float number):New York Knicks 101.12 Atlanta Hawks 112"});
 
     return combineData(inputs, SIX);
   }
