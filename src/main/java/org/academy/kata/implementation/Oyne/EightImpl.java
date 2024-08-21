@@ -86,19 +86,21 @@ public class EightImpl extends Base implements Eight{
 
     @Override
     public boolean am_i_wilson(double n) {
-        if (n <= 1) {
+        final int p = (int) n;
+        if (p <= 1) {
             return false;
         }
+        final BigInteger denominator = BigInteger.valueOf((long) p * p);
+        final BigInteger numeric = factorial(p - 1);
+        return numeric.add(BigInteger.ONE).remainder(denominator).equals(BigInteger.ZERO);
 
-        BigInteger factorial = BigInteger.ONE;
-        for (int i = 1; i <= n - 1; i++) {
+    }
+
+    private static BigInteger factorial(int n) {
+        BigInteger factorial = new BigInteger(String.valueOf(1));
+        for (int i = 1; i <= n; i++) {
             factorial = factorial.multiply(BigInteger.valueOf(i));
         }
-
-        BigInteger numerator = factorial.add(BigInteger.ONE);
-        BigInteger denominator = BigInteger.valueOf((long) n).multiply(BigInteger.valueOf((long) n));
-        BigInteger[] divisionResult = numerator.divideAndRemainder(denominator);
-
-        return divisionResult[1].equals(BigInteger.ZERO);
+        return factorial;
     }
 }
