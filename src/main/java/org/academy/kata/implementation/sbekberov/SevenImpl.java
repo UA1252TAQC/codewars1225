@@ -6,10 +6,6 @@ import org.academy.kata.Seven;
 public class SevenImpl extends Base implements Seven {
     @Override
     public long newAvg(double[] arr, double navg) {
-        if (navg <= 0) {
-            throw new IllegalArgumentException("The target average must be greater than 0.");
-        }
-
         double totalCurrentSum = 0;
         for (double donation : arr) {
             totalCurrentSum += donation;
