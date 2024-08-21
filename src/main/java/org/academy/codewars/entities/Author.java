@@ -44,12 +44,7 @@ public enum Author {
             new org.academy.kata.implementation.Oyne.FiveImpl(),
             new org.academy.kata.implementation.Oyne.SixImpl(),
             new org.academy.kata.implementation.Oyne.SevenImpl(),
-            new org.academy.kata.implementation.Oyne.EightImpl()),
-    ROCKETMAN2K21("Duda Roman",
-            new org.academy.kata.implementation.RocketMan2k21.FiveImpl(),
-            new org.academy.kata.implementation.RocketMan2k21.SixImpl(),
-            new org.academy.kata.implementation.RocketMan2k21.SevenImpl(),
-            new org.academy.kata.implementation.RocketMan2k21.EightImpl()
+            new org.academy.kata.implementation.Oyne.EightImpl()
     ),
     SBEKBEROV("Bekberov Selim",
             new org.academy.kata.implementation.sbekberov.FiveImpl(),
