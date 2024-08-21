@@ -31,7 +31,8 @@ public class ConsoleScannerDataProvider {
         String param = "readBigIntegerParam";
 
         String expectedOutput1 = "Enter a " + param + " number: ";
-        String expectedOutput2 = "Enter a " + param + " number: Invalid data format. An integer (BigInteger) is expected. Enter a " + param + " number: ";
+        String expectedOutput2 = "Enter a " + param + " number: Invalid data format. An integer (BigInteger) is expected." + System.lineSeparator()
+            + "Enter a " + param + " number: ";
 
         inputs.add(new Object[]{param, "12345\n", new BigInteger("12345"), expectedOutput1});
         inputs.add(new Object[]{param, "abc\n67890\n", new BigInteger("67890"), expectedOutput2});

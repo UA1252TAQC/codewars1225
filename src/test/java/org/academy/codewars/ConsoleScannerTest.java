@@ -129,6 +129,7 @@ public class ConsoleScannerTest extends ConsoleScannerDataProvider {
         assertEquals(actualValue, expectedValue);
         assertEquals(actualOutputStream.toString(), expectedOutput);
     }
+
     @Test(dataProvider = "dp-testReadBigInteger")
     public void testReadBigInteger(String param, String input, BigInteger expectedValue, String expectedOutput) {
         System.setIn(new ByteArrayInputStream(input.getBytes()));
@@ -137,15 +138,16 @@ public class ConsoleScannerTest extends ConsoleScannerDataProvider {
         var actualOutputStream = new ByteArrayOutputStream();
         var originalOut = System.out;
         System.setOut(new PrintStream(actualOutputStream));
-        BigInteger actualValue = consoleScanner.readBigInteger(param);
-        System.setOut(originalOut);
 
-        String actualOutputNormalized = actualOutputStream.toString().trim().replaceAll("[\\s\\n]+", " ");
-        String expectedOutputNormalized = expectedOutput.trim().replaceAll("[\\s\\n]+", " ");
+        BigInteger actualValue = consoleScanner.readBigInteger(param);
+
+        System.setOut(originalOut);
+        String actualOutput = actualOutputStream.toString();
 
         assertEquals(actualValue, expectedValue);
-        assertEquals(actualOutputNormalized, expectedOutputNormalized);
+        assertEquals(actualOutput, expectedOutput);
     }
+
     @Test(dataProvider = "dp-testReadDoubleArray")
     public void testReadDoubleArray(String param, String input, double[] expectedValue, String expectedOutput) {
         System.setIn(new ByteArrayInputStream(input.getBytes()));
