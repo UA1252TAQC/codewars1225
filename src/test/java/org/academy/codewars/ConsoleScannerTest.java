@@ -28,14 +28,13 @@ public class ConsoleScannerTest extends ConsoleScannerDataProvider {
         int actualValue = consoleScanner.readInt(param);
         System.setOut(originalOut);
         assertEquals(actualValue, expectedValue);
-        String normalizedExpectedOutput = expectedOutput.replace("\r\n", "\n").replace("\r", "\n");
-        String normalizedActualOutput = actualOutputStream.toString().replace("\r\n", "\n").replace("\r", "\n");
-        assertEquals(normalizedActualOutput, normalizedExpectedOutput);
+        assertEquals(actualOutputStream.toString(), expectedOutput);
     }
+
 
     @Test
     public void testReadIntInvalidData() {
-        String testData = "invalid\n25\n";
+        String testData = "invalid" + System.lineSeparator() + "25" + System.lineSeparator();
         int expected = 25;
         System.setIn(new ByteArrayInputStream(testData.getBytes()));
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
@@ -43,10 +42,11 @@ public class ConsoleScannerTest extends ConsoleScannerDataProvider {
         ConsoleScanner consoleScanner = new ConsoleScanner(new Scanner(System.in));
         int actual = consoleScanner.readInt("test int");
         System.setOut(System.out);
+        String expectedOutput = "Enter a test int (int): Invalid data format. An integer is expected." + System.lineSeparator() + "Enter a test int (int):";
         assertEquals(actual, expected);
-        String expectedOutput = "Enter a test int (int): Invalid data format. An integer is expected.\nEnter a test int (int):";
-        assertEquals(outputStream.toString().trim().replace("\r\n", "\n"), expectedOutput.replace("\r\n", "\n").trim());
+        assertEquals(outputStream.toString().trim(), expectedOutput.trim());
     }
+
 
     @Test
     public void testReadFloat() {
