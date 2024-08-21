@@ -81,9 +81,6 @@ public class EightImpl extends Base implements Eight {
 
     @Override
     public int[] divisibleBy(int[] numbers, int divider) {
-        if (divider == 0) {
-            throw new IllegalArgumentException("Divider cannot be zero.");
-        }
 
         ArrayList<Integer> resultList = new ArrayList<>();
 
