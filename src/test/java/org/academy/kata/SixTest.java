@@ -1,12 +1,12 @@
 package org.academy.kata;
 
-import org.academy.kata.dataprovider.SixDataProvider;
+import org.academy.kata.dataproviders.SixDataProvider;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import java.util.Locale;
 
-import static org.testng.Assert.*;
+import static org.testng.Assert.assertEquals;
 
 public class SixTest extends SixDataProvider {
     @BeforeClass()
