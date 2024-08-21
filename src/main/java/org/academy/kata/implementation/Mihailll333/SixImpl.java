@@ -1,11 +1,12 @@
 package org.academy.kata.implementation.Mihailll333;
 
+import org.academy.kata.Base;
 import org.academy.kata.Six;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class SixImpl implements Six {
+public class SixImpl extends Base implements Six {
     @Override
     public long findNb(long m) {
         long n = 0;
@@ -85,73 +86,90 @@ public class SixImpl implements Six {
         return -1;
     }
 
+    private static double[] extractRainfallValues(String town, String strng) {
+        String[] records = strng.split("\n");
+
+        for (String record : records) {
+            if (record.startsWith(town + ":")) {
+                String[] monthlyData = record.substring(record.indexOf(":") + 1).split(",");
+                double[] values = new double[monthlyData.length];
+
+                for (int i = 0; i < monthlyData.length; i++) {
+                    String[] parts = monthlyData[i].trim().split(" ");
+                    values[i] = Double.parseDouble(parts[1]);
+                }
+
+                return values;
+            }
+        }
+
+        return null;
+    }
     @Override
     public double variance(String town, String strng) {
-        return 0;
+        double[] rainfallValues = extractRainfallValues(town, strng);
+        if (rainfallValues == null) {
+            return -1.0;
+        }
+
+        double mean = mean(town, strng);
+        double sumOfSquares = 0.0;
+
+        for (double value : rainfallValues) {
+            sumOfSquares += Math.pow(value - mean, 2);
+        }
+
+        return sumOfSquares / rainfallValues.length;
     }
 
     @Override
     public String nbaCup(String resultSheet, String toFind) {
-        if (toFind.isEmpty()) {
-            return "";
-        }
+        if (toFind.isEmpty()) return "";
+        int wins = 0, draws = 0, losses = 0, totalScored = 0, totalConceded = 0;
 
-        String[] matches = resultSheet.split(",");
-        int wins = 0, draws = 0, losses = 0, scored = 0, conceded = 0;
+        for (String match : resultSheet.split(",")) {
+            String[] teams = match.split("(?<=\\d)\\s+");
+            if (!isMatchMember(teams, toFind)) continue;
 
-        boolean teamPlayed = false;
+            try {
+                int[] scores = extractScores(teams, toFind);
+                int scored = scores[0], conceded = scores[1];
 
-        for (String match : matches) {
-            if (match.contains(toFind)) {
-                teamPlayed = true;
+                if (scored > conceded) wins++;
+                else if (scored == conceded) draws++;
+                else losses++;
 
-                String[] parts = match.replaceAll("[0-9]+\\.[0-9]+", "Error(float number)").split(" ");
-
-                if (parts.length < 2) {
-                    return "Error(float number):" + match;
-                }
-
-                int team1Score = 0;
-                int team2Score = 0;
-                StringBuilder team1Name = new StringBuilder();
-                StringBuilder team2Name = new StringBuilder();
-
-                int i = 0;
-                while (!Character.isDigit(parts[i].charAt(0))) {
-                    team1Name.append(parts[i++]).append(" ");
-                }
-                team1Name = new StringBuilder(team1Name.toString().trim());
-                team1Score = Integer.parseInt(parts[i++]);
-
-                while (i < parts.length && !Character.isDigit(parts[i].charAt(0))) {
-                    team2Name.append(parts[i++]).append(" ");
-                }
-                team2Name = new StringBuilder(team2Name.toString().trim());
-                team2Score = Integer.parseInt(parts[i]);
-
-                if (team1Name.toString().equals(toFind)) {
-                    scored += team1Score;
-                    conceded += team2Score;
-                    if (team1Score > team2Score) wins++;
-                    else if (team1Score == team2Score) draws++;
-                    else losses++;
-                } else if (team2Name.toString().equals(toFind)) {
-                    scored += team2Score;
-                    conceded += team1Score;
-                    if (team2Score > team1Score) wins++;
-                    else if (team2Score == team1Score) draws++;
-                    else losses++;
-                }
+                totalScored += scored;
+                totalConceded += conceded;
+            } catch (Exception e) {
+                return "Error(float number):" + match;
             }
         }
 
-        if (!teamPlayed) {
-            return toFind + ":This team didn't play!";
-        }
+        if (wins + draws + losses == 0) return String.format("%s:This team didn't play!", toFind);
+        return String.format("%s:W=%d;D=%d;L=%d;Scored=%d;Conceded=%d;Points=%d",
+                toFind, wins, draws, losses, totalScored, totalConceded, (wins * 3) + draws);
+    }
 
-        int points = wins * 3 + draws;
-        return toFind + ":W=" + wins + ";D=" + draws + ";L=" + losses + ";Scored=" + scored +
-                ";Conceded=" + conceded + ";Points=" + points;
+    private static boolean isMatchMember(String[] teams, String team) {
+        return teams[0].substring(0, teams[0].trim().lastIndexOf(" ")).trim().equals(team) ||
+                teams[1].substring(0, teams[1].trim().lastIndexOf(" ")).trim().equals(team);
+    }
+
+    private static int[] extractScores(String[] teams, String team) {
+        final String team1 = teams[0].trim();
+        final String team2 = teams[1].trim();
+
+        if (isRequiredTeam(team, team1)) return new int[]{extractScore(team1), extractScore(team2)};
+        return new int[]{extractScore(team2), extractScore(team1)};
+    }
+
+    private static boolean isRequiredTeam(String team, String team1) {
+        return team1.substring(0, team1.lastIndexOf(" ")).equals(team);
+    }
+
+    private static int extractScore(String team) {
+        return Integer.parseInt(team.substring(team.lastIndexOf(" ")).trim());
     }
 
     @Override

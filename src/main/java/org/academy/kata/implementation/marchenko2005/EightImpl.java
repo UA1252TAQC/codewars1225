@@ -1,12 +1,14 @@
 package org.academy.kata.implementation.marchenko2005;
 
+import org.academy.kata.Base;
 import org.academy.kata.Eight;
 
 import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.math.RoundingMode;
 import java.util.ArrayList;
 
-public class EightImpl implements Eight {
+public class EightImpl extends Base implements Eight {
     @Override
     public int liters(double time) {
         double res = time / 2;
@@ -20,8 +22,7 @@ public class EightImpl implements Eight {
 
     @Override
     public float mpgToKPM(float mpg) {
-        double a = 1.609344 / 4.54609188;
-        return mpg * (float) a;
+        return Math.round(mpg * (1.609344f / 4.54609188f) * 100.0f) / 100.0f;
     }
 
     @Override
@@ -44,16 +45,15 @@ public class EightImpl implements Eight {
             return new int[0];
         int negSum = 0;
         int posCount = 0;
-        for (int i = 0; i < input.length; i++) {
-            if (input[i] < 0) {
-                negSum += input[i];
+        for (int j : input) {
+            if (j < 0) {
+                negSum += j;
             }
-            if (input[i] > 0) {
+            if (j > 0) {
                 posCount++;
             }
         }
-        int[] result = new int[]{posCount, negSum};
-        return result;
+        return new int[]{posCount, negSum};
     }
 
     @Override
@@ -71,36 +71,27 @@ public class EightImpl implements Eight {
     @Override
     public int[] divisibleBy(int[] numbers, int divider) {
         ArrayList<Integer> a = new ArrayList<>();
-        for (int i = 0; i < numbers.length; i++) {
-            if (numbers[i] % divider == 0)
-                a.add(numbers[i]);
+        for (int number : numbers) {
+            if (number % divider == 0)
+                a.add(number);
         }
         return a.stream().mapToInt(i -> i).toArray();
     }
 
-    public static long factorial(double n) {
-        long res = 1;
-        while ((int) n > 0) {
-            res *= n;
-            n--;
-        }
-        return res;
-    }
-
-    public static boolean isPrime(double n) {
-        if (n <= 1) return false;
-        if (n <= 3) return true;
-        if (n % 2 == 0 || n % 3 == 0) return false;
-        for (int i = 5; i * i <= n; i += 6) {
-            if (n % i == 0 || n % (i + 2) == 0) return false;
-        }
-        return true;
-    }
-
     @Override
     public boolean am_i_wilson(double n) {
-        if (!isPrime(n))
+        final int num = (int) n;
+        if (num <= 1) {
             return false;
-        return (factorial(n - 1) / n * n) % 1 == 0;
+        }
+        BigInteger factorialValue = BigInteger.ONE;
+        for (int i = 2; i < num; i++) {
+            factorialValue = factorialValue.multiply(BigInteger.valueOf(i));
+        }
+        final BigInteger denominator = BigInteger.valueOf((long) num * num);
+        final BigInteger numerator = factorialValue.add(BigInteger.ONE);
+
+        return numerator.remainder(denominator).equals(BigInteger.ZERO);
     }
+
 }

@@ -1,5 +1,6 @@
 package org.academy.kata.implementation.marchenko2005;
 
+import org.academy.kata.Base;
 import org.academy.kata.Six;
 
 import java.util.HashMap;
@@ -7,7 +8,7 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class SixImpl implements Six {
+public class SixImpl extends Base implements Six {
     @Override
     public long findNb(long m) {
         long n = 0;
@@ -187,7 +188,7 @@ public class SixImpl implements Six {
 
     @Override
     public String stockSummary(String[] lstOfArt, String[] lstOf1stLetter) {
-        if (lstOfArt.length == 0 || lstOf1stLetter.length == 0) {
+        if (lstOfArt == null || lstOfArt.length == 0 || lstOf1stLetter == null || lstOf1stLetter.length == 0) {
             return "";
         }
 

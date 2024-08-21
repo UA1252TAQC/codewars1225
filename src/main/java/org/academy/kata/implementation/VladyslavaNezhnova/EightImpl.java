@@ -1,11 +1,12 @@
 package org.academy.kata.implementation.VladyslavaNezhnova;
 
+import org.academy.kata.Base;
 import org.academy.kata.Eight;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class EightImpl implements Eight {
+public class EightImpl extends Base implements Eight {
     @Override
     public int liters(double time) {
         return (int) Math.floor(time * 0.5);

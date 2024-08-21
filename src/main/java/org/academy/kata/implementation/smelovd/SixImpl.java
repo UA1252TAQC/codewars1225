@@ -1,5 +1,6 @@
 package org.academy.kata.implementation.smelovd;
 
+import org.academy.kata.Base;
 import org.academy.kata.Six;
 
 import java.math.BigInteger;
@@ -8,7 +9,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.DoubleStream;
 
-public class SixImpl implements Six {
+public class SixImpl extends Base implements Six {
     @Override
     public long findNb(long m) {
         final BigInteger expectedVolume = BigInteger.valueOf(m);
@@ -73,6 +74,7 @@ public class SixImpl implements Six {
         int wins = 0, draws = 0, losses = 0, totalScored = 0, totalConceded = 0;
 
         for (String match : resultSheet.split(",")) {
+            if (match.isEmpty()) return toFind + ":This team didn't play!";
             String[] teams = match.split("(?<=\\d)\\s+");
             if (!isMatchMember(teams, toFind)) continue;
 
@@ -119,14 +121,12 @@ public class SixImpl implements Six {
 
     @Override
     public String stockSummary(String[] lstOfArt, String[] lstOf1stLetter) {
+        if (lstOfArt == null || lstOfArt.length == 0 || lstOf1stLetter == null || lstOf1stLetter.length == 0) {
+            return "";
+        }
         final Map<Character, Integer> categoryCounts = Arrays.stream(lstOfArt)
                 .collect(Collectors.groupingBy(s -> s.charAt(0), Collectors.summingInt(s -> Integer.parseInt(s.split(" ")[1]))));
-        if (isAllZeros(lstOf1stLetter, categoryCounts)) return "";
         return Arrays.stream(lstOf1stLetter).map(letters -> String.format("(%s : %d)", letters, categoryCounts.getOrDefault(letters.charAt(0), 0)))
                 .collect(Collectors.joining(" - "));
-    }
-
-    private static boolean isAllZeros(String[] lstOf1stLetter, Map<Character, Integer> categoryCounts) {
-        return Arrays.stream(lstOf1stLetter).allMatch(letters -> categoryCounts.getOrDefault(letters.charAt(0), 0) == 0);
     }
 }

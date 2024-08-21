@@ -1,5 +1,6 @@
 package org.academy.kata.implementation.ol271176;
 
+import org.academy.kata.Base;
 import org.academy.kata.Six;
 
 import java.util.LinkedHashMap;
@@ -7,7 +8,7 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class SixImpl implements Six {
+public class SixImpl extends Base implements Six {
     @Override
     public long findNb(long m) {
         int n = 1;
@@ -48,7 +49,7 @@ public class SixImpl implements Six {
             totalExpense += checkAmount;
             count++;
 
-            result.append(String.format("%d %s %.2f Balance %.2f\\r\\n", checkNumber, category, checkAmount, balance));
+            result.append(String.format("%03d %s %.2f Balance %.2f\\r\\n", checkNumber, category, checkAmount, balance));
         }
         result.append(String.format("Total expense  %.2f\\r\\n", totalExpense));
         result.append(String.format("Average expense  %.2f", totalExpense / count));
@@ -137,7 +138,7 @@ public class SixImpl implements Six {
         for (String line : lines) {
             Matcher errorMatcher = errorPattern.matcher(line);
 
-            if (errorMatcher.find()) return "Error(float number):the concerned string";
+            if (errorMatcher.find()) return "Error(float number):" + line;
             if (!line.contains(toFind)) continue;
 
             Matcher correctMatcher = correctPattern.matcher(line);
@@ -185,6 +186,9 @@ public class SixImpl implements Six {
 
     @Override
     public String stockSummary(String[] lstOfArt, String[] lstOf1stLetter) {
+        if (lstOfArt == null || lstOfArt.length == 0 || lstOf1stLetter == null || lstOf1stLetter.length == 0) {
+            return "";
+        }
         Map<Character, Integer> mapOfBooks = new LinkedHashMap<>();
         for (String letter : lstOf1stLetter) mapOfBooks.put(letter.charAt(0), 0);
 
