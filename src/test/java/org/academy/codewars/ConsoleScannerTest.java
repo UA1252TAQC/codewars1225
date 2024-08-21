@@ -120,27 +120,22 @@ public class ConsoleScannerTest extends ConsoleScannerDataProvider {
         assertEquals(actual, expected);
     }
 
-    @Test
-    public void testReadIntArray() {
-        String testData = "3\n1\n-2\n0\n";
-        int[] expected = new int[]{1, -2, 0};
-        System.setIn(new ByteArrayInputStream(testData.getBytes()));
-        InputStream inputStream = System.in;
-        ConsoleScanner consoleScanner = new ConsoleScanner(new Scanner(inputStream));
-        int[] actual = consoleScanner.readIntArray("test array");
-        assertEquals(actual, expected);
+    @Test(dataProvider = "dp-testReadIntArray")
+    public void testReadIntArray(String param, String input, int[] expectedValue, String expectedOutput) {
+        System.setIn(new ByteArrayInputStream(input.getBytes()));
+        ConsoleScanner consoleScanner = new ConsoleScanner(new Scanner(System.in));
+
+        var actualOutputStream = new ByteArrayOutputStream();
+        var originalOut = System.out;
+        System.setOut(new PrintStream(actualOutputStream));
+
+        int[] actualValue = consoleScanner.readIntArray(param);
+
+        System.setOut(originalOut);
+        assertEquals(actualValue, expectedValue);
+        assertEquals(actualOutputStream.toString(), expectedOutput);
     }
 
-    @Test
-    public void testReadIntArrayInvalidData() {
-        String testData = "-3\n3\ninvalid 1\n-2\n0\n";
-        int[] expected = new int[]{1, -2, 0};
-        System.setIn(new ByteArrayInputStream(testData.getBytes()));
-        InputStream inputStream = System.in;
-        ConsoleScanner consoleScanner = new ConsoleScanner(new Scanner(inputStream));
-        int[] actual = consoleScanner.readIntArray("test array");
-        assertEquals(actual, expected);
-    }
 
     @Test
     public void testReadDoubleArray() {
