@@ -198,7 +198,7 @@ public class ConsoleScannerTest extends ConsoleScannerDataProvider {
     }
 
     @Test(dataProvider = "dp-testReadStringArray")
-    public void testReadStringArray(String input, String[] expectedValue, String expectedOutput) {
+    public void testReadStringArray(String param, String input, String[] expectedValue, String expectedOutput) {
         System.setIn(new ByteArrayInputStream(input.getBytes()));
         ConsoleScanner consoleScanner = new ConsoleScanner(new Scanner(System.in));
 
@@ -206,7 +206,7 @@ public class ConsoleScannerTest extends ConsoleScannerDataProvider {
         var originalOut = System.out;
         System.setOut(new PrintStream(actualOutputStream));
 
-        String[] actualValue = consoleScanner.readStringArray("test");
+        String[] actualValue = consoleScanner.readStringArray(param);
 
         System.setOut(originalOut);
         assertEquals(actualValue, expectedValue);
