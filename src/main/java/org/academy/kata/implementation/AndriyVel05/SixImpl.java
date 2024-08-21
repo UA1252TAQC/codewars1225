@@ -120,60 +120,45 @@ public class SixImpl extends Base implements Six {
     @Override
     public String nbaCup(String resultSheet, String toFind) {
         if (toFind.isEmpty()) return "";
-
         String[] games = resultSheet.split(",");
         int wins = 0, draws = 0, losses = 0, scored = 0, conceded = 0;
-
         for (String game : games) {
             if (game.contains(toFind)) {
-                try {
 
-                    String regex = "(.*)\\s(\\d+)\\s(.*)\\s(\\d+)";
-                    Pattern pattern = Pattern.compile(regex);
-                    Matcher matcher = pattern.matcher(game);
-
-                    if (!matcher.matches()) {
-
-                        if (game.matches(".*\\d+\\.\\d+.*")) {
-                            return "Error(float number):" + game.trim();
-                        }
-                        return "Error in score format: " + game.trim();
+                String regex = "(.*)\\s(\\d+)\\s(.*)\\s(\\d+)";
+                Pattern pattern = Pattern.compile(regex);
+                Matcher matcher = pattern.matcher(game);
+                if (!matcher.matches()) {
+                    if (game.matches(".*\\d+\\.\\d+.*")) {
+                        return "Error(float number):" + game.trim();
                     }
+                    continue;
+                }
 
-                    String team1 = matcher.group(1).trim();
-                    int team1Score = Integer.parseInt(matcher.group(2));
-                    String team2 = matcher.group(3).trim();
-                    int team2Score = Integer.parseInt(matcher.group(4));
-
-
-                    System.out.println("Processing game: " + game);
-                    System.out.println("Team 1: " + team1 + " Score: " + team1Score);
-                    System.out.println("Team 2: " + team2 + " Score: " + team2Score);
-
-                    if (toFind.equals(team1)) {
-                        scored += team1Score;
-                        conceded += team2Score;
-                        if (team1Score > team2Score) {
-                            wins++;
-                        } else if (team1Score < team2Score) {
-                            losses++;
-                        } else {
-                            draws++;
-                        }
-                    } else if (toFind.equals(team2)) {
-                        scored += team2Score;
-                        conceded += team1Score;
-                        if (team2Score > team1Score) {
-                            wins++;
-                        } else if (team2Score < team1Score) {
-                            losses++;
-                        } else {
-                            draws++;
-                        }
+                String team1 = matcher.group(1).trim();
+                int team1Score = Integer.parseInt(matcher.group(2));
+                String team2 = matcher.group(3).trim();
+                int team2Score = Integer.parseInt(matcher.group(4));
+                if (toFind.equals(team1)) {
+                    scored += team1Score;
+                    conceded += team2Score;
+                    if (team1Score > team2Score) {
+                        wins++;
+                    } else if (team1Score < team2Score) {
+                        losses++;
+                    } else {
+                        draws++;
                     }
-
-                } catch (NumberFormatException e) {
-                    return "Error in score format: " + game.trim();
+                } else if (toFind.equals(team2)) {
+                    scored += team2Score;
+                    conceded += team1Score;
+                    if (team2Score > team1Score) {
+                        wins++;
+                    } else if (team2Score < team1Score) {
+                        losses++;
+                    } else {
+                        draws++;
+                    }
                 }
             }
         }
@@ -185,7 +170,6 @@ public class SixImpl extends Base implements Six {
         int points = 3 * wins + draws;
         return String.format("%s:W=%d;D=%d;L=%d;Scored=%d;Conceded=%d;Points=%d", toFind, wins, draws, losses, scored, conceded, points);
     }
-
 
     @Override
     public String stockSummary(String[] lstOfArt, String[] lstOf1stLetter) {
