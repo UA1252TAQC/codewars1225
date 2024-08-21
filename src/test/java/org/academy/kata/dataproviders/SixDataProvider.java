@@ -109,14 +109,19 @@ public class SixDataProvider extends AbstractDataProvider {
         List<Object[]> inputs = new ArrayList<>();
 
         String resultSheetDefault = "Los Angeles Clippers 104 Dallas Mavericks 88,New York Knicks 101 Dallas Mavericks 88, Indiana Pacers 103 Memphis Grizzlies 112,"
-                + "Los Angeles Clippers 111 Minnesota Timberwolves 112,Phoenix Suns 95 Dallas Mavericks 111,Portland Trail Blazers 112 New Orleans Pelicans 94,"
+                + "Minnesota Timberwolves 112 Los Angeles Clippers 111,Phoenix Suns 95 Dallas Mavericks 111,Portland Trail Blazers 112 New Orleans Pelicans 94,"
                 + "Sacramento Kings 104 Los Angeles Clippers 111,Houston Rockets 85 Denver Nuggets 105";
 
         String resultSheetEmpty = "";
 
         String resultSheetWinFirst = "Los Angeles Clippers 104 Dallas Mavericks 88";
         String resultSheetWinSecond = "Los Angeles Clippers 88 Dallas Mavericks 104";
-        String resultSheetDraw = "Los Angeles Clippers 104 Dallas Mavericks 104";
+        String resultSheetDraw = "Dallas Mavericks 104 Los Angeles Clippers 104";
+
+        String resultSheetWDL = "Dallas Mavericks 104 Los Angeles Clippers 104,"
+                + "Los Angeles Clippers 104  Portland Trail Blazers 98,"
+                + "Houston Rockets 104 Portland Trail Blazers 103,"
+                + "Houston Rockets 104 Los Angeles Clippers 103";
 
         String resultSheetDecimalFirst = "New York Knicks 101.12 Atlanta Hawks 112";
         String resultSheetDecimalSecond = "New York Knicks 101 Atlanta Hawks 112.3";
@@ -137,9 +142,13 @@ public class SixDataProvider extends AbstractDataProvider {
         inputs.add(new Object[]{resultSheetDraw, "Los Angeles Clippers", "Los Angeles Clippers:W=0;D=1;L=0;Scored=104;Conceded=104;Points=1"});
         inputs.add(new Object[]{resultSheetDraw, "Dallas Mavericks", "Dallas Mavericks:W=0;D=1;L=0;Scored=104;Conceded=104;Points=1"});
 
+        inputs.add(new Object[]{resultSheetWDL, "Los Angeles Clippers", "Los Angeles Clippers:W=1;D=1;L=1;Scored=311;Conceded=306;Points=4"});
+
         inputs.add(new Object[]{resultSheetDecimalFirst, "Atlanta Hawks", "Error(float number):New York Knicks 101.12 Atlanta Hawks 112"});
         inputs.add(new Object[]{resultSheetDecimalSecond, "Atlanta Hawks", "Error(float number):New York Knicks 101 Atlanta Hawks 112.3"});
         inputs.add(new Object[]{resultSheetDecimalBoth, "Atlanta Hawks", "Error(float number):New York Knicks 101.30 Atlanta Hawks 112.3"});
+
+        inputs.add(new Object[]{resultSheetDefault, "Los Angeles Clippers", "Los Angeles Clippers:W=2;D=0;L=1;Scored=326;Conceded=304;Points=6"});
 
         return combineData(inputs, SIX);
     }

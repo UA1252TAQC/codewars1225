@@ -117,7 +117,7 @@ public class SixImpl extends Base implements Six {
 
     @Override
     public String nbaCup(String resultSheet, String toFind) {
-        if (toFind == null || toFind.isEmpty()) {
+        if (toFind.isEmpty()) {
             return "";
         }
 

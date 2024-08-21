@@ -1,6 +1,8 @@
 package org.academy.kata.implementation.AndriyVel05;
+
 import org.academy.kata.Base;
 import org.academy.kata.Six;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Matcher;
@@ -51,9 +53,6 @@ public class SixImpl extends Base implements Six {
 
         return report.toString();
     }
-
-
-
 
 
     @Override
@@ -126,47 +125,42 @@ public class SixImpl extends Base implements Six {
 
         for (String game : games) {
             if (game.contains(toFind)) {
-                try {
-                    String regex = "(.*)\\s(\\d+)\\s(.*)\\s(\\d+)";
-                    Pattern pattern = Pattern.compile(regex);
-                    Matcher matcher = pattern.matcher(game);
+                String regex = "(.*)\\s(\\d+)\\s(.*)\\s(\\d+)";
+                Pattern pattern = Pattern.compile(regex);
+                Matcher matcher = pattern.matcher(game);
 
-                    if (!matcher.matches()) {
-                        if (game.matches(".*\\d+\\.\\d+.*")) {
-                            return "Error(float number):" + game.trim();
-                        }
-                        continue;
+                if (!matcher.matches()) {
+                    if (game.matches(".*\\d+\\.\\d+.*")) {
+                        return "Error(float number):" + game.trim();
                     }
+                    continue;
+                }
 
-                    String team1 = matcher.group(1).trim();
-                    int team1Score = Integer.parseInt(matcher.group(2));
-                    String team2 = matcher.group(3).trim();
-                    int team2Score = Integer.parseInt(matcher.group(4));
+                String team1 = matcher.group(1).trim();
+                int team1Score = Integer.parseInt(matcher.group(2));
+                String team2 = matcher.group(3).trim();
+                int team2Score = Integer.parseInt(matcher.group(4));
 
-                    if (toFind.equals(team1)) {
-                        scored += team1Score;
-                        conceded += team2Score;
-                        if (team1Score > team2Score) {
-                            wins++;
-                        } else if (team1Score < team2Score) {
-                            losses++;
-                        } else {
-                            draws++;
-                        }
-                    } else if (toFind.equals(team2)) {
-                        scored += team2Score;
-                        conceded += team1Score;
-                        if (team2Score > team1Score) {
-                            wins++;
-                        } else if (team2Score < team1Score) {
-                            losses++;
-                        } else {
-                            draws++;
-                        }
+                if (toFind.equals(team1)) {
+                    scored += team1Score;
+                    conceded += team2Score;
+                    if (team1Score > team2Score) {
+                        wins++;
+                    } else if (team1Score < team2Score) {
+                        losses++;
+                    } else {
+                        draws++;
                     }
-
-                } catch (NumberFormatException e) {
-                    return "Error in score format: " + game.trim();
+                } else if (toFind.equals(team2)) {
+                    scored += team2Score;
+                    conceded += team1Score;
+                    if (team2Score > team1Score) {
+                        wins++;
+                    } else if (team2Score < team1Score) {
+                        losses++;
+                    } else {
+                        draws++;
+                    }
                 }
             }
         }
