@@ -19,24 +19,30 @@ public class ConsoleScannerTest extends ConsoleScannerDataProvider {
     }
 
     @Test(dataProvider = "dp-testReadInt")
-    public void testReadInt(String input, int expected) {
+    public void testReadInt(String input, int expected, String expectedOutput) {
         System.setIn(new ByteArrayInputStream(input.getBytes()));
-        InputStream inputStream = System.in;
-        ConsoleScanner consoleScanner = new ConsoleScanner(new Scanner(inputStream));
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outputStream));
+        ConsoleScanner consoleScanner = new ConsoleScanner(new Scanner(System.in));
         int actual = consoleScanner.readInt("test int");
+        System.setOut(System.out);
         assertEquals(actual, expected);
+        assertEquals(outputStream.toString().trim().replace("\r\n", "\n"), expectedOutput.trim().replace("\r\n", "\n"));
     }
-
 
     @Test
     public void testReadIntInvalidData() {
         String testData = "invalid\n25\n";
         int expected = 25;
         System.setIn(new ByteArrayInputStream(testData.getBytes()));
-        InputStream inputStream = System.in;
-        ConsoleScanner consoleScanner = new ConsoleScanner(new Scanner(inputStream));
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outputStream));
+        ConsoleScanner consoleScanner = new ConsoleScanner(new Scanner(System.in));
         int actual = consoleScanner.readInt("test int");
+        System.setOut(System.out);
         assertEquals(actual, expected);
+        String expectedOutput = "Enter a test int (int): Invalid data format. An integer is expected.\nEnter a test int (int):";
+        assertEquals(outputStream.toString().trim().replace("\r\n", "\n"), expectedOutput.replace("\r\n", "\n").trim());
     }
 
     @Test

@@ -27,8 +27,8 @@ public class ConsoleScannerDataProvider {
     @DataProvider(name = "dp-testReadInt")
     public Object[][] dpTestReadIntValues() {
         return new Object[][]{
-                {"25\n", 25},
-                {"invalid\n25\n", 25},
+                {"25\n", 25, "Enter a test int (int):"},
+                {"invalid\n25\n", 25, "Enter a test int (int): Invalid data format. An integer is expected.\nEnter a test int (int):"},
         };
     }
 
