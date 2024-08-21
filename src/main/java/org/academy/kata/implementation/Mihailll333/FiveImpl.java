@@ -10,10 +10,6 @@ import java.util.List;
 public class FiveImpl extends Base implements Five {
     @Override
     public long[] gap(int g, long m, long n) {
-        if (g < 2 || m < 2 || n < m) {
-            return new long[]{0, 0};
-        }
-
         boolean[] isPrime = new boolean[(int) (n + 1)];
         for (int i = 2; i <= n; i++) {
             isPrime[i] = true;
@@ -57,48 +53,47 @@ public class FiveImpl extends Base implements Five {
 
     @Override
     public BigInteger perimeter(BigInteger n) {
-        if (n.compareTo(BigInteger.ZERO) < 0) {
-            return BigInteger.ZERO;
-        }
-
-        int intN = n.intValue();
-
         BigInteger a = BigInteger.ZERO;
         BigInteger b = BigInteger.ONE;
-        BigInteger c;
+        BigInteger sum = BigInteger.ONE;
 
-        if (intN == 0) {
-            return BigInteger.valueOf(4);
-        } else if (intN == 1) {
-            return BigInteger.valueOf(12);
-        }
-
-        for (int i = 2; i <= intN + 1; i++) {
-            c = a.add(b);
+        for (BigInteger i = BigInteger.valueOf(2); i.compareTo(n.add(BigInteger.ONE)) <= 0;
+             i = i.add(BigInteger.ONE)) {
+            BigInteger tmp = a.add(b);
             a = b;
-            b = c;
+            b = tmp;
+            sum = sum.add(b);
         }
 
-        BigInteger sumOfFib = b.subtract(BigInteger.ONE);
-        return sumOfFib.multiply(BigInteger.valueOf(4));
+        return sum.multiply(BigInteger.valueOf(4));
+    }
+
+    private static BigInteger fibonacci(int n) {
+        if (n < 2) {
+            return BigInteger.valueOf(n);
+        }
+        BigInteger a = BigInteger.ZERO;
+        BigInteger b = BigInteger.ONE;
+        for (int i = 2; i <= n; i++) {
+            BigInteger temp = a.add(b);
+            a = b;
+            b = temp;
+        }
+        return b;
     }
 
     @Override
     public double solve(double m) {
-        double discriminant = (m - 1) * (m - 1) + 4 * m;
-        double sqrtDiscriminant = Math.sqrt(discriminant);
+        double discriminant = Math.sqrt((1 + 2 * m) * (1 + 2 * m) - 4 * m * m);
 
-        // Calculate the two possible roots
-        double x1 = (m - 1 + sqrtDiscriminant) / 2;
-        double x2 = (m - 1 - sqrtDiscriminant) / 2;
+        double x1 = (1 + 2 * m - discriminant) / (2 * m);
+        double x2 = (1 + 2 * m + discriminant) / (2 * m);
 
-        // Return the root in the range (0, 1)
         if (x1 > 0 && x1 < 1) {
             return x1;
-        } else if (x2 > 0 && x2 < 1) {
+        } else {
             return x2;
         }
-        return discriminant;
     }
 
     @Override
