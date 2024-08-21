@@ -168,19 +168,8 @@ public class ConsoleScannerTest extends ConsoleScannerDataProvider {
         assertEquals(actual, expected);
     }
 
-    @Test
-    public void testReadString() {
-        String testData = "test 123123#readString\n";
-        System.setIn(new ByteArrayInputStream(testData.getBytes()));
-        InputStream inputStream = System.in;
-        ConsoleScanner consoleScanner = new ConsoleScanner(new Scanner(inputStream));
-        String actual = consoleScanner.readString("test");
-        String expected = "test 123123#readString";
-        assertEquals(actual, expected);
-    }
-
-    @Test(dataProvider = "dp-testReadStringArray")
-    public void testReadStringArray(String input, String[] expectedValue, String expectedOutput) {
+    @Test(dataProvider = "dp-testReadString")
+    public void testReadString(String param, String input, String expectedValue, String expectedOutput) {
         System.setIn(new ByteArrayInputStream(input.getBytes()));
         ConsoleScanner consoleScanner = new ConsoleScanner(new Scanner(System.in));
 
@@ -188,7 +177,23 @@ public class ConsoleScannerTest extends ConsoleScannerDataProvider {
         var originalOut = System.out;
         System.setOut(new PrintStream(actualOutputStream));
 
-        String[] actualValue = consoleScanner.readStringArray("test");
+        String actualValue = consoleScanner.readString(param);
+
+        System.setOut(originalOut);
+        assertEquals(actualValue, expectedValue);
+        assertEquals(actualOutputStream.toString(), expectedOutput);
+    }
+
+    @Test(dataProvider = "dp-testReadStringArray")
+    public void testReadStringArray(String param, String input, String[] expectedValue, String expectedOutput) {
+        System.setIn(new ByteArrayInputStream(input.getBytes()));
+        ConsoleScanner consoleScanner = new ConsoleScanner(new Scanner(System.in));
+
+        var actualOutputStream = new ByteArrayOutputStream();
+        var originalOut = System.out;
+        System.setOut(new PrintStream(actualOutputStream));
+
+        String[] actualValue = consoleScanner.readStringArray(param);
 
         System.setOut(originalOut);
         assertEquals(actualValue, expectedValue);
