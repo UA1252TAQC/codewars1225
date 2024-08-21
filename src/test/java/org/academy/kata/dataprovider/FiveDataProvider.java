@@ -37,6 +37,13 @@ public class FiveDataProvider extends AbstractDataProvider {
         inputs.add(new Object[]{6,100,110, null});
         inputs.add(new Object[]{8,300,400, new long[]{359,367}});
         inputs.add(new Object[]{10,300,400, new long[]{337,347}});
+        inputs.add(new Object[]{2, -5, 5, null});
+        inputs.add(new Object[]{2, 1, 1, null});
+        inputs.add(new Object[]{2, 2, 2, null});
+        inputs.add(new Object[]{1, 10, 20, new long[]{0, 0}});  // g < 2
+        inputs.add(new Object[]{3, 1, 10, new long[]{0, 0}});   // m < 2
+        inputs.add(new Object[]{3, 10, 5, new long[]{0, 0}});   // n < m
+
 
         return combineData(inputs, FIVE);
     }
