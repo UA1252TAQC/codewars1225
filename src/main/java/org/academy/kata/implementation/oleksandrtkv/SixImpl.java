@@ -151,7 +151,7 @@ public class SixImpl extends Base implements Six {
                     } else {
                         losses = losses + 1;
                     }
-                } else if (team2.equals(toFind)) {
+                } else {
                     scored += score2;
                     conceded += score1;
 

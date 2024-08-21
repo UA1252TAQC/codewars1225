@@ -130,10 +130,7 @@ public class SixImpl extends Base implements Six {
                 Matcher matcher = pattern.matcher(game);
 
                 if (!matcher.matches()) {
-                    if (game.matches(".*\\d+\\.\\d+.*")) {
-                        return "Error(float number):" + game.trim();
-                    }
-                    continue;
+                    return "Error(float number):" + game.trim();
                 }
 
                 String team1 = matcher.group(1).trim();
