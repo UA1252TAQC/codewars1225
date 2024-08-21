@@ -1,4 +1,4 @@
-package org.academy.kata.dataprovider;
+package org.academy.kata.dataproviders;
 
 import org.testng.annotations.DataProvider;
 
