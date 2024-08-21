@@ -72,4 +72,15 @@ public class ConsoleScannerDataProvider {
 
         return inputs.iterator();
     }
+
+    @DataProvider(name = "dp-testReadString")
+    public Iterator<Object[]> dpTestReadString() {
+        List<Object[]> inputs = new ArrayList<>();
+        String param = "test";
+        String expectedOutput = "Enter a " + param + ": ";
+
+        inputs.add(new Object[]{param, "string", "string", expectedOutput});
+
+        return inputs.iterator();
+    }
 }
