@@ -2,7 +2,7 @@ package org.academy.kata.implementation.marchenko2005;
 
 import org.academy.kata.Base;
 import org.academy.kata.Eight;
-
+import java.math.BigInteger;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
@@ -21,8 +21,8 @@ public class EightImpl extends Base implements Eight {
 
     @Override
     public float mpgToKPM(float mpg) {
-        double a = 1.609344 / 4.54609188;
-        return mpg * (float) a;
+        float res =  Math.round(mpg * (1.609344f / 4.54609188f) * 100.0f) / 100.0f;
+        return res;
     }
 
     @Override
@@ -100,8 +100,18 @@ public class EightImpl extends Base implements Eight {
 
     @Override
     public boolean am_i_wilson(double n) {
-        if (!isPrime(n))
+        final int num = (int) n;
+        if (num <= 1) {
             return false;
-        return (factorial(n - 1) / n * n) % 1 == 0;
+        }
+        BigInteger factorialValue = BigInteger.ONE;
+        for (int i = 2; i < num; i++) {
+            factorialValue = factorialValue.multiply(BigInteger.valueOf(i));
+        }
+        final BigInteger denominator = BigInteger.valueOf((long) num * num);
+        final BigInteger numerator = factorialValue.add(BigInteger.ONE);
+
+        return numerator.remainder(denominator).equals(BigInteger.ZERO);
     }
+
 }
