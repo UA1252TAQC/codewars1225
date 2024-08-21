@@ -25,11 +25,17 @@ public class ConsoleScannerDataProvider {
     }
 
     @DataProvider(name = "dp-testReadInt")
-    public Object[][] dpTestReadIntValues() {
-        return new Object[][]{
-                {"25\n", 25, "Enter a test int (int):"},
-                {"invalid\n25\n", 25, "Enter a test int (int): Invalid data format. An integer is expected.\nEnter a test int (int):"},
-        };
+    public Iterator<Object[]> testReadInt() {
+        List<Object[]> inputs = new ArrayList<>();
+        String param = "test int";
+        String expectedOutput1 = "Enter a " + param + " (int): ";
+        String expectedOutput2 = "Enter a " + param + " (int): Invalid data format. An integer is expected.\nEnter a " + param + " (int): ";
+
+        inputs.add(new Object[]{param, "25\n", 25, expectedOutput1});
+        inputs.add(new Object[]{param, "invalid\n25\n", 25, expectedOutput2});
+
+        return inputs.iterator();
     }
+
 
 }

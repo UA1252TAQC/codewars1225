@@ -19,15 +19,18 @@ public class ConsoleScannerTest extends ConsoleScannerDataProvider {
     }
 
     @Test(dataProvider = "dp-testReadInt")
-    public void testReadInt(String input, int expected, String expectedOutput) {
+    public void testReadInt(String param, String input, int expectedValue, String expectedOutput) {
         System.setIn(new ByteArrayInputStream(input.getBytes()));
-        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(outputStream));
         ConsoleScanner consoleScanner = new ConsoleScanner(new Scanner(System.in));
-        int actual = consoleScanner.readInt("test int");
-        System.setOut(System.out);
-        assertEquals(actual, expected);
-        assertEquals(outputStream.toString().trim().replace("\r\n", "\n"), expectedOutput.trim().replace("\r\n", "\n"));
+        var actualOutputStream = new ByteArrayOutputStream();
+        var originalOut = System.out;
+        System.setOut(new PrintStream(actualOutputStream));
+        int actualValue = consoleScanner.readInt(param);
+        System.setOut(originalOut);
+        assertEquals(actualValue, expectedValue);
+        String normalizedExpectedOutput = expectedOutput.replace("\r\n", "\n").replace("\r", "\n");
+        String normalizedActualOutput = actualOutputStream.toString().replace("\r\n", "\n").replace("\r", "\n");
+        assertEquals(normalizedActualOutput, normalizedExpectedOutput);
     }
 
     @Test
