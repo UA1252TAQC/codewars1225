@@ -23,4 +23,16 @@ public class ConsoleScannerDataProvider {
 
         return inputs.iterator();
     }
+
+    @DataProvider(name = "dp-testReadLongOutput")
+    public Iterator<Object[]> dpTestReadLongOutput() {
+        List<Object[]> inputs = new ArrayList<>();
+
+        inputs.add(new Object[]{"1234567890123456789\n", "Enter a test value (long): "});
+        inputs.add(new Object[]{"notANumber\n1234567890123456789\n", "Enter a test value (long): Invalid data format. An integer (long) is expected.\nEnter a test value (long): "});
+
+        return inputs.iterator();
+    }
+
+
 }
