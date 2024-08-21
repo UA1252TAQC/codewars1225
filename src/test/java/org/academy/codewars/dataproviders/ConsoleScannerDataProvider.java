@@ -30,9 +30,8 @@ public class ConsoleScannerDataProvider {
         String param = "test param";
         String expectedOutput1 = "Enter a " + param + " (float): ";
         String expectedOutput2 = "Enter a " + param + " (float): " +
-                "Invalid data format. A floating point number is expected.\n" +
-                "Enter a " + param + " (float): ";
-        expectedOutput2 = expectedOutput2.replaceAll("\\n|\\r\\n", System.lineSeparator());
+                "Invalid data format. A floating point number is expected.\r\nEnter a " + param + " (float): ";
+        //expectedOutput2 = expectedOutput2.replaceAll("\\n|\\r\\n", System.lineSeparator());
 
         inputs.add(new Object[]{param, "3.5\n", 3.5F, expectedOutput1});
         inputs.add(new Object[]{param, "; 3.5\n", 3.5F, expectedOutput2});
