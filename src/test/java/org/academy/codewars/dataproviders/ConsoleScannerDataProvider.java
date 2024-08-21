@@ -25,8 +25,6 @@ public class ConsoleScannerDataProvider {
         return inputs.iterator();
     }
 
-
-
     @DataProvider(name = "dp-testReadDouble")
     public Iterator<Object[]> testReadDouble() {
         List<Object[]> inputs = new ArrayList<>();
@@ -85,6 +83,18 @@ public class ConsoleScannerDataProvider {
         inputs.add(new Object[]{param, "3\n1\n2\n3\n", new int[]{1, 2, 3}, expectedOutput1});
         inputs.add(new Object[]{param, "test\n-3\n3\n1\n2\n3\n", new int[]{1, 2, 3}, expectedOutput2});
 
+        return inputs.iterator();
+    }
+
+    @DataProvider(name = "dpTestReadInt")
+    public Iterator<Object[]> dpTestReadInt1() {
+        List<Object[]> inputs = new ArrayList<>();
+        String param = "test int";
+        String lineSeparator = System.lineSeparator();
+        String expectedOutput1 = "Enter a " + param + " (int): ";
+        inputs.add(new Object[]{param, "25" + lineSeparator, 25, expectedOutput1});
+        String expectedOutput2 = "Enter a " + param + " (int): Invalid data format. An integer is expected." + lineSeparator + "Enter a " + param + " (int): ";
+        inputs.add(new Object[]{param, "invalid" + lineSeparator + "25" + lineSeparator, 25, expectedOutput2});
         return inputs.iterator();
     }
 

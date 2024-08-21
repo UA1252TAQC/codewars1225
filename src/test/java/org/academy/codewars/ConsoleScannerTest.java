@@ -20,26 +20,17 @@ public class ConsoleScannerTest extends ConsoleScannerDataProvider {
         Locale.setDefault(Locale.US);
     }
 
-    @Test
-    public void testReadInt() {
-        String testData = "25\n";
-        int expected = 25;
-        System.setIn(new ByteArrayInputStream(testData.getBytes()));
-        InputStream inputStream = System.in;
-        ConsoleScanner consoleScanner = new ConsoleScanner(new Scanner(inputStream));
-        int actual = consoleScanner.readInt("test int");
-        assertEquals(actual, expected);
-    }
-
-    @Test
-    public void testReadIntInvalidData() {
-        String testData = "invalid\n25\n";
-        int expected = 25;
-        System.setIn(new ByteArrayInputStream(testData.getBytes()));
-        InputStream inputStream = System.in;
-        ConsoleScanner consoleScanner = new ConsoleScanner(new Scanner(inputStream));
-        int actual = consoleScanner.readInt("test int");
-        assertEquals(actual, expected);
+    @Test(dataProvider = "dpTestReadInt")
+    public void testReadInt(String param, String input, int expectedValue, String expectedOutput) {
+        System.setIn(new ByteArrayInputStream(input.getBytes()));
+        ConsoleScanner consoleScanner = new ConsoleScanner(new Scanner(System.in));
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        PrintStream originalOut = System.out;
+        System.setOut(new PrintStream(outputStream));
+        int actualValue = consoleScanner.readInt(param);
+        System.setOut(originalOut);
+        assertEquals(actualValue, expectedValue);
+        assertEquals(outputStream.toString().trim(), expectedOutput.trim());
     }
 
     @Test(dataProvider = "dp-testReadFloat")
