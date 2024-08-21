@@ -5,6 +5,8 @@ import org.academy.kata.Six;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class SixImpl extends Base implements Six {
     @Override
@@ -26,40 +28,26 @@ public class SixImpl extends Base implements Six {
 
     @Override
     public String balance(String book) {
-        String cleanedBook = book.replaceAll("[^a-zA-Z0-9.\\s]", "").trim();
+        book = book.replaceAll("[^a-zA-Z0-9.\\s]", "");
+        String[] arr = book.split("\n");
+        double balance = Double.parseDouble(arr[0]);
+        String result = "Original Balance: " + String.format("%.2f", balance) + "\\r\\n";
+        double n = 0, total = 0;
+        for (int i = 1; i < arr.length; i++) {
+            if (arr[i].trim().isEmpty()) continue;
 
-        String[] lines = cleanedBook.split("\\n");
+            String[] line = arr[i].split(" ");
+            if (line.length < 3) continue;
 
-        double originalBalance = Double.parseDouble(lines[0]);
-        double currentBalance = originalBalance;
-
-        StringBuilder report = new StringBuilder();
-        report.append(String.format("Original Balance: %.2f\n", originalBalance));
-
-        double totalExpense = 0.0;
-        int transactionCount = 0;
-
-        // Step 4: Process each transaction
-        for (int i = 1; i < lines.length; i++) {
-            if (!lines[i].trim().isEmpty()) {
-                String[] parts = lines[i].split("\\s+");
-                int checkNumber = Integer.parseInt(parts[0]);
-                String category = parts[1];
-                double amount = Double.parseDouble(parts[2]);
-
-                currentBalance -= amount;
-                totalExpense += amount;
-                transactionCount++;
-
-                report.append(String.format("%d %s %.2f Balance %.2f\n", checkNumber, category, amount, currentBalance));
-            }
+            double price = Double.parseDouble(line[2]);
+            total += price;
+            balance -= price;
+            result += arr[i] + " Balance " + String.format("%.2f", balance) + "\\r\\n";
+            n++;
         }
-        double averageExpense = totalExpense / transactionCount;
-
-        report.append(String.format("Total expense  %.2f\n", totalExpense));
-        report.append(String.format("Average expense  %.2f", averageExpense));
-
-        return report.toString();
+        result += "Total expense  " + String.format("%.2f", total) + "\\r\\n"
+                + "Average expense  " + String.format("%.2f", total / n);
+        return result;
     }
 
     @Override
@@ -69,21 +57,17 @@ public class SixImpl extends Base implements Six {
 
     @Override
     public double mean(String town, String strng) {
-        String[] records = strng.split("\n");
-
-        for (String record : records) {
-            if (record.startsWith(town + ":")) {
-                String data = record.split(":")[1];
-                String[] monthlyRainfall = data.split(",");
-                double sum = 0.0;
-
-                for (String rainfall : monthlyRainfall) {
-                    sum += Double.parseDouble(rainfall.split(" ")[1]);
-                }
-                return sum / 12.0;  // Return the mean
-            }
+        double[] rainfallValues = extractRainfallValues(town, strng);
+        if (rainfallValues == null) {
+            return -1.0;
         }
-        return -1;
+
+        double sum = 0.0;
+        for (double value : rainfallValues) {
+            sum += value;
+        }
+
+        return sum / rainfallValues.length;
     }
 
     private static double[] extractRainfallValues(String town, String strng) {
@@ -125,86 +109,114 @@ public class SixImpl extends Base implements Six {
     @Override
     public String nbaCup(String resultSheet, String toFind) {
         if (toFind.isEmpty()) return "";
-        int wins = 0, draws = 0, losses = 0, totalScored = 0, totalConceded = 0;
 
-        for (String match : resultSheet.split(",")) {
-            String[] teams = match.split("(?<=\\d)\\s+");
-            if (!isMatchMember(teams, toFind)) continue;
+        String[] matches = resultSheet.split(",");
+        int wins = 0, draws = 0, losses = 0, scored = 0, conceded = 0;
+        boolean teamFound = false;
 
-            try {
-                int[] scores = extractScores(teams, toFind);
-                int scored = scores[0], conceded = scores[1];
+        for (String match : matches) {
+            if (containsFloat(match)) {
+                return "Error(float number):" + match.trim();
+            }
 
-                if (scored > conceded) wins++;
-                else if (scored == conceded) draws++;
-                else losses++;
+            String[] result = parseMatch(match);
+            if (result != null) {
+                String team1 = result[0];
+                int score1 = Integer.parseInt(result[1]);
+                String team2 = result[2];
+                int score2 = Integer.parseInt(result[3]);
 
-                totalScored += scored;
-                totalConceded += conceded;
-            } catch (Exception e) {
-                return "Error(float number):" + match;
+                if (team1.equals(toFind) || team2.equals(toFind)) {
+                    teamFound = true;
+                    if (team1.equals(toFind)) {
+                        int[] stats = updateTeamStats(score1, score2);
+                        wins += stats[0];
+                        draws += stats[1];
+                        losses += stats[2];
+                        scored += score1;
+                        conceded += score2;
+                    } else {
+                        int[] stats = updateTeamStats(score2, score1);
+                        wins += stats[0];
+                        draws += stats[1];
+                        losses += stats[2];
+                        scored += score2;
+                        conceded += score1;
+                    }
+                }
             }
         }
 
-        if (wins + draws + losses == 0) return String.format("%s:This team didn't play!", toFind);
+        if (!teamFound) {
+            return toFind + ":This team didn't play!";
+        }
+
+        int points = wins * 3 + draws;
         return String.format("%s:W=%d;D=%d;L=%d;Scored=%d;Conceded=%d;Points=%d",
-                toFind, wins, draws, losses, totalScored, totalConceded, (wins * 3) + draws);
+                toFind, wins, draws, losses, scored, conceded, points);
     }
 
-    private static boolean isMatchMember(String[] teams, String team) {
-        return teams[0].substring(0, teams[0].trim().lastIndexOf(" ")).trim().equals(team) ||
-                teams[1].substring(0, teams[1].trim().lastIndexOf(" ")).trim().equals(team);
+    private static boolean containsFloat(String match) {
+        return match.matches(".*\\d+\\.\\d+.*");
     }
 
-    private static int[] extractScores(String[] teams, String team) {
-        final String team1 = teams[0].trim();
-        final String team2 = teams[1].trim();
+    private static String[] parseMatch(String match) {
+        Pattern pattern = Pattern.compile("([A-Za-z0-9 ]+) (\\d+) ([A-Za-z0-9 ]+) (\\d+)");
+        Matcher matcher = pattern.matcher(match.trim());
 
-        if (isRequiredTeam(team, team1)) return new int[]{extractScore(team1), extractScore(team2)};
-        return new int[]{extractScore(team2), extractScore(team1)};
+        if (matcher.find()) {
+            return new String[]{
+                    matcher.group(1).trim(),
+                    matcher.group(2),
+                    matcher.group(3).trim(),
+                    matcher.group(4)
+            };
+        }
+        return null;
     }
 
-    private static boolean isRequiredTeam(String team, String team1) {
-        return team1.substring(0, team1.lastIndexOf(" ")).equals(team);
-    }
+    private static int[] updateTeamStats(int scored, int conceded) {
+        int[] stats = new int[3]; // {wins, draws, losses}
 
-    private static int extractScore(String team) {
-        return Integer.parseInt(team.substring(team.lastIndexOf(" ")).trim());
+        if (scored > conceded) {
+            stats[0] = 1;
+        } else if (scored == conceded) {
+            stats[1] = 1;
+        } else {
+            stats[2] = 1;
+        }
+
+        return stats;
     }
 
     @Override
     public String stockSummary(String[] lstOfArt, String[] lstOf1stLetter) {
-        if (lstOfArt.length == 0 || lstOf1stLetter.length == 0) {
+        if (lstOfArt == null || lstOfArt.length == 0 || lstOf1stLetter == null || lstOf1stLetter.length == 0) {
             return "";
         }
 
-        Map<String, Integer> categoryQuantities = new HashMap<>();
+        Map<String, Integer> categorySums = new HashMap<>();
 
         for (String category : lstOf1stLetter) {
-            categoryQuantities.put(category, 0);
+            categorySums.put(category, 0);
         }
 
-        for (String entry : lstOfArt) {
-            String[] parts = entry.split(" ");
-            String code = parts[0];
+        for (String item : lstOfArt) {
+            String[] parts = item.split(" ");
+            String category = parts[0].substring(0, 1);
             int quantity = Integer.parseInt(parts[1]);
 
-            String category = code.substring(0, 1);
-
-            if (categoryQuantities.containsKey(category)) {
-                categoryQuantities.put(category, categoryQuantities.get(category) + quantity);
+            if (categorySums.containsKey(category)) {
+                categorySums.put(category, categorySums.get(category) + quantity);
             }
         }
 
         StringBuilder result = new StringBuilder();
-        for (int i = 0; i < lstOf1stLetter.length; i++) {
-            String category = lstOf1stLetter[i];
-            int quantity = categoryQuantities.getOrDefault(category, 0);
-            result.append("(").append(category).append(" : ").append(quantity).append(")");
-
-            if (i < lstOf1stLetter.length - 1) {
+        for (String category : lstOf1stLetter) {
+            if (result.length() > 0) {
                 result.append(" - ");
             }
+            result.append("(").append(category).append(" : ").append(categorySums.get(category)).append(")");
         }
 
         return result.toString();

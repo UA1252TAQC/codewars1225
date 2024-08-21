@@ -10,39 +10,27 @@ import java.util.List;
 public class FiveImpl extends Base implements Five {
     @Override
     public long[] gap(int g, long m, long n) {
-        if (g < 2 || m < 2 || n < m) {
-            return new long[]{0, 0};
-        }
+        long prevPrime = 0;
 
-        boolean[] isPrime = new boolean[(int) (n + 1)];
-        for (int i = 2; i <= n; i++) {
-            isPrime[i] = true;
-        }
-
-        for (int i = 2; (long) i * i <= n; i++) {
-            if (isPrime[i]) {
-                for (int j = i * i; j <= n; j += i) {
-                    isPrime[j] = false;
+        for (long i = m; i <= n; i++) {
+            if (isPrime(i)) {
+                if (prevPrime != 0 && i - prevPrime == g) {
+                    return new long[]{prevPrime, i};
                 }
+                prevPrime = i;
             }
         }
 
-        List<Long> primesInRange = new ArrayList<>();
-        for (long i = Math.max(m, 2); i <= n; i++) {
-            if (isPrime[(int) i]) {
-                primesInRange.add(i);
-            }
+        return null;
+    }
+    private boolean isPrime(long num) {
+        if (num <= 1) return false;
+        if (num == 2 || num == 3) return true;
+        if (num % 2 == 0 || num % 3 == 0) return false;
+        for (long i = 5; i * i <= num; i += 6) {
+            if (num % i == 0 || num % (i + 2) == 0) return false;
         }
-
-        for (int i = 0; i < primesInRange.size() - 1; i++) {
-            long p1 = primesInRange.get(i);
-            long p2 = primesInRange.get(i + 1);
-            if (p2 - p1 == g) {
-                return new long[]{p1, p2};
-            }
-        }
-
-        return new long[]{0, 0};
+        return true;
     }
 
     @Override
@@ -57,48 +45,27 @@ public class FiveImpl extends Base implements Five {
 
     @Override
     public BigInteger perimeter(BigInteger n) {
-        if (n.compareTo(BigInteger.ZERO) < 0) {
-            return BigInteger.ZERO;
-        }
-
-        int intN = n.intValue();
-
-        BigInteger a = BigInteger.ZERO;
+        BigInteger sum = BigInteger.ZERO;
+        BigInteger a = BigInteger.ONE;
         BigInteger b = BigInteger.ONE;
-        BigInteger c;
 
-        if (intN == 0) {
-            return BigInteger.valueOf(4);
-        } else if (intN == 1) {
-            return BigInteger.valueOf(12);
-        }
-
-        for (int i = 2; i <= intN + 1; i++) {
-            c = a.add(b);
+        for (BigInteger i = BigInteger.ZERO; i.compareTo(n) <= 0; i = i.add(BigInteger.ONE)) {
+            sum = sum.add(a);
+            BigInteger next = a.add(b);
             a = b;
-            b = c;
+            b = next;
         }
-
-        BigInteger sumOfFib = b.subtract(BigInteger.ONE);
-        return sumOfFib.multiply(BigInteger.valueOf(4));
+        return sum.multiply(BigInteger.valueOf(4));
     }
 
     @Override
     public double solve(double m) {
-        double discriminant = (m - 1) * (m - 1) + 4 * m;
-        double sqrtDiscriminant = Math.sqrt(discriminant);
+        double numeratorPart1 = 2 * m + 1;
+        double numeratorPart2 = Math.sqrt(4 * m + 1);
+        double numerator = numeratorPart1 - numeratorPart2;
+        double denominator = 2 * m;
 
-        // Calculate the two possible roots
-        double x1 = (m - 1 + sqrtDiscriminant) / 2;
-        double x2 = (m - 1 - sqrtDiscriminant) / 2;
-
-        // Return the root in the range (0, 1)
-        if (x1 > 0 && x1 < 1) {
-            return x1;
-        } else if (x2 > 0 && x2 < 1) {
-            return x2;
-        }
-        return discriminant;
+        return numerator / denominator;
     }
 
     @Override
