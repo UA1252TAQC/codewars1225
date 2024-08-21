@@ -100,7 +100,7 @@ public class ConsoleScanner {
     }
 
     public String readString(String param) {
-        System.out.print("Enter a " + param + " : ");
+        System.out.print("Enter a " + param + ": ");
         return scanner.nextLine().trim();
     }
 
