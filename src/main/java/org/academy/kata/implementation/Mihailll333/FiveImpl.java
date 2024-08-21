@@ -68,7 +68,6 @@ public class FiveImpl extends Base implements Five {
         return sum.multiply(BigInteger.valueOf(4));
     }
 
-    // Function to compute Fibonacci number F(n) using BigInteger
     private static BigInteger fibonacci(int n) {
         if (n < 2) {
             return BigInteger.valueOf(n);

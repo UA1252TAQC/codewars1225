@@ -77,13 +77,11 @@ public class SixImpl extends Base implements Six {
     private static double[] extractRainfallValues(String town, String strng) {
         int startIndex = strng.indexOf(town + ":");
         if (startIndex == -1) {
-            return null; // City not found
+            return null;
         }
 
-        // Move to the start of the rainfall data
-        startIndex += town.length() + 1; // Length of town name + ':'
+        startIndex += town.length() + 1;
 
-        // Extract the data part
         int endIndex = strng.indexOf('\n', startIndex);
         if (endIndex == -1) {
             endIndex = strng.length();
@@ -91,10 +89,9 @@ public class SixImpl extends Base implements Six {
 
         String data = strng.substring(startIndex, endIndex).trim();
         if (data.isEmpty()) {
-            return null; // No rainfall data
+            return null;
         }
 
-        // Split the data into individual values
         String[] values = data.split("\\s*,\\s*");
         double[] rainfallValues = new double[values.length];
         try {
@@ -102,7 +99,7 @@ public class SixImpl extends Base implements Six {
                 rainfallValues[i] = Double.parseDouble(values[i]);
             }
         } catch (NumberFormatException e) {
-            return null; // Error in parsing
+            return null;
         }
 
         return rainfallValues;
