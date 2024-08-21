@@ -86,27 +86,44 @@ public class ConsoleScannerTest extends ConsoleScannerDataProvider {
         assertEquals(expected, actual);
     }
 
-    @Test
-    public void testReadDouble() {
-        String testData = "7.5\n";
-        double expected = 7.5;
-        System.setIn(new ByteArrayInputStream(testData.getBytes()));
+    @Test(dataProvider = "dp-testReadDoubleValidData")
+    public void testReadDouble(String param, String input, double expectedValue, String expectedOutput) {
+        System.setIn(new ByteArrayInputStream(input.getBytes()));
         InputStream inputStream = System.in;
         ConsoleScanner consoleScanner = new ConsoleScanner(new Scanner(inputStream));
-        double actual = consoleScanner.readDouble("test double");
-        assertEquals(actual, expected);
+
+        ByteArrayOutputStream actualOutputStream = new ByteArrayOutputStream();
+        PrintStream originalOut = System.out;
+        System.setOut(new PrintStream(actualOutputStream));
+
+        double actualValue = consoleScanner.readDouble(param);
+
+        System.setOut(originalOut);
+
+        assertEquals(actualOutputStream.toString(), expectedOutput);
+        assertEquals(actualValue, expectedValue);
     }
 
-    @Test
-    public void testReadDoubleInvalidData() {
-        String testData = "invalid\n2.718\n";
-        double expected = 2.718;
-        System.setIn(new ByteArrayInputStream(testData.getBytes()));
+    @Test(dataProvider = "dp-testReadDoubleInvalidData")
+    public void testReadDoubleInvalidData(String param, String input, double expectedValue, String expectedOutput) {
+        System.setIn(new ByteArrayInputStream(input.getBytes()));
         InputStream inputStream = System.in;
         ConsoleScanner consoleScanner = new ConsoleScanner(new Scanner(inputStream));
-        double actual = consoleScanner.readDouble("test double");
-        assertEquals(actual, expected);
+
+        ByteArrayOutputStream actualOutputStream = new ByteArrayOutputStream();
+        PrintStream originalOut = System.out;
+        System.setOut(new PrintStream(actualOutputStream));
+
+        double actualValue = consoleScanner.readDouble(param);
+
+        System.setOut(originalOut);
+
+        assertEquals(actualOutputStream.toString(), expectedOutput);
+        assertEquals(actualValue, expectedValue);
     }
+
+
+
 
     @Test
     public void testReadBigInteger() {

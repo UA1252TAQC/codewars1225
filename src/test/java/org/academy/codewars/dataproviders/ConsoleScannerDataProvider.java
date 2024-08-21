@@ -23,4 +23,41 @@ public class ConsoleScannerDataProvider {
 
         return inputs.iterator();
     }
+
+    @DataProvider(name = "dp-testReadDoubleValidData")
+    public Iterator<Object[]> testReadDoubleValidData() {
+        List<Object[]> inputs = new ArrayList<>();
+        String param = "double param";
+        String testInput1 = "7.5\n";
+        double expectedValue1 = 7.5;
+        String expectedOutput1 = "Enter a " + param + " (double): ";
+        String testInput2 = "123.456\n";
+        double expectedValue2 = 123.456;
+        String expectedOutput2 = "Enter a " + param + " (double): ";
+
+        inputs.add(new Object[]{param, testInput1, expectedValue1, expectedOutput1});
+        inputs.add(new Object[]{param, testInput2, expectedValue2, expectedOutput2});
+
+        return inputs.iterator();
+    }
+
+    @DataProvider(name = "dp-testReadDoubleInvalidData")
+    public Iterator<Object[]> testReadDoubleInvalidData() {
+        List<Object[]> inputs = new ArrayList<>();
+        String param = "double param";
+        String testInput1 = "invalid\n2.718\n";
+        double expectedValue1 = 2.718;
+        String expectedOutput1 = "Enter a " + param + " (double): Invalid data format. A floating point number is expected.\n" +
+                "Enter a " + param + " (double): ";
+        String testInput2 = "wrong\n3.14159\n";
+        double expectedValue2 = 3.14159;
+        String expectedOutput2 = "Enter a " + param + " (double): Invalid data format. A floating point number is expected.\n" +
+                "Enter a " + param + " (double): ";
+
+        inputs.add(new Object[]{param, testInput1, expectedValue1, expectedOutput1});
+        inputs.add(new Object[]{param, testInput2, expectedValue2, expectedOutput2});
+
+        return inputs.iterator();
+    }
+
 }
