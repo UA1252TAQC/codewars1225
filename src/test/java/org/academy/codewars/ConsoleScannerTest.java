@@ -1,7 +1,6 @@
 package org.academy.codewars;
 
 import org.academy.codewars.dataproviders.ConsoleScannerDataProvider;
-import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -102,20 +101,9 @@ public class ConsoleScannerTest extends ConsoleScannerDataProvider {
         double actual = consoleScanner.readDouble("test double");
         assertEquals(actual, expected);
     }
-
-    @Test
-    public void testReadBigInteger() {
-        String testData = "12345678901234567890\n";
-        BigInteger expected = new BigInteger("12345678901234567890");
-        System.setIn(new ByteArrayInputStream(testData.getBytes()));
-        InputStream inputStream = System.in;
-        ConsoleScanner consoleScanner = new ConsoleScanner(new Scanner(inputStream));
-        BigInteger actual = consoleScanner.readBigInteger("test BigInteger");
-        assertEquals(actual, expected);
-    }
-
+    
     @Test(dataProvider = "dp-testReadBigInteger")
-    public void testReadBigInteger(String input, BigInteger expectedValue, String expectedOutput) {
+    public void testReadBigInteger(String param, String input, BigInteger expectedValue, String expectedOutput) {
         System.setIn(new ByteArrayInputStream(input.getBytes()));
         ConsoleScanner consoleScanner = new ConsoleScanner(new Scanner(System.in));
 
@@ -123,18 +111,15 @@ public class ConsoleScannerTest extends ConsoleScannerDataProvider {
         var originalOut = System.out;
         System.setOut(new PrintStream(actualOutputStream));
 
-        BigInteger actualValue = consoleScanner.readBigInteger("test");
-
+        BigInteger actualValue = consoleScanner.readBigInteger(param);
         System.setOut(originalOut);
 
-        // Normalize and trim spaces for robust comparison
         String actualOutputNormalized = actualOutputStream.toString().trim().replaceAll("[\\s\\n]+", " ");
         String expectedOutputNormalized = expectedOutput.trim().replaceAll("[\\s\\n]+", " ");
 
         assertEquals(actualValue, expectedValue);
         assertEquals(actualOutputNormalized, expectedOutputNormalized);
     }
-
 
     @Test
     public void testReadIntArray() {
@@ -159,7 +144,8 @@ public class ConsoleScannerTest extends ConsoleScannerDataProvider {
     }
 
     @Test(dataProvider = "dp-testReadDoubleArray")
-    public void testReadDoubleArray(String input, double[] expectedValue, String expectedOutput) {
+    public void testReadDoubleArray(String param, String input, double[] expectedValue, String expectedOutput) {
+
         System.setIn(new ByteArrayInputStream(input.getBytes()));
         ConsoleScanner consoleScanner = new ConsoleScanner(new Scanner(System.in));
 
@@ -167,24 +153,14 @@ public class ConsoleScannerTest extends ConsoleScannerDataProvider {
         var originalOut = System.out;
         System.setOut(new PrintStream(actualOutputStream));
 
-        double[] actualValue = consoleScanner.readDoubleArray("test");
+        double[] actualValue = consoleScanner.readDoubleArray(param);
 
         System.setOut(originalOut);
+        String actualOutput = actualOutputStream.toString();
 
-        // Normalize and trim spaces for robust comparison
-//        String actualOutputNormalized = actualOutputStream.toString().trim().replaceAll("[\\s\\n]+", " ");
-//        String expectedOutputNormalized = expectedOutput.trim().replaceAll("[\\s\\n]+", " ");
-
-        // Use assertEquals for array content comparison
-        String actualOutputNormalized = actualOutputStream.toString().replaceAll("\\r\\n|\\n", " ").replaceAll("\\s+", " ").trim();
-        String expectedOutputNormalized = expectedOutput.replaceAll("\\r\\n|\\n", " ").replaceAll("\\s+", " ").trim();
-
-        // Use assertArrayEquals for array content comparison
-        Assert.assertEquals(actualValue, expectedValue, "The actual array does not match the expected array.");
-        Assert.assertEquals(actualOutputNormalized, expectedOutputNormalized, "The actual output does not match the expected output.");
+        assertEquals(actualValue, expectedValue);
+        assertEquals(actualOutput, expectedOutput);
     }
-
-
 
     @Test(dataProvider = "dp-testReadString")
     public void testReadString(String param, String input, String expectedValue, String expectedOutput) {
