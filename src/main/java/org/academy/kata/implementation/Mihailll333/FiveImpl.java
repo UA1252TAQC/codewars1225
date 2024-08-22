@@ -38,7 +38,7 @@ public class FiveImpl extends Base implements Five {
             }
         }
 
-        return new long[]{0, 0};
+        return null;
     }
 
     @Override
