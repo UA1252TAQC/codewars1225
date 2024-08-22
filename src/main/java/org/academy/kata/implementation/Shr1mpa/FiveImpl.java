@@ -73,23 +73,25 @@ public class FiveImpl extends Base implements Five {
     @Override
     public long[] smallest(long n) {
         String numStr = Long.toString(n);
-        long[] result = new long[3];
+        long[] result = new long[]{n, -1, -1};
         long minNum = n;
 
         for (int i = 0; i < numStr.length(); i++) {
             for (int j = 0; j < numStr.length(); j++) {
+                if (i == j) continue;
+
                 StringBuilder sb = new StringBuilder(numStr);
                 char c = sb.charAt(i);
                 sb.deleteCharAt(i);
                 sb.insert(j, c);
-                String num = sb.toString();
-                if (Long.parseLong(num) < minNum) {
-                    minNum = Long.parseLong(num);
+                long newNum = Long.parseLong(sb.toString());
+
+                if (newNum < minNum) {
+                    minNum = newNum;
                     result[0] = minNum;
                     result[1] = i;
                     result[2] = j;
                 }
-                sb.deleteCharAt(j);
             }
         }
 
