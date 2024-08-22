@@ -11,7 +11,7 @@ public class SixDataProvider extends AbstractDataProvider {
 
     @DataProvider(name = "data-findNb")
     public static Iterator<Object[]> dpFindNb() {
-        List<Object[]> inputs = new ArrayList<>();
+        final List<Object[]> inputs = new ArrayList<>();
         inputs.add(new Object[]{1071225L, 45});
         inputs.add(new Object[]{91716553919377L, -1});
         inputs.add(new Object[]{135440716410000L, 4824});
@@ -21,8 +21,7 @@ public class SixDataProvider extends AbstractDataProvider {
 
     @DataProvider(name = "data-stockSummary")
     public static Iterator<Object[]> dpStockSummary() {
-        List<Object[]> inputs = new ArrayList<>();
-
+        final List<Object[]> inputs = new ArrayList<>();
         inputs.add(new Object[]{new String[]{"ABAR 200", "CDXE 500", "BKWR 250", "BTSQ 890", "DRTY 600"},
                 new String[]{"A", "B", "C", "D"}, "(A : 200) - (B : 1140) - (C : 500) - (D : 600)"});
         inputs.add(new Object[]{new String[]{"XYZ 300", "LMN 400", "OPQ 100", "RST 500"},
@@ -46,7 +45,7 @@ public class SixDataProvider extends AbstractDataProvider {
 
     @DataProvider(name = "data-f")
     public static Iterator<Object[]> dpF() {
-        List<Object[]> inputs = new ArrayList<>();
+        final List<Object[]> inputs = new ArrayList<>();
         inputs.add(new Object[]{1e-15, 4.99999999999999875e-16});
         inputs.add(new Object[]{1e-10, 4.99999999975000000e-11});
         inputs.add(new Object[]{1e-5, 4.99999997499999875e-6});
@@ -56,7 +55,7 @@ public class SixDataProvider extends AbstractDataProvider {
 
     @DataProvider(name = "data-balance")
     public static Iterator<Object[]> dpBalance() {
-        List<Object[]> inputs = new ArrayList<>();
+        final List<Object[]> inputs = new ArrayList<>();
         inputs.add(new Object[]{
                 "1000.00\n125 Market !=:125.45\n126 Hardware =34.95\n127 Video! 7.45\n128 Book :14.32\n129 Gasoline ::16.10",
                 "Original Balance: 1000.00\\r\\n125 Market 125.45 Balance 874.55\\r\\n126 Hardware 34.95 Balance 839.60\\r\\n127 Video 7.45 Balance 832.15\\r\\n128 Book 14.32 Balance 817.83\\r\\n129 Gasoline 16.10 Balance 801.73\\r\\nTotal expense  198.27\\r\\nAverage expense  39.65"
@@ -86,7 +85,7 @@ public class SixDataProvider extends AbstractDataProvider {
 
     @DataProvider(name = "data-mean")
     public static Iterator<Object[]> dpMean() {
-        List<Object[]> inputs = new ArrayList<>();
+        final List<Object[]> inputs = new ArrayList<>();
         inputs.add(new Object[]{"London", "London:Jan 20.5,Feb 30.2,Mar 40.3\nParis:Jan 25.2,Feb 28.3,Mar 35.4", 30.333333333333332});
         inputs.add(new Object[]{"Paris", "London:Jan 20.5,Feb 30.2,Mar 40.3\nParis:Jan 25.2,Feb 28.3,Mar 35.4", 29.633333333333333});
         inputs.add(new Object[]{"Berlin", "London:Jan 20.5,Feb 30.2,Mar 40.3\nParis:Jan 25.2,Feb 28.3,Mar 35.4", -1.0});
@@ -96,7 +95,7 @@ public class SixDataProvider extends AbstractDataProvider {
 
     @DataProvider(name = "data-variance")
     public static Iterator<Object[]> dpVariance() {
-        List<Object[]> inputs = new ArrayList<>();
+        final List<Object[]> inputs = new ArrayList<>();
         inputs.add(new Object[]{"London", "London:Jan 20.5,Feb 30.2,Mar 40.3\nParis:Jan 25.2,Feb 28.3,Mar 35.4", 65.3436111111111});
         inputs.add(new Object[]{"Paris", "London:Jan 20.5,Feb 30.2,Mar 40.3\nParis:Jan 25.2,Feb 28.3,Mar 35.4", 18.229333333333332});
         inputs.add(new Object[]{"Berlin", "London:Jan 20.5,Feb 30.2,Mar 40.3\nParis:Jan 25.2,Feb 28.3,Mar 35.4", -1.0});
@@ -106,26 +105,26 @@ public class SixDataProvider extends AbstractDataProvider {
 
     @DataProvider(name = "data-nbaCup")
     public static Iterator<Object[]> dpNbaCup() {
-        List<Object[]> inputs = new ArrayList<>();
+        final List<Object[]> inputs = new ArrayList<>();
 
-        String resultSheetDefault = "Los Angeles Clippers 104 Dallas Mavericks 88,New York Knicks 101 Dallas Mavericks 88, Indiana Pacers 103 Memphis Grizzlies 112,"
+        final String resultSheetDefault = "Los Angeles Clippers 104 Dallas Mavericks 88,New York Knicks 101 Dallas Mavericks 88, Indiana Pacers 103 Memphis Grizzlies 112,"
                 + "Minnesota Timberwolves 112 Los Angeles Clippers 111,Phoenix Suns 95 Dallas Mavericks 111,Portland Trail Blazers 112 New Orleans Pelicans 94,"
                 + "Sacramento Kings 104 Los Angeles Clippers 111,Houston Rockets 85 Denver Nuggets 105";
 
-        String resultSheetEmpty = "";
+        final String resultSheetEmpty = "";
 
-        String resultSheetWinFirst = "Los Angeles Clippers 104 Dallas Mavericks 88";
-        String resultSheetWinSecond = "Los Angeles Clippers 88 Dallas Mavericks 104";
-        String resultSheetDraw = "Dallas Mavericks 104 Los Angeles Clippers 104";
+        final String resultSheetWinFirst = "Los Angeles Clippers 104 Dallas Mavericks 88";
+        final String resultSheetWinSecond = "Los Angeles Clippers 88 Dallas Mavericks 104";
+        final String resultSheetDraw = "Dallas Mavericks 104 Los Angeles Clippers 104";
 
-        String resultSheetWDL = "Dallas Mavericks 104 Los Angeles Clippers 104,"
+        final String resultSheetWDL = "Dallas Mavericks 104 Los Angeles Clippers 104,"
                 + "Los Angeles Clippers 104  Portland Trail Blazers 98,"
                 + "Houston Rockets 104 Portland Trail Blazers 103,"
                 + "Houston Rockets 104 Los Angeles Clippers 103";
 
-        String resultSheetDecimalFirst = "New York Knicks 101.12 Atlanta Hawks 112";
-        String resultSheetDecimalSecond = "New York Knicks 101 Atlanta Hawks 112.3";
-        String resultSheetDecimalBoth = "New York Knicks 101.30 Atlanta Hawks 112.3";
+        final String resultSheetDecimalFirst = "New York Knicks 101.12 Atlanta Hawks 112";
+        final String resultSheetDecimalSecond = "New York Knicks 101 Atlanta Hawks 112.3";
+        final String resultSheetDecimalBoth = "New York Knicks 101.30 Atlanta Hawks 112.3";
 
         inputs.add(new Object[]{resultSheetDefault, "", ""});
         inputs.add(new Object[]{resultSheetEmpty, "", ""});

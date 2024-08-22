@@ -17,31 +17,31 @@ public class FiveTest extends FiveDataProvider {
 
     @Test(dataProvider = "data-gap")
     public void testGap(Five five, int g, long m, long n, long[] expected) {
-        long[] actual = five.gap(g, m, n);
+        final long[] actual = five.gap(g, m, n);
         assertEquals(actual, expected);
     }
 
     @Test(dataProvider = "data-Zeros")
     public void testZeros(Five five, int n, int expected) {
-        int actual = five.zeros(n);
+        final int actual = five.zeros(n);
         assertEquals(actual, expected);
     }
 
     @Test(dataProvider = "data-perimeter")
     public void testPerimeter(Five five, BigInteger n, BigInteger expected) {
-        BigInteger actual = five.perimeter(n);
+        final BigInteger actual = five.perimeter(n);
         assertEquals(actual, expected);
     }
 
     @Test(dataProvider = "data-solve")
     public void testSolve(Five five, double input, double expected) {
-        double actual = five.solve(input);
+        final double actual = five.solve(input);
         assertEquals(actual, expected, 1e-6);
     }
 
     @Test(dataProvider = "data-Smallest")
     public void testSmallest(Five five, long n, long[] expected) {
-        long[] actual = five.smallest(n);
+        final long[] actual = five.smallest(n);
         assertEquals(actual, expected);
     }
 }

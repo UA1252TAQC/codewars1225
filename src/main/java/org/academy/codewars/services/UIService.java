@@ -7,7 +7,6 @@ import org.academy.codewars.entities.Task;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
-import java.util.Scanner;
 import java.util.function.Function;
 
 public class UIService {
@@ -22,29 +21,21 @@ public class UIService {
     }
 
     public void start() {
-        Scanner scanner = new Scanner(System.in);
-        String userInput;
         while (true) {
             System.out.println("Main menu:");
             System.out.println("\t1) Show all authors");
             System.out.println("\t2) Show all tasks");
             System.out.println("\t3) Run author's method");
             System.out.println("\tq) Quit");
-            userInput = scanner.next();
-            switch (userInput.trim()) {
-                case "1":
-                    getAllAuthors();
-                    break;
-                case "2":
-                    getAllTasks();
-                    break;
-                case "3":
-                    executeTask();
-                    break;
-                case "q":
+            final String userInput = consoleScanner.readString("value");
+            switch (userInput) {
+                case "1" -> getAllAuthors();
+                case "2" -> getAllTasks();
+                case "3" -> executeTask();
+                case "0" -> {
                     return;
-                default:
-                    actionNotFound();
+                }
+                default -> actionNotFound();
             }
         }
     }
@@ -69,14 +60,13 @@ public class UIService {
 
     private void executeTask() {
         try {
-            Author author = requestAuthor();
-            Task task = requestTask();
+            final Author author = requestAuthor();
+            final Task task = requestTask();
             System.out.println("Author: " + author.getName());
             System.out.println("Task description: " + task.getDescription());
-            List<Object> params = requestParams(task);
-
+            final List<Object> params = requestParams(task);
             try {
-                String result = task.getSupplier().applyString(author, params);
+                final String result = task.getSupplier().applyString(author, params);
                 System.out.println("Result: " + result);
             } catch (Exception e) {
                 System.out.println("Result: Thrown exception: " + e.getClass() + ", with message: " + e.getMessage());
@@ -87,7 +77,7 @@ public class UIService {
     }
 
     private List<Object> requestParams(Task task) {
-        List<Object> params = new ArrayList<>();
+        final List<Object> params = new ArrayList<>();
         for (Function<ConsoleScanner, ?> param : task.getRequiredParams()) {
             params.add(param.apply(consoleScanner));
         }

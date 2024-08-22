@@ -11,7 +11,7 @@ public class FiveDataProvider extends AbstractDataProvider {
 
     @DataProvider(name = "data-Smallest")
     public static Iterator<Object[]> dpFindSmallest(){
-        List<Object[]> inputs = new ArrayList<>();
+        final List<Object[]> inputs = new ArrayList<>();
         inputs.add(new Object[]{261235L, new long[]{126235L, 2L, 0L}});
         inputs.add(new Object[]{209917L, new long[]{29917L, 0L, 1L}});
         inputs.add(new Object[]{1000000L, new long[]{1L, 0L, 6L}});
@@ -24,7 +24,7 @@ public class FiveDataProvider extends AbstractDataProvider {
 
     @DataProvider(name = "data-Zeros")
     public static Iterator<Object[]> dpZeros(){
-        List<Object[]> inputs = new ArrayList<>();
+        final List<Object[]> inputs = new ArrayList<>();
         inputs.add(new Object[]{0, 0});
         inputs.add(new Object[]{6, 1});
         inputs.add(new Object[]{14, 2});
@@ -35,7 +35,7 @@ public class FiveDataProvider extends AbstractDataProvider {
 
     @DataProvider(name = "data-gap")
     public static Iterator<Object[]> dpGap(){
-        List<Object[]> inputs = new ArrayList<>();
+        final List<Object[]> inputs = new ArrayList<>();
         inputs.add(new Object[]{2,100,110, new long[]{101,103}});
         inputs.add(new Object[]{4,100,110, new long[]{103,107}});
         inputs.add(new Object[]{6,100,110, null});
@@ -52,7 +52,7 @@ public class FiveDataProvider extends AbstractDataProvider {
 
     @DataProvider(name = "data-perimeter")
     public static Iterator<Object[]> dpPerimeter(){
-        List<Object[]> inputs = new ArrayList<>();
+        final List<Object[]> inputs = new ArrayList<>();
         inputs.add(new Object[]{BigInteger.valueOf(5), BigInteger.valueOf(80)});
         inputs.add(new Object[]{BigInteger.valueOf(7), BigInteger.valueOf(216)});
         inputs.add(new Object[]{BigInteger.valueOf(1), BigInteger.valueOf(8)});
@@ -64,8 +64,7 @@ public class FiveDataProvider extends AbstractDataProvider {
 
     @DataProvider(name = "data-solve")
     public static Iterator<Object[]> whichXForThatSum(){
-        List<Object[]> inputs = new ArrayList<>();
-
+        final List<Object[]> inputs = new ArrayList<>();
         inputs.add(new Object[]{2.0, 0.5});
         inputs.add(new Object[]{4.0, 0.6096117967978});
         inputs.add(new Object[]{5.0, 0.6417424305044});

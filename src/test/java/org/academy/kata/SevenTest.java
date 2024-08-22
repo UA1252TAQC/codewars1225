@@ -21,14 +21,14 @@ public class SevenTest extends SevenDataProvider {
         if (expectedException != null) {
             assertThrows(expectedException, () -> seven.newAvg(arr, navg));
         } else {
-            long actual = seven.newAvg(arr, navg);
+            final long actual = seven.newAvg(arr, navg);
             assertEquals(actual, expected);
         }
     }
 
     @Test(dataProvider = "data-SeriesSum")
     public void testSeriesSum(Seven seven, int n, String expected) {
-        String actual = seven.seriesSum(n);
+        final String actual = seven.seriesSum(n);
         assertEquals(actual, expected);
     }
 

@@ -14,33 +14,23 @@ public class SupplierWrapper<T> {
     }
 
     public String applyString(Author author, List<Object> params) {
-        T result = supplier.apply(author, params);
-        if (result == null) {
-            return null;
-        }
+        final T result = supplier.apply(author, params);
+        if (result == null) return null;
         if (!result.getClass().isArray()) {
             return String.valueOf(result);
         }
 
-        if (result instanceof int[]) {
-            return Arrays.toString((int[]) result);
-        } else if (result instanceof double[]) {
-            return Arrays.toString((double[]) result);
-        } else if (result instanceof float[]) {
-            return Arrays.toString((float[]) result);
-        } else if (result instanceof long[]) {
-            return Arrays.toString((long[]) result);
-        } else if (result instanceof short[]) {
-            return Arrays.toString((short[]) result);
-        } else if (result instanceof byte[]) {
-            return Arrays.toString((byte[]) result);
-        } else if (result instanceof char[]) {
-            return Arrays.toString((char[]) result);
-        } else if (result instanceof boolean[]) {
-            return Arrays.toString((boolean[]) result);
-        } else {
-            return Arrays.deepToString((Object[]) result);
-        }
+        return switch (result) {
+            case int[] ints -> Arrays.toString(ints);
+            case double[] doubles -> Arrays.toString(doubles);
+            case float[] floats -> Arrays.toString(floats);
+            case long[] longs -> Arrays.toString(longs);
+            case short[] shorts -> Arrays.toString(shorts);
+            case byte[] bytes -> Arrays.toString(bytes);
+            case char[] chars -> Arrays.toString(chars);
+            case boolean[] booleans -> Arrays.toString(booleans);
+            default -> Arrays.deepToString((Object[]) result);
+        };
     }
 }
 

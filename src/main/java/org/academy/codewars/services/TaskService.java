@@ -7,12 +7,13 @@ import java.util.NoSuchElementException;
 
 
 public class TaskService {
+
     public List<Task> getAll() {
         return Task.findAll();
     }
 
     public Task getById(int id) {
-        Task task = Task.findById(id);
+        final Task task = Task.findById(id);
         if (task == null) {
             throw new NoSuchElementException("Task not found with id: " + id);
         }
