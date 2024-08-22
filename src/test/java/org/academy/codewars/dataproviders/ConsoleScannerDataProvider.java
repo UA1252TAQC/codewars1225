@@ -67,7 +67,7 @@ public class ConsoleScannerDataProvider {
 
         inputs.add(new Object[]{param, "7.5\n", 7.5, expectedOutput1});
         inputs.add(new Object[]{param, "invalid\n2.718\n", 2.718, expectedOutput2});
-  
+
         return inputs.iterator();
     }
 
@@ -117,8 +117,8 @@ public class ConsoleScannerDataProvider {
         return inputs.iterator();
     }
 
-    @DataProvider(name = "dp-testReadLongOutput")
-    public Iterator<Object[]> dpTestReadLongOutput() {
+    @DataProvider(name = "dp-testReadLong")
+    public Iterator<Object[]> dpTestReadLong() {
         List<Object[]> inputs = new ArrayList<>();
 
         String expectedOutput1 = "Enter a test value (long): " + System.lineSeparator();
@@ -127,7 +127,9 @@ public class ConsoleScannerDataProvider {
 
         inputs.add(new Object[]{"1234567890123456789" + System.lineSeparator(), expectedOutput1});
         inputs.add(new Object[]{"notANumber" + System.lineSeparator() + "1234567890123456789" + System.lineSeparator(), expectedOutput2});
-
+        inputs.add(new Object[]{Long.MIN_VALUE + System.lineSeparator(), expectedOutput1});
+        inputs.add(new Object[]{Long.MAX_VALUE + System.lineSeparator(), expectedOutput1});
         return inputs.iterator();
     }
+
 }
