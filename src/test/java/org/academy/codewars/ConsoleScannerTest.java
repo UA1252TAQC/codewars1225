@@ -49,26 +49,19 @@ public class ConsoleScannerTest extends ConsoleScannerDataProvider {
         assertEquals(actualOutputStream.toString(), expectedOutput);
     }
 
-    @Test
-    public void testReadLong() {
-        String testData = "invalid\n987654321\n";
-        long expected = 987654321L;
-        System.setIn(new ByteArrayInputStream(testData.getBytes()));
-        InputStream inputStream = System.in;
-        ConsoleScanner consoleScanner = new ConsoleScanner(new Scanner(inputStream));
-        long actual = consoleScanner.readLong("test long");
-        assertEquals(expected, actual);
-    }
+    @Test(dataProvider = "dp-testReadLong")
+    public void testReadLong(String input, String expectedOutput) {
+        ByteArrayInputStream in = new ByteArrayInputStream(input.getBytes());
+        System.setIn(in);
 
-    @Test
-    public void testReadLongValidData() {
-        String testData = "123456789\n";
-        long expected = 123456789L;
-        System.setIn(new ByteArrayInputStream(testData.getBytes()));
-        InputStream inputStream = System.in;
-        ConsoleScanner consoleScanner = new ConsoleScanner(new Scanner(inputStream));
-        long actual = consoleScanner.readLong("test long");
-        assertEquals(expected, actual);
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(out));
+
+        ConsoleScanner scannerTest = new ConsoleScanner(new Scanner(System.in));
+        scannerTest.readLong("test value");
+
+        assertEquals(out.toString(), expectedOutput);
+
     }
 
     @Test(dataProvider = "dp-testReadDouble")
