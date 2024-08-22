@@ -25,6 +25,7 @@ public class ConsoleScannerDataProvider {
 
         return inputs.iterator();
     }
+  
     @DataProvider(name = "dp-testReadBigInteger")
     public Iterator<Object[]> dpTestReadBigInteger() {
         List<Object[]> inputs = new ArrayList<>();
@@ -117,6 +118,7 @@ public class ConsoleScannerDataProvider {
         return inputs.iterator();
     }
 
+
     @DataProvider(name = "dp-testReadLong")
     public Iterator<Object[]> dpTestReadLong() {
         List<Object[]> inputs = new ArrayList<>();
@@ -129,9 +131,20 @@ public class ConsoleScannerDataProvider {
         inputs.add(new Object[]{"notANumber\n1234567890123456789\n", expectedOutput2});
         inputs.add(new Object[]{Long.MIN_VALUE + "\n", expectedOutput1});
         inputs.add(new Object[]{Long.MAX_VALUE + "\n", expectedOutput1});
-
+  
         return inputs.iterator();
     }
 
+    @DataProvider(name = "dp-TestReadInt")
+    public Iterator<Object[]> dpTestReadInt1() {
+        List<Object[]> inputs = new ArrayList<>();
+        String param = "test int";
+        String expectedOutput1 = "Enter a " + param + " (int): " ;
+        String expectedOutput2 = "Enter a " + param + " (int): Invalid data format. An integer is expected."
+                + System.lineSeparator() + "Enter a " + param + " (int): " ;
+        inputs.add(new Object[]{param, "25\n", 25, expectedOutput1});
+        inputs.add(new Object[]{param, "invalid\n25\n", 25, expectedOutput2});
 
+        return inputs.iterator();
+    }
 }
