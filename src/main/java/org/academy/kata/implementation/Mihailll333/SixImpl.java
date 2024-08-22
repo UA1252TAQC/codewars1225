@@ -4,6 +4,8 @@ import org.academy.kata.Base;
 import org.academy.kata.Six;
 
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class SixImpl extends Base implements Six {
     @Override
@@ -63,122 +65,118 @@ public class SixImpl extends Base implements Six {
 
     @Override
     public double mean(String town, String strng) {
-        double[] rainfallValues = extractRainfallValues(town, strng);
-        if (rainfallValues == null) {
+        String[] cities = strng.split("\n");
+        String townLine = null;
+        for (String cityLine : cities) {
+            String[] parts = cityLine.split(":");
+            String city = parts[0];
+            if (city.equals(town)) {
+                townLine = parts[1];
+                break;
+            }
+        }
+
+        if (townLine == null) {
             return -1.0;
         }
+
+        String[] townRecordsLine = townLine.replaceAll("[^0-9. ]", "").trim().split(" ");
+        double[] townRecords = new double[townRecordsLine.length];
+        for (int i = 0; i < townRecordsLine.length; i++) {
+            townRecords[i] = Double.parseDouble(townRecordsLine[i]);
+        }
+
         double sum = 0;
-        for (double value : rainfallValues) {
-            sum += value;
+        for (double e : townRecords) {
+            sum += e;
         }
-        return sum / rainfallValues.length;
+
+        return sum / townRecords.length;
     }
 
-    private static double[] extractRainfallValues(String town, String strng) {
-        int startIndex = strng.indexOf(town + ":");
-        if (startIndex == -1) {
-            return null;
-        }
-
-        startIndex += town.length() + 1;
-
-        int endIndex = strng.indexOf('\n', startIndex);
-        if (endIndex == -1) {
-            endIndex = strng.length();
-        }
-
-        String data = strng.substring(startIndex, endIndex).trim();
-        if (data.isEmpty()) {
-            return null;
-        }
-
-        String[] values = data.split("\\s*,\\s*");
-        double[] rainfallValues = new double[values.length];
-        try {
-            for (int i = 0; i < values.length; i++) {
-                rainfallValues[i] = Double.parseDouble(values[i]);
-            }
-        } catch (NumberFormatException e) {
-            return null;
-        }
-
-        return rainfallValues;
-    }
     @Override
     public double variance(String town, String strng) {
-        double[] rainfallValues = extractRainfallValues(town, strng);
-        if (rainfallValues == null) {
-            return -1.0;
+        double meanValue = mean(town, strng);
+        if (meanValue == -1) {
+            return -1;
         }
-        double mean = mean(town, strng);
-        double sumSquaredDiffs = 0;
-        for (double value : rainfallValues) {
-            double diff = value - mean;
-            sumSquaredDiffs += diff * diff;
+        String[] records = strng.split("\n");
+        String townRecord = null;
+        for (String record : records) {
+            if (record.startsWith(town + ":")) {
+                townRecord = record;
+                break;
+            }
         }
-        return sumSquaredDiffs / rainfallValues.length;
+        String[] monthlyData = townRecord.split(":")[1].split(",");
+        double sumOfSquares = 0;
+        int count = 0;
+
+        for (String data : monthlyData) {
+            String[] parts = data.split(" ");
+            double rainfall = Double.parseDouble(parts[1]);
+            sumOfSquares += Math.pow(rainfall - meanValue, 2);
+            count++;
+        }
+
+        return sumOfSquares / count;
     }
 
     @Override
     public String nbaCup(String resultSheet, String toFind) {
-        if (toFind.isEmpty()) {
-            return "";
-        }
+        if (toFind.isEmpty()) return "";
 
+        int wins = 0, draws = 0, losses = 0, totalScored = 0, totalConceded = 0;
         String[] matches = resultSheet.split(",");
-        int wins = 0, draws = 0, losses = 0;
-        int scored = 0, conceded = 0;
-        boolean teamFound = false;
-
         for (String match : matches) {
-            String[] parts = match.trim().split("\\s+");
-            if (parts.length < 4) {
-                continue;
+            match = match.trim();
+            if (match.isEmpty()) continue;
+
+            Pattern pattern = Pattern.compile("(.+) (\\d+) (.+) (\\d+)");
+            Matcher matcher = pattern.matcher(match);
+
+            if (!matcher.matches()) {
+                return "Error(float number):" + match;
             }
 
-            int score1Index = parts.length - 2;
-            int score2Index = parts.length - 1;
+            String team1 = matcher.group(1).trim();
+            int score1 = Integer.parseInt(matcher.group(2));
+            String team2 = matcher.group(3).trim();
+            int score2 = Integer.parseInt(matcher.group(4));
 
-            try {
-                int score1 = Integer.parseInt(parts[score1Index]);
-                int score2 = Integer.parseInt(parts[score2Index]);
-
-                String team1 = String.join(" ", Arrays.copyOfRange(parts, 0, score1Index));
-                String team2 = String.join(" ", Arrays.copyOfRange(parts, score1Index + 1, score2Index));
-
-                if (team1.equals(toFind) || team2.equals(toFind)) {
-                    teamFound = true;
-
-                    if (team1.equals(toFind)) {
-                        scored += score1;
-                        conceded += score2;
-                        if (score1 > score2) wins++;
-                        else if (score1 == score2) draws++;
-                        else losses++;
-                    } else if (team2.equals(toFind)) {
-                        scored += score2;
-                        conceded += score1;
-                        if (score2 > score1) wins++;
-                        else if (score2 == score1) draws++;
-                        else losses++;
+            if (team1.equals(toFind) || team2.equals(toFind)) {
+                if (team1.equals(toFind)) {
+                    totalScored += score1;
+                    totalConceded += score2;
+                    if (score1 > score2) {
+                        wins++;
+                    } else if (score1 == score2) {
+                        draws++;
+                    } else {
+                        losses++;
+                    }
+                } else {
+                    totalScored += score2;
+                    totalConceded += score1;
+                    if (score2 > score1) {
+                        wins++;
+                    } else if (score2 == score1) {
+                        draws++;
+                    } else {
+                        losses++;
                     }
                 }
-
-            } catch (NumberFormatException e) {
-                return "Error(float number):" + match.trim();
             }
         }
 
-        if (!teamFound) {
+        if (wins + draws + losses == 0) {
             return toFind + ":This team didn't play!";
         }
 
-        int points = wins * 3 + draws;
-
+        int points = (wins * 3) + draws;
         return String.format("%s:W=%d;D=%d;L=%d;Scored=%d;Conceded=%d;Points=%d",
-                toFind, wins, draws, losses, scored, conceded, points);
+                toFind, wins, draws, losses, totalScored, totalConceded, points);
     }
-
 
     @Override
     public String stockSummary(String[] lstOfArt, String[] lstOf1stLetter) {
