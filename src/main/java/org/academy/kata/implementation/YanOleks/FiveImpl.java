@@ -15,7 +15,7 @@ public class FiveImpl extends Base implements Five {
             if (isPrime(i)) {
                 firstPrime = secondPrime;
                 secondPrime = i;
-                if (!first) if (secondPrime - firstPrime == g) return new long[]{firstPrime, secondPrime};
+                if (!first && secondPrime - firstPrime == g) return new long[]{firstPrime, secondPrime};
                 first = false;
             }
         }
@@ -70,7 +70,8 @@ public class FiveImpl extends Base implements Five {
     public long[] smallest(long n) {
         String numStr = Long.toString(n);
         int len = numStr.length();
-        int iMin = 0, jMin = 0;
+        int iMin = -1;
+        int jMin = -1;
         String smallest = numStr;
         for (int i = 0; i < len; i++) {
             char currentChar = numStr.charAt(i);
