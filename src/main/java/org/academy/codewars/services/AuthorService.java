@@ -12,7 +12,7 @@ public class AuthorService {
     }
 
     public Author getById(int id) {
-        Author author = Author.findById(id);
+        final Author author = Author.findById(id);
         if (author == null) {
             throw new NoSuchElementException("Author not found with id: " + id);
         }

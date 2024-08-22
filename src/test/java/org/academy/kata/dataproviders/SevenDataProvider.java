@@ -11,7 +11,7 @@ public class SevenDataProvider extends AbstractDataProvider {
 
     @DataProvider(name = "data-NewAvg")
     public static Iterator<Object[]> dpNewAvg() {
-        List<Object[]> inputs = new ArrayList<>();
+        final List<Object[]> inputs = new ArrayList<>();
         inputs.add(new Object[]{null, new double[]{14, 30, 5, 7, 9, 11, 15}, 30, 149L});
         inputs.add(new Object[]{null, new double[]{14, 30, 5, 7, 9, 11, 15}, 92, 645L});
         inputs.add(new Object[]{null, new double[]{14, 30, 5, 7, 9, 11, 15}, 30, 149L});
@@ -28,7 +28,7 @@ public class SevenDataProvider extends AbstractDataProvider {
 
     @DataProvider(name = "data-SeriesSum")
     public static Iterator<Object[]> dpSeriesSum() {
-        List<Object[]> inputs = new ArrayList<>();
+        final List<Object[]> inputs = new ArrayList<>();
         inputs.add(new Object[]{0, "0.00"});
         inputs.add(new Object[]{1, "1.00"});
         inputs.add(new Object[]{2, "1.25"});

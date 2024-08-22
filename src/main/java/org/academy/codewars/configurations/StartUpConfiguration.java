@@ -11,11 +11,12 @@ import java.util.Scanner;
 public class StartUpConfiguration {
 
     public static UIController initUIController() {
-        ConsoleScanner consoleScanner = new ConsoleScanner(new Scanner(System.in));
+        final ConsoleScanner consoleScanner = new ConsoleScanner(new Scanner(System.in));
 
-        AuthorService authorService = new AuthorService();
-        TaskService taskService = new TaskService();
-        UIService uiService = new UIService(authorService, taskService, consoleScanner);
+        final AuthorService authorService = new AuthorService();
+        final TaskService taskService = new TaskService();
+
+        final UIService uiService = new UIService(authorService, taskService, consoleScanner);
 
         return new UIController(uiService);
     }

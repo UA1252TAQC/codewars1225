@@ -68,7 +68,7 @@ public class AbstractDataProvider {
 
 
     protected static Iterator<Object[]> combineData(List<Object[]> objects, List<?> impls) {
-        List<Object[]> data = new ArrayList<>();
+        final List<Object[]> data = new ArrayList<>();
         for (Object impl : impls) {
             for (Object[] o : objects) {
                 data.add(Stream.concat(Stream.of(impl), Arrays.stream(o).map(obj -> {
