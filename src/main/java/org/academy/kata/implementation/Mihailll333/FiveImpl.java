@@ -68,32 +68,13 @@ public class FiveImpl extends Base implements Five {
         return sum.multiply(BigInteger.valueOf(4));
     }
 
-    private static BigInteger fibonacci(int n) {
-        if (n < 2) {
-            return BigInteger.valueOf(n);
-        }
-        BigInteger a = BigInteger.ZERO;
-        BigInteger b = BigInteger.ONE;
-        for (int i = 2; i <= n; i++) {
-            BigInteger temp = a.add(b);
-            a = b;
-            b = temp;
-        }
-        return b;
-    }
 
     @Override
     public double solve(double m) {
         double discriminant = Math.sqrt((1 + 2 * m) * (1 + 2 * m) - 4 * m * m);
 
         double x1 = (1 + 2 * m - discriminant) / (2 * m);
-        double x2 = (1 + 2 * m + discriminant) / (2 * m);
-
-        if (x1 > 0 && x1 < 1) {
-            return x1;
-        } else {
-            return x2;
-        }
+        return x1;
     }
 
     @Override

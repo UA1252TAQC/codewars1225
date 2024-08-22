@@ -28,9 +28,6 @@ public class EightImpl extends Base implements Eight {
 
     @Override
     public int[] squareOrSquareRoot(int[] array) {
-        if (array == null || array.length == 0) {
-            throw new IllegalArgumentException("Input array must not be null or empty.");
-        }
 
         int[] result = new int[array.length];
 

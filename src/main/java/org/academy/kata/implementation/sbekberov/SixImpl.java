@@ -199,13 +199,8 @@ public class SixImpl extends Base implements Six {
             if (parts.length < 2) continue;
 
             String code = parts[0];
-            int quantity;
+            int quantity = Integer.parseInt(parts[1]);
 
-            try {
-                quantity = Integer.parseInt(parts[1]);
-            } catch (NumberFormatException e) {
-                continue;
-            }
 
             if (code.isEmpty()) continue;
 
