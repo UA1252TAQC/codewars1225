@@ -28,8 +28,12 @@ public class ConsoleScannerDataProvider {
     public Iterator<Object[]> dpTestReadLongOutput() {
         List<Object[]> inputs = new ArrayList<>();
 
-        inputs.add(new Object[]{"1234567890123456789\n", "Enter a test value (long): "});
-        inputs.add(new Object[]{"notANumber\n1234567890123456789\n", "Enter a test value (long): Invalid data format. An integer (long) is expected.\nEnter a test value (long): "});
+        String expectedOutput1 = "Enter a test value (long): " + System.lineSeparator();
+        String expectedOutput2 = "Enter a test value (long): Invalid data format. An integer (long) is expected." + System.lineSeparator() +
+                "Enter a test value (long): " + System.lineSeparator();
+
+        inputs.add(new Object[]{"1234567890123456789" + System.lineSeparator(), expectedOutput1});
+        inputs.add(new Object[]{"notANumber" + System.lineSeparator() + "1234567890123456789" + System.lineSeparator(), expectedOutput2});
 
         return inputs.iterator();
     }

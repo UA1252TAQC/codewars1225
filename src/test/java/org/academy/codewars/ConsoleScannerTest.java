@@ -97,7 +97,8 @@ public class ConsoleScannerTest extends ConsoleScannerDataProvider {
         ConsoleScanner scannerTest = new ConsoleScanner(new Scanner(System.in));
         scannerTest.readLong("test value");
 
-        assertEquals(out.toString().replaceAll("\r", ""), expectedOutput.replaceAll("\r", ""));
+        assertEquals(out.toString().trim(), expectedOutput.trim());
+
     }
 
     @Test

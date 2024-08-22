@@ -24,26 +24,14 @@ public class SixImpl extends Base implements Six {
 
     @Override
     public String balance(String book) {
-        book = book.replaceAll("[^a-zA-Z0-9.\\s]", "");
-        String[] arr = book.split("\n");
-        double balance = Double.parseDouble(arr[0]);
-        String result = "Original Balance: " + String.format("%.2f", balance) + "\\r\\n";
-        double n = 0, total = 0;
-        for (int i = 1; i < arr.length; i++) {
-            if (arr[i].trim().isEmpty()) continue;
-
-            String[] line = arr[i].split(" ");
-            if (line.length < 3) continue;
-
-            double price = Double.parseDouble(line[2]);
-            total += price;
-            balance -= price;
-            result += arr[i] + " Balance " + String.format("%.2f", balance) + "\\r\\n";
-            n++;
+        var text = book.replaceAll("[^\\w\n. ]", "").split("\n");
+        var result = new StringBuilder("Original Balance: " + text[0] + (book = "\\r\\n"));
+        double balance = Double.parseDouble(text[0]), sum = 0;
+        for (int i = 1; i < text.length; i++) {
+            sum += Double.parseDouble(text[i].split("\\s+")[2]);
+            result.append(text[i].trim().replaceAll("\\s+", " ")).append(String.format(" Balance %.2f", balance - sum)).append(book);
         }
-        result += "Total expense  " + String.format("%.2f", total) + "\\r\\n"
-                + "Average expense  " + String.format("%.2f", total / n);
-        return result;
+        return result + String.format("Total expense  %.2f%sAverage expense  %.2f", sum, book, sum / (text.length - 1));
     }
 
     @Override
