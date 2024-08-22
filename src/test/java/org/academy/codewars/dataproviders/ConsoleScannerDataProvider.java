@@ -50,15 +50,12 @@ public class ConsoleScannerDataProvider {
             "Enter a size for array > 0 " + param + " (int): Enter a size for array > 0 " + param + " (int): Enter elements double[]:" + System.lineSeparator() +
             "Element_1 => Enter a new double (double): Element_2 => Enter a new double (double): Element_3 => Enter a new double (double): ";
 
-Fixed_readInt_Test
-
         inputs.add(new Object[]{param, "3\n1.1\n2.2\n3.3\n", new double[]{1.1, 2.2, 3.3}, expectedOutput1});
         inputs.add(new Object[]{param, "test\n-3\n3\n1.1\n2.2\n3.3\n", new double[]{1.1, 2.2, 3.3}, expectedOutput2});
 
         return inputs.iterator();
     }
 
-dev
     @DataProvider(name = "dp-testReadDouble")
     public Iterator<Object[]> testReadDouble() {
         List<Object[]> inputs = new ArrayList<>();
@@ -120,14 +117,16 @@ dev
         return inputs.iterator();
     }
 
-    @DataProvider(name = "dpTestReadInt")
+    @DataProvider(name = "dp-TestReadInt")
     public Iterator<Object[]> dpTestReadInt1() {
         List<Object[]> inputs = new ArrayList<>();
         String param = "test int";
-        String expectedOutput1 = "Enter a " + param + " (int): ";
+        String expectedOutput1 = "Enter a " + param + " (int): " ;
         inputs.add(new Object[]{param, "25\n", 25, expectedOutput1});
-        String expectedOutput2 = "Enter a " + param + " (int): Invalid data format. An integer is expected.\nEnter a " + param + " (int): ";
+        String expectedOutput2 = "Enter a " + param + " (int): Invalid data format. An integer is expected."
+                + System.lineSeparator() + "Enter a " + param + " (int): " ;
         inputs.add(new Object[]{param, "invalid\n25\n", 25, expectedOutput2});
+
         return inputs.iterator();
     }
 

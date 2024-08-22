@@ -20,7 +20,7 @@ public class ConsoleScannerTest extends ConsoleScannerDataProvider {
         Locale.setDefault(Locale.US);
     }
 
-    @Test(dataProvider = "dpTestReadInt")
+    @Test(dataProvider = "dp-TestReadInt")
     public void testReadInt(String param, String input, int expectedValue, String expectedOutput) {
         System.setIn(new ByteArrayInputStream(input.getBytes()));
         ConsoleScanner consoleScanner = new ConsoleScanner(new Scanner(System.in));
@@ -30,7 +30,7 @@ public class ConsoleScannerTest extends ConsoleScannerDataProvider {
         int actualValue = consoleScanner.readInt(param);
         System.setOut(originalOut);
         assertEquals(actualValue, expectedValue);
-        assertEquals(outputStream.toString(), expectedOutput.replaceAll("\\n|\\r\\n", System.lineSeparator()));
+        assertEquals(outputStream.toString(), expectedOutput);
     }
 
     @Test(dataProvider = "dp-testReadFloat")
