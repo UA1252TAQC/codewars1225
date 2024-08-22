@@ -99,7 +99,8 @@ public class FiveImpl extends Base implements Five {
                     sb.deleteCharAt(i);
                     sb.insert(j, digitToMove);
                     long newNumber = Long.parseLong(sb.toString());
-                    if (newNumber < minNumber) {
+
+                    if (newNumber < minNumber || (newNumber == minNumber && (i < fromIndex || (i == fromIndex && j < toIndex)))) {
                         minNumber = newNumber;
                         fromIndex = i;
                         toIndex = j;
