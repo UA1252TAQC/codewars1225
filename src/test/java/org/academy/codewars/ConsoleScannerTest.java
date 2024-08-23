@@ -3,6 +3,7 @@ package org.academy.codewars;
 import org.academy.codewars.dataproviders.ConsoleScannerDataProvider;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -42,9 +43,10 @@ public class ConsoleScannerTest extends ConsoleScannerDataProvider {
         System.setOut(new PrintStream(actualOutputStream));
 
         final float actualValue = consoleScanner.readFloat(param);
-
-        assertEquals(actualValue, expectedValue);
-        assertEquals(actualOutputStream.toString(), expectedOutput);
+        SoftAssert softAssert = new SoftAssert();
+        softAssert.assertEquals(actualValue, expectedValue);
+        softAssert.assertEquals(actualOutputStream.toString(), expectedOutput);
+        softAssert.assertAll();
     }
 
     @Test(dataProvider = "dp-testReadLong")
