@@ -77,12 +77,8 @@ public class FiveImpl extends Base implements Five {
 
     @Override
     public double solve(double m) {
-        // Перевiрка коректностi m
-        if (m <= 0) {
-            throw new IllegalArgumentException("m must be greater than 0");
-        }
 
-        // Iнтервал пошука
+
         double lower = 0.0;
         double upper = 1.0;
         double tolerance = 1e-12;
@@ -91,7 +87,6 @@ public class FiveImpl extends Base implements Five {
         while ((upper - lower) > tolerance) {
             midpoint = (lower + upper) / 2.0;
 
-            // Значення функцii в среднiй точцi
             double fx = midpoint / Math.pow(1 - midpoint, 2) - m;
 
             if (fx > 0) {

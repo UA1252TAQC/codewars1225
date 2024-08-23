@@ -1,222 +1,149 @@
 package org.academy.codewars;
 
-import static org.testng.Assert.assertEquals;
+import org.academy.codewars.dataproviders.ConsoleScannerDataProvider;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
 
 import java.io.ByteArrayInputStream;
-import java.io.InputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 import java.math.BigInteger;
 import java.util.Locale;
 import java.util.Scanner;
 
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Test;
+import static org.testng.Assert.assertEquals;
 
-public class ConsoleScannerTest {
+public class ConsoleScannerTest extends ConsoleScannerDataProvider {
     @BeforeClass()
     public void beforeClass() {
         Locale.setDefault(Locale.US);
     }
 
-    @Test
-    public void testReadIntValidData() {
-        String testData = "25\n";
-        int expected = 25;
-        System.setIn(new ByteArrayInputStream(testData.getBytes()));
-        InputStream inputStream = System.in;
-        ConsoleScanner consoleScanner = new ConsoleScanner(new Scanner(inputStream));
-        int actual = consoleScanner.readInt("test int");
-        assertEquals(actual, expected);
+    @Test(dataProvider = "dp-TestReadInt")
+    public void testReadInt(String param, String input, int expectedValue, String expectedOutput) {
+        System.setIn(new ByteArrayInputStream(input.getBytes()));
+        final ConsoleScanner consoleScanner = new ConsoleScanner(new Scanner(System.in));
+
+        final ByteArrayOutputStream actualOutputStream = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(actualOutputStream));
+
+        final int actualValue = consoleScanner.readInt(param);
+
+        assertEquals(actualValue, expectedValue);
+        assertEquals(actualOutputStream.toString(), expectedOutput);
     }
 
-    @Test
-    public void testReadIntInvalidData() {
-        String testData = "invalid\n25\n";
-        int expected = 25;
-        System.setIn(new ByteArrayInputStream(testData.getBytes()));
-        InputStream inputStream = System.in;
-        ConsoleScanner consoleScanner = new ConsoleScanner(new Scanner(inputStream));
-        int actual = consoleScanner.readInt("test int");
-        assertEquals(actual, expected);
+    @Test(dataProvider = "dp-testReadFloat")
+    public void testReadFloat(String param, String input, Float expectedValue, String expectedOutput) {
+        System.setIn(new ByteArrayInputStream(input.getBytes()));
+        final ConsoleScanner consoleScanner = new ConsoleScanner(new Scanner(System.in));
+
+        final ByteArrayOutputStream actualOutputStream = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(actualOutputStream));
+
+        final float actualValue = consoleScanner.readFloat(param);
+        SoftAssert softAssert = new SoftAssert();
+        softAssert.assertEquals(actualValue, expectedValue);
+        softAssert.assertEquals(actualOutputStream.toString(), expectedOutput);
+        softAssert.assertAll();
     }
 
-    @Test
-    public void testReadFloatValidData() {
-        String testData = "23.4\n";
-        float expected = 23.4f;
-        System.setIn(new ByteArrayInputStream(testData.getBytes()));
-        InputStream inputStream = System.in;
-        ConsoleScanner consoleScanner = new ConsoleScanner(new Scanner(inputStream));
-        float actual = consoleScanner.readFloat("test float");
-        assertEquals(actual, expected);
+    @Test(dataProvider = "dp-testReadLong")
+    public void testReadLong(String param, String input, long expectedValue, String expectedOutput) {
+        System.setIn(new ByteArrayInputStream(input.getBytes()));
+        final ConsoleScanner consoleScanner = new ConsoleScanner(new Scanner(System.in));
+
+        final ByteArrayOutputStream actualOutputStream = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(actualOutputStream));
+
+        final long actualValue = consoleScanner.readLong(param);
+
+        assertEquals(actualValue, expectedValue);
+        assertEquals(actualOutputStream.toString(), expectedOutput);
     }
 
-    @Test
-    public void testReadFloatInvalidData() {
-        String testData = "invalid 1.4\n";
-        float expected = 1.4f;
-        System.setIn(new ByteArrayInputStream(testData.getBytes()));
-        InputStream inputStream = System.in;
-        ConsoleScanner consoleScanner = new ConsoleScanner(new Scanner(inputStream));
-        float actual = consoleScanner.readFloat("test float");
-        assertEquals(actual, expected);
+    @Test(dataProvider = "dp-testReadDouble")
+    public void testReadDouble(String param, String input, double expectedValue, String expectedOutput) {
+        System.setIn(new ByteArrayInputStream(input.getBytes()));
+        final ConsoleScanner consoleScanner = new ConsoleScanner(new Scanner(System.in));
+
+        final ByteArrayOutputStream actualOutputStream = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(actualOutputStream));
+
+        final double actualValue = consoleScanner.readDouble(param);
+
+        assertEquals(actualValue, expectedValue);
+        assertEquals(actualOutputStream.toString(), expectedOutput);
     }
 
-    @Test
-    public void testReadLongInvalidData() {
-        String testData = "invalid\n987654321\n";
-        long expected = 987654321L;
-        System.setIn(new ByteArrayInputStream(testData.getBytes()));
-        InputStream inputStream = System.in;
-        ConsoleScanner consoleScanner = new ConsoleScanner(new Scanner(inputStream));
-        long actual = consoleScanner.readLong("test long");
-        assertEquals(expected, actual);
+    @Test(dataProvider = "dp-testReadIntArray")
+    public void testReadIntArray(String param, String input, int[] expectedValue, String expectedOutput) {
+        System.setIn(new ByteArrayInputStream(input.getBytes()));
+        final ConsoleScanner consoleScanner = new ConsoleScanner(new Scanner(System.in));
+
+        final ByteArrayOutputStream actualOutputStream = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(actualOutputStream));
+
+        final int[] actualValue = consoleScanner.readIntArray(param);
+
+        assertEquals(actualValue, expectedValue);
+        assertEquals(actualOutputStream.toString(), expectedOutput);
     }
 
-    @Test
-    public void testReadLongValidData() {
-        String testData = "123456789\n";
-        long expected = 123456789L;
-        System.setIn(new ByteArrayInputStream(testData.getBytes()));
-        InputStream inputStream = System.in;
-        ConsoleScanner consoleScanner = new ConsoleScanner(new Scanner(inputStream));
-        long actual = consoleScanner.readLong("test long");
-        assertEquals(expected, actual);
+    @Test(dataProvider = "dp-testReadString")
+    public void testReadString(String param, String input, String expectedValue, String expectedOutput) {
+        System.setIn(new ByteArrayInputStream(input.getBytes()));
+        final ConsoleScanner consoleScanner = new ConsoleScanner(new Scanner(System.in));
+
+        final ByteArrayOutputStream actualOutputStream = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(actualOutputStream));
+
+        final String actualValue = consoleScanner.readString(param);
+
+        assertEquals(actualValue, expectedValue);
+        assertEquals(actualOutputStream.toString(), expectedOutput);
     }
 
-    @Test
-    public void testReadDoubleValidData() {
-        String testData = "7.5\n";
-        double expected = 7.5;
-        System.setIn(new ByteArrayInputStream(testData.getBytes()));
-        InputStream inputStream = System.in;
-        ConsoleScanner consoleScanner = new ConsoleScanner(new Scanner(inputStream));
-        double actual = consoleScanner.readDouble("test double");
-        assertEquals(actual, expected);
+    @Test(dataProvider = "dp-testReadBigInteger")
+    public void testReadBigInteger(String param, String input, BigInteger expectedValue, String expectedOutput) {
+        System.setIn(new ByteArrayInputStream(input.getBytes()));
+        final ConsoleScanner consoleScanner = new ConsoleScanner(new Scanner(System.in));
+
+        final ByteArrayOutputStream actualOutputStream = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(actualOutputStream));
+
+        final BigInteger actualValue = consoleScanner.readBigInteger(param);
+
+        assertEquals(actualValue, expectedValue);
+        assertEquals(actualOutputStream.toString(), expectedOutput);
     }
 
-    @Test
-    public void testReadDoubleInvalidData() {
-        String testData = "invalid\n2.718\n";
-        double expected = 2.718;
-        System.setIn(new ByteArrayInputStream(testData.getBytes()));
-        InputStream inputStream = System.in;
-        ConsoleScanner consoleScanner = new ConsoleScanner(new Scanner(inputStream));
-        double actual = consoleScanner.readDouble("test double");
-        assertEquals(actual, expected);
+    @Test(dataProvider = "dp-testReadDoubleArray")
+    public void testReadDoubleArray(String param, String input, double[] expectedValue, String expectedOutput) {
+        System.setIn(new ByteArrayInputStream(input.getBytes()));
+        final ConsoleScanner consoleScanner = new ConsoleScanner(new Scanner(System.in));
+
+        final ByteArrayOutputStream actualOutputStream = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(actualOutputStream));
+
+        final double[] actualValue = consoleScanner.readDoubleArray(param);
+
+        assertEquals(actualValue, expectedValue);
+        assertEquals(actualOutputStream.toString(), expectedOutput);
     }
 
-    @Test
-    public void testReadBigIntegerValidData() {
-        String testData = "12345678901234567890\n";
-        BigInteger expected = new BigInteger("12345678901234567890");
-        System.setIn(new ByteArrayInputStream(testData.getBytes()));
-        InputStream inputStream = System.in;
-        ConsoleScanner consoleScanner = new ConsoleScanner(new Scanner(inputStream));
-        BigInteger actual = consoleScanner.readBigInteger("test BigInteger");
-        assertEquals(actual, expected);
-    }
+    @Test(dataProvider = "dp-testReadStringArray")
+    public void testReadStringArray(String param, String input, String[] expectedValue, String expectedOutput) {
+        System.setIn(new ByteArrayInputStream(input.getBytes()));
+        final ConsoleScanner consoleScanner = new ConsoleScanner(new Scanner(System.in));
 
-    @Test
-    public void testReadBigIntegerInvalidData() {
-        String testData = "invalid\nsecondInvalid\n12345678901234567890\n";
-        BigInteger expected = new BigInteger("12345678901234567890");
-        System.setIn(new ByteArrayInputStream(testData.getBytes()));
-        InputStream inputStream = System.in;
-        ConsoleScanner consoleScanner = new ConsoleScanner(new Scanner(inputStream));
-        BigInteger actual = consoleScanner.readBigInteger("test BigInteger");
-        assertEquals(actual, expected);
-    }
+        final ByteArrayOutputStream actualOutputStream = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(actualOutputStream));
 
-    @Test
-    public void testReadIntArrayValidData() {
-        String testData = "3\n1\n-2\n0\n";
-        int[] expected = new int[]{1, -2, 0};
-        System.setIn(new ByteArrayInputStream(testData.getBytes()));
-        InputStream inputStream = System.in;
-        ConsoleScanner consoleScanner = new ConsoleScanner(new Scanner(inputStream));
-        int[] actual = consoleScanner.readIntArray("test array");
-        assertEquals(actual, expected);
-    }
+        final String[] actualValue = consoleScanner.readStringArray(param);
 
-    @Test
-    public void testReadIntArrayInvalidData() {
-        String testData = "-3\n3\ninvalid 1\n-2\n0\n";
-        int[] expected = new int[]{1, -2, 0};
-        System.setIn(new ByteArrayInputStream(testData.getBytes()));
-        InputStream inputStream = System.in;
-        ConsoleScanner consoleScanner = new ConsoleScanner(new Scanner(inputStream));
-        int[] actual = consoleScanner.readIntArray("test array");
-        assertEquals(actual, expected);
-    }
-
-    @Test
-    public void testReadDoubleArrayValidData() {
-        String testData = "3\n1.1\n2.2\n3.3\n";
-        double[] expected = new double[]{1.1, 2.2, 3.3};
-        System.setIn(new ByteArrayInputStream(testData.getBytes()));
-        InputStream inputStream = System.in;
-        ConsoleScanner consoleScanner = new ConsoleScanner(new Scanner(inputStream));
-        double[] actual = consoleScanner.readDoubleArray("test array");
-        assertEquals(actual, expected);
-    }
-
-    @Test
-    public void testReadDoubleArrayInvalidData() {
-        String testData = "invalid\n-3\n3\n1.1\n2.2\n3.3\n";
-        double[] expected = new double[]{1.1, 2.2, 3.3};
-        System.setIn(new ByteArrayInputStream(testData.getBytes()));
-        InputStream inputStream = System.in;
-        ConsoleScanner consoleScanner = new ConsoleScanner(new Scanner(inputStream));
-        double[] actual = consoleScanner.readDoubleArray("test array");
-        assertEquals(actual, expected);
-    }
-
-    @Test
-    public void testReadString() {
-        String testData = "test 123123#readString\n";
-        System.setIn(new ByteArrayInputStream(testData.getBytes()));
-        InputStream inputStream = System.in;
-        ConsoleScanner consoleScanner = new ConsoleScanner(new Scanner(inputStream));
-        String actual = consoleScanner.readString("test");
-        String expected = "test 123123#readString";
-        assertEquals(actual, expected);
-    }
-
-    @Test
-    public void testReadStringArrayValidData() {
-        String testData =
-                """
-                        t
-                        -3
-                        3
-                        First arg
-                        Second arg
-                        Third arg
-                        """;
-        String[] expected = new String[]{"First arg", "Second arg", "Third arg"};
-        System.setIn(new ByteArrayInputStream(testData.getBytes()));
-        InputStream inputStream = System.in;
-        ConsoleScanner consoleScanner = new ConsoleScanner(new Scanner(inputStream));
-        String[] actual = consoleScanner.readStringArray("test");
-        assertEquals(actual, expected);
-    }
-
-    @Test
-    public void testReadStringArrayInvalidData() {
-        String testData =
-                """
-                         test
-                         -3
-                         3
-                         First arg\s
-                         Second arg
-                         Third arg
-                        \s""";
-        String[] expected = new String[]{"First arg", "Second arg", "Third arg"};
-        System.setIn(new ByteArrayInputStream(testData.getBytes()));
-        InputStream inputStream = System.in;
-        ConsoleScanner consoleScanner = new ConsoleScanner(new Scanner(inputStream));
-        String[] actual = consoleScanner.readStringArray("test");
-        assertEquals(actual, expected);
+        assertEquals(actualValue, expectedValue);
+        assertEquals(actualOutputStream.toString(), expectedOutput);
     }
 }

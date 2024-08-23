@@ -89,7 +89,7 @@ public class FiveImpl extends Base implements Five {
         String str = Long.toString(n);
         int len = str.length();
         long minNumber = n;
-        int fromIndex = 0, toIndex = 0;
+        int fromIndex = -1, toIndex = -1;
 
         for (int i = 0; i < len; i++) {
             for (int j = 0; j < len; j++) {
@@ -99,7 +99,8 @@ public class FiveImpl extends Base implements Five {
                     sb.deleteCharAt(i);
                     sb.insert(j, digitToMove);
                     long newNumber = Long.parseLong(sb.toString());
-                    if (newNumber < minNumber) {
+
+                    if (newNumber < minNumber || (newNumber == minNumber && (i < fromIndex || (i == fromIndex && j < toIndex)))) {
                         minNumber = newNumber;
                         fromIndex = i;
                         toIndex = j;

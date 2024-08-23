@@ -85,8 +85,8 @@ public class FiveImpl extends Base implements Five {
     public long[] smallest(long n) {
         String numStr = Long.toString(n);
         long minNumber = n;
-        int fromIndex = 0;
-        int toIndex = 0;
+        int fromIndex = -1;
+        int toIndex = -1;
 
         for (int i = 0; i < numStr.length(); i++) {
             char digit = numStr.charAt(i);
